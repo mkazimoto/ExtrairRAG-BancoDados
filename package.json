@@ -1,0 +1,17 @@
+{
+  "name": "extrair-rag-banco-dados",
+  "version": "1.0.0",
+  "description": "Extrai documentação RAG das tabelas do banco via DBHub MCP",
+  "type": "module",
+  "main": "extract-rag.mjs",
+  "scripts": {
+    "start":   "node --no-warnings=ExperimentalWarning extract-rag.mjs",
+    "extract": "node --no-warnings=ExperimentalWarning extract-rag.mjs"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "mssql": "^12.2.1"
+  }
+}
