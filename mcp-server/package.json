@@ -1,0 +1,25 @@
+{
+  "name": "totvs-rm-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server para banco de dados ERP TOTVS RM — consulta de esquemas e execução de queries T-SQL",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "mssql": "^11.0.1",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/mssql": "^9.1.5",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.0"
+  }
+}
