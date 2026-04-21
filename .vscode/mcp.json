@@ -3,7 +3,7 @@
     "totvs-rm": {
       "type": "stdio",
       "command": "node",
-      "args": ["${workspaceFolder}/mcp-server/dist/index.js"],
+      "args": ["${workspaceFolder}/dist/index.js"],
       "env": {
         "DB_SERVER": "localhost",
         "DB_PORT": "1433",

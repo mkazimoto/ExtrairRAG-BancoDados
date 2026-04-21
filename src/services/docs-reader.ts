@@ -3,8 +3,8 @@ import { join, resolve } from 'node:path';
 import { MODULES, type ColumnInfo, type ForeignKey, type TableDetail, type TableSummary } from '../types.js';
 
 /** Caminho base para a documentação de tabelas */
-const DOCS_DIR = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'), '..', '..', '..', '..', 'docs', 'db', 'tables');
-const INDEX_FILE = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'), '..', '..', '..', '..', 'ai', 'db-index.md');
+const DOCS_DIR = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'), '..', '..', '..', 'docs', 'db', 'tables');
+const INDEX_FILE = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'), '..', '..', '..', 'ai', 'db-index.md');
 
 /** Cache em memória dos índices e detalhes de tabelas */
 let tableIndex: TableSummary[] | null = null;
