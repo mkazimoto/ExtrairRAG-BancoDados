@@ -20,7 +20,7 @@
  */
 
 import sql from 'mssql';
-import { existsSync, mkdirSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 
@@ -762,23 +762,32 @@ function generateIndex(tables, modulos, outputFile) {
 }
 
 /**
- * Lê o cache SQLite e gera o db-index.md — sem parsear arquivos .md.
+ * Extrai a descrição de um arquivo .md de tabela lendo a seção "## Descrição".
+ */
+function extrairDescricaoMd(filePath) {
+  try {
+    const content = readFileSync(filePath, 'utf-8');
+    const match   = content.match(/##\s+Descri[çc][aã]o\s*\n+([^\n#][^\n]*)/);
+    return match ? match[1].trim() : '';
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * Lê o cache SQLite e gera o db-index.md.
+ * Também considera todos os arquivos .md em docs/db/tables que não estejam no cache.
  */
 async function runGenerateIndex() {
   const outputFile = resolve(CONFIG.indexFile);
 
   console.log('\n═══════════════════════════════════════════════════');
-  console.log('  Gerando Índice RAG (do cache SQLite)');
+  console.log('  Gerando Índice RAG (do cache SQLite + arquivos .md)');
   console.log('═══════════════════════════════════════════════════');
   console.log(`  Saída : ${outputFile}`);
   console.log('───────────────────────────────────────────────────\n');
 
   const tableNames = db.prepare('SELECT nome FROM tabelas ORDER BY nome').all().map(r => r.nome);
-
-  if (tableNames.length === 0) {
-    console.warn('Cache vazio — execute sem --so-index para popular o cache primeiro.');
-    return;
-  }
 
   console.log(`Carregando ${tableNames.length} tabela(s) do cache...`);
 
@@ -813,6 +822,33 @@ async function runGenerateIndex() {
       })),
     };
   });
+
+  // Complementa com arquivos .md que não estão no cache
+  const tablesDir   = resolve(CONFIG.outputDir);
+  const cachedNames = new Set(tableNames);
+  let mdExtras      = 0;
+
+  if (existsSync(tablesDir)) {
+    const mdFiles = readdirSync(tablesDir).filter(f => f.endsWith('.md'));
+    for (const file of mdFiles) {
+      const name = file.slice(0, -3).toUpperCase();
+      if (!cachedNames.has(name)) {
+        const descricao = extrairDescricaoMd(join(tablesDir, file));
+        tables.push({ name, descricao, totalColunas: 0, colsComDesc: 0, pkCols: [], columns: [] });
+        mdExtras++;
+      }
+    }
+  }
+
+  if (mdExtras > 0) {
+    tables.sort((a, b) => a.name.localeCompare(b.name));
+    console.log(`  + ${mdExtras} tabela(s) incluída(s) somente via arquivo .md`);
+  }
+
+  if (tables.length === 0) {
+    console.warn('Nenhuma tabela encontrada (cache vazio e nenhum .md em docs/db/tables).');
+    return;
+  }
 
   const modulos = db.prepare('SELECT codsistema, descricao FROM modulos ORDER BY codsistema').all();
 
