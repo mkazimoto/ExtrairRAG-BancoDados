@@ -20,7 +20,7 @@
  */
 
 import sql from 'mssql';
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 
@@ -525,13 +525,6 @@ function gerarMdDaCache(outputPath, tableNames) {
 
     try {
       const tbl    = stmtTab.get(tableName);
-
-      // Pula tabelas sem descrição na GDIC
-      if (!tbl?.descricao?.trim()) {
-        console.log(`—  (sem descrição na GDIC — ignorado)`);
-        continue;
-      }
-
       const cols   = stmtCols.all(tableName);
       const fksOut = stmtFksOut.all(tableName);
       const fksIn  = stmtFksIn.all(tableName);
@@ -769,107 +762,56 @@ function generateIndex(tables, modulos, outputFile) {
 }
 
 /**
- * Extrai a descrição de um arquivo .md já gerado.
- * Retorna string vazia se não encontrar ou se for a mensagem padrão "sem descrição".
- */
-function parseDescFromMd(filePath) {
-  try {
-    const content = readFileSync(filePath, 'utf-8');
-    const lines   = content.split('\n');
-    const idx     = lines.findIndex(l => l.trim() === '## Descrição');
-    if (idx === -1) return '';
-    let i = idx + 1;
-    while (i < lines.length && lines[i].trim() === '') i++;
-    const desc = lines[i]?.trim() ?? '';
-    // Ignora a mensagem padrão gerada quando não há descrição no GDIC
-    if (desc.startsWith('> Tabela ')) return '';
-    const clean = desc.startsWith('> ') ? desc.slice(2) : desc;
-    return clean.length > 180 ? clean.slice(0, 177) + '...' : clean;
-  } catch {
-    return '';
-  }
-}
-
-/**
- * Lê o cache SQLite + arquivos .md existentes em docs/db/tables e gera o db-index.md.
- * Tabelas presentes no cache têm prioridade; as demais têm a descrição extraída do .md.
+ * Lê o cache SQLite e gera o db-index.md — sem parsear arquivos .md.
  */
 async function runGenerateIndex() {
   const outputFile = resolve(CONFIG.indexFile);
-  const outputPath = resolve(CONFIG.outputDir);
 
   console.log('\n═══════════════════════════════════════════════════');
-  console.log('  Gerando Índice RAG (cache SQLite + arquivos .md)');
+  console.log('  Gerando Índice RAG (do cache SQLite)');
   console.log('═══════════════════════════════════════════════════');
   console.log(`  Saída : ${outputFile}`);
   console.log('───────────────────────────────────────────────────\n');
 
-  // Tabelas no cache atual
-  const cacheNames = new Set(
-    db.prepare('SELECT nome FROM tabelas ORDER BY nome').all().map(r => r.nome)
-  );
+  const tableNames = db.prepare('SELECT nome FROM tabelas ORDER BY nome').all().map(r => r.nome);
 
-  // Tabelas com .md já existentes no diretório de saída
-  const mdNames = existsSync(outputPath)
-    ? readdirSync(outputPath)
-        .filter(f => f.endsWith('.md'))
-        .map(f => f.replace(/\.md$/, ''))
-    : [];
-
-  // União ordenada de ambas as fontes
-  const allNames = [...new Set([...cacheNames, ...mdNames])].sort();
-
-  if (allNames.length === 0) {
-    console.warn('Nenhuma tabela encontrada no cache ou em docs/db/tables/.');
-    console.warn('Execute sem --so-index para popular o cache primeiro.');
+  if (tableNames.length === 0) {
+    console.warn('Cache vazio — execute sem --so-index para popular o cache primeiro.');
     return;
   }
 
-  const fromCache = cacheNames.size;
-  const fromMd    = allNames.length - fromCache;
-  console.log(`Fontes: ${fromCache} tabela(s) do cache | ${fromMd} somente do diretório .md`);
-  console.log(`Total  : ${allNames.length} tabela(s)`);
+  console.log(`Carregando ${tableNames.length} tabela(s) do cache...`);
 
   const stmtCols = db.prepare('SELECT * FROM colunas WHERE tabela = ? ORDER BY ordinal');
   const stmtTab  = db.prepare('SELECT * FROM tabelas WHERE nome = ?');
 
-  const tables = allNames.flatMap(name => {
-    if (cacheNames.has(name)) {
-      // Dados completos vindos do cache
-      const tbl  = stmtTab.get(name);
-      const cols = stmtCols.all(name);
-      const pkCols      = cols.filter(c => c.is_pk).map(c => c.nome);
-      const colsComDesc = cols.filter(c => c.gdic_descricao).length;
-      let descricao     = tbl?.descricao ?? '';
-      // Pula tabelas sem descrição na GDIC
-      if (!descricao.trim()) return [];
-      if (descricao.length > 180) descricao = descricao.slice(0, 177) + '...';
-      return [{
-        name,
-        descricao,
-        totalColunas: cols.length,
-        colsComDesc,
-        pkCols,
-        columns: cols.map(c => ({
-          name:  c.nome,
-          type:  formatType({
-            DATA_TYPE:                c.data_type,
-            CHARACTER_MAXIMUM_LENGTH: c.char_max_len,
-            NUMERIC_PRECISION:        c.num_precision,
-            NUMERIC_SCALE:            c.num_scale,
-          }),
-          isPk:  c.is_pk === 1,
-          desc:  c.gdic_descricao ?? '',
-        })),
-      }];
-    } else {
-      // Dados mínimos lidos do arquivo .md existente
-      const mdPath    = join(outputPath, `${name}.md`);
-      const descricao = parseDescFromMd(mdPath);
-      // Pula tabelas sem descrição
-      if (!descricao.trim()) return [];
-      return [{ name, descricao, totalColunas: 0, colsComDesc: 0, pkCols: [], columns: [] }];
-    }
+  const tables = tableNames.map(name => {
+    const tbl  = stmtTab.get(name);
+    const cols = stmtCols.all(name);
+
+    const pkCols     = cols.filter(c => c.is_pk).map(c => c.nome);
+    const colsComDesc = cols.filter(c => c.gdic_descricao).length;
+    let descricao    = tbl?.descricao ?? '';
+    if (descricao.length > 180) descricao = descricao.slice(0, 177) + '...';
+
+    return {
+      name,
+      descricao,
+      totalColunas: cols.length,
+      colsComDesc,
+      pkCols,
+      columns: cols.map(c => ({
+        name:  c.nome,
+        type:  formatType({
+          DATA_TYPE:                c.data_type,
+          CHARACTER_MAXIMUM_LENGTH: c.char_max_len,
+          NUMERIC_PRECISION:        c.num_precision,
+          NUMERIC_SCALE:            c.num_scale,
+        }),
+        isPk:  c.is_pk === 1,
+        desc:  c.gdic_descricao ?? '',
+      })),
+    };
   });
 
   const modulos = db.prepare('SELECT codsistema, descricao FROM modulos ORDER BY codsistema').all();

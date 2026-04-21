@@ -1,6 +1,6 @@
 {
   "servers": {
-    "totvs-rm": {
+    "totvs-rm-database-mcp-server": {
       "type": "stdio",
       "command": "node",
       "args": ["${workspaceFolder}/dist/index.js"],
