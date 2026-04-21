@@ -21,8 +21,17 @@
 
 import sql from 'mssql';
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
+import { fileURLToPath } from 'node:url';
+
+/** Diretório onde este script está instalado (pasta do MCP). */
+const __scriptDir = dirname(fileURLToPath(import.meta.url));
+
+/** Resolve um caminho relativo à pasta do MCP, não ao cwd do projeto chamador. */
+function mcpResolve(...parts) {
+  return resolve(__scriptDir, ...parts);
+}
 
 // ─── Configurações ───────────────────────────────────────────────────────────
 
@@ -77,7 +86,7 @@ let db = null;
 
 /** Abre (ou cria) o banco SQLite e garante o schema. */
 function initSqlite() {
-  const dbPath = resolve(CONFIG.cacheDb);
+  const dbPath = mcpResolve(CONFIG.cacheDb);
   const dbDir  = dbPath.substring(0, Math.max(dbPath.lastIndexOf('/'), dbPath.lastIndexOf('\\')));
   if (!existsSync(dbDir)) mkdirSync(dbDir, { recursive: true });
 
@@ -249,7 +258,7 @@ async function executeSQL(query) {
 
 async function main() {
   const startTime  = Date.now();
-  const outputPath = resolve(CONFIG.outputDir);
+  const outputPath = mcpResolve(CONFIG.outputDir);
 
   console.log('═══════════════════════════════════════════════════');
   console.log('  Extrator RAG — Banco de Dados ' + CONFIG.database);
@@ -259,7 +268,7 @@ async function main() {
   console.log(`  Auth      : ${CONFIG.user ? CONFIG.user : 'Windows Auth'}`);
   console.log(`  Prefixo   : ${CONFIG.todasTabelas ? '(todas as tabelas)' : CONFIG.tablePrefix + '%'}`);
   console.log(`  Saída     : ${outputPath}`);
-  console.log(`  Cache     : ${resolve(CONFIG.cacheDb)}`);
+  console.log(`  Cache     : ${mcpResolve(CONFIG.cacheDb)}`);
   console.log('───────────────────────────────────────────────────\n');
 
   // 1. Abre o cache SQLite
@@ -779,7 +788,7 @@ function extrairDescricaoMd(filePath) {
  * Também considera todos os arquivos .md em docs/db/tables que não estejam no cache.
  */
 async function runGenerateIndex() {
-  const outputFile = resolve(CONFIG.indexFile);
+  const outputFile = mcpResolve(CONFIG.indexFile);
 
   console.log('\n═══════════════════════════════════════════════════');
   console.log('  Gerando Índice RAG (do cache SQLite + arquivos .md)');
@@ -824,7 +833,7 @@ async function runGenerateIndex() {
   });
 
   // Complementa com arquivos .md que não estão no cache
-  const tablesDir   = resolve(CONFIG.outputDir);
+  const tablesDir   = mcpResolve(CONFIG.outputDir);
   const cachedNames = new Set(tableNames);
   let mdExtras      = 0;
 
@@ -868,7 +877,7 @@ async function runGenerateIndex() {
 // ─── Utilitários de encerramento ────────────────────────────────────────────
 
 function limparCache() {
-  const dbPath = resolve(CONFIG.cacheDb);
+  const dbPath = mcpResolve(CONFIG.cacheDb);
   if (existsSync(dbPath)) {
     unlinkSync(dbPath);
     console.log(`  Cache SQLite removido: ${dbPath}`);
