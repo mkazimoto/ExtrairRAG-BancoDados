@@ -55,7 +55,7 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
       "totvs-rm": {
         "type": "stdio",
         "command": "node",
-        "args": ["C:/GIT/ExtrairRAG-BancoDados/mcp-server/dist/index.js"],
+        "args": ["C:/GIT/ExtrairRAG-BancoDados/dist/index.js"],
         "env": {
           "DB_SERVER": "SEU_SERVIDOR",
           "DB_DATABASE": "NOME_DO_BANCO",
@@ -77,7 +77,7 @@ Adicione ao `claude_desktop_config.json`:
   "mcpServers": {
     "totvs-rm": {
       "command": "node",
-      "args": ["C:/GIT/ExtrairRAG-BancoDados/mcp-server/dist/index.js"],
+      "args": ["C:/GIT/ExtrairRAG-BancoDados/dist/index.js"],
       "env": {
         "DB_SERVER": "SEU_SERVIDOR",
         "DB_DATABASE": "NOME_DO_BANCO",
@@ -99,7 +99,7 @@ Adicione ao `claude_desktop_config.json`:
 ## Estrutura do Projeto
 
 ```
-mcp-server/
+ExtrairRAG-BancoDados
 ├── src/
 │   ├── index.ts              # Entry point — inicializa o servidor MCP (stdio)
 │   ├── types.ts              # Interfaces e constantes (módulos ERP, ResponseFormat)
