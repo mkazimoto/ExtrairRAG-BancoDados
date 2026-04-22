@@ -104,6 +104,16 @@ export function getTableRawMarkdown(tableName: string): string {
 }
 
 /**
+ * Retorna o conteúdo do arquivo de regras de uma tabela (<TABELA>.rules.md), ou null se não existir.
+ */
+export function getTableRules(tableName: string): string | null {
+  const upper = tableName.toUpperCase();
+  const filePath = join(DOCS_DIR, `${upper}.rules.md`);
+  if (!existsSync(filePath)) return null;
+  return readFileSync(filePath, 'utf-8');
+}
+
+/**
  * Retorna o conteúdo do db-index.md.
  */
 export function getDbIndexMarkdown(): string {

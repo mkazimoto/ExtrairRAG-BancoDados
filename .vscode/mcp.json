@@ -1,18 +1,8 @@
 {
   "servers": {
     "totvs-rm-database-mcp-server": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["${workspaceFolder}/dist/index.js"],
-      "env": {
-        "DB_SERVER": "localhost",
-        "DB_PORT": "1433",
-        "DB_DATABASE": "EXEMPLO1212606",
-        "DB_USER": "rm",
-        "DB_PASSWORD": "??",
-        "DB_TRUST_CERT": "true",
-        "DB_REQUEST_TIMEOUT": "30000"
-      }
+      "type": "http",
+      "url": "http://localhost:3001/mcp"
     }
   }
 }

@@ -1,10 +1,11 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import {
-    getDbIndexMarkdown,
-    getTableDetail,
-    listTablesByModule,
-    searchTables
+  getDbIndexMarkdown,
+  getTableDetail,
+  getTableRules,
+  listTablesByModule,
+  searchTables
 } from '../services/docs-reader.js';
 import { MODULES, ResponseFormat, type TableDetail, type TableSummary } from '../types.js';
 
@@ -223,6 +224,35 @@ Use esta ferramenta para descobrir qual prefixo pertence a qual módulo antes de
         ...Object.entries(MODULES).map(([k, v]) => `| \`${k}\` | ${v} |`),
       ];
       return { content: [{ type: 'text', text: lines.join('\n') }] };
+    },
+  );
+
+  // ── totvs_get_table_rules ──────────────────────────────────────────────────
+  server.registerTool(
+    'totvs_get_table_rules',
+    {
+      title: 'Obter Regras de Colunas de Tabela TOTVS RM',
+      description: `Retorna as regras de valores possíveis para colunas de uma tabela do ERP TOTVS RM.
+
+Use esta ferramenta para descobrir os valores válidos de colunas codificadas (enumerações, flags, status, tipos).
+Retorna null/mensagem informativa quando não há arquivo de regras para a tabela.
+
+Args:
+  - table_name (string): Nome da tabela (ex: "MBIMMODELO", "PFUNC", "TITMMOV")
+
+Returns:
+  Conteúdo do arquivo <TABELA>.rules.md com os possíveis valores documentados por coluna.`,
+      inputSchema: {
+        table_name: z.string().min(1).max(100).describe('Nome da tabela (ex: MBIMMODELO, PFUNC)'),
+      },
+      annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
+    },
+    async ({ table_name }) => {
+      const rules = getTableRules(table_name);
+      if (rules === null) {
+        return { content: [{ type: 'text', text: `Nenhum arquivo de regras encontrado para a tabela: ${table_name.toUpperCase()}` }] };
+      }
+      return { content: [{ type: 'text', text: rules }] };
     },
   );
 
