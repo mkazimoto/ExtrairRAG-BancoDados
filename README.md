@@ -52,37 +52,9 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
 {
   "mcp": {
     "servers": {
-      "totvs-rm": {
-        "type": "stdio",
-        "command": "node",
-        "args": ["C:/GIT/ExtrairRAG-BancoDados/dist/index.js"],
-        "env": {
-          "DB_SERVER": "SEU_SERVIDOR",
-          "DB_DATABASE": "NOME_DO_BANCO",
-          "DB_USER": "rm",
-          "DB_PASSWORD": "SUA_SENHA"
-        }
-      }
-    }
-  }
-}
-```
-
-## Uso com Claude Desktop
-
-Adicione ao `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "totvs-rm": {
-      "command": "node",
-      "args": ["C:/GIT/ExtrairRAG-BancoDados/dist/index.js"],
-      "env": {
-        "DB_SERVER": "SEU_SERVIDOR",
-        "DB_DATABASE": "NOME_DO_BANCO",
-        "DB_USER": "rm",
-        "DB_PASSWORD": "SUA_SENHA"
+      "totvs-rm-database-mcp-server": {
+        "type": "http",
+        "url": "http://localhost:3001/mcp"
       }
     }
   }
