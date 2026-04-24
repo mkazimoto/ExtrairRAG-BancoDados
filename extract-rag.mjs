@@ -534,6 +534,13 @@ function gerarMdDaCache(outputPath, tableNames) {
 
     try {
       const tbl    = stmtTab.get(tableName);
+
+      // Tabelas sem descrição no dicionário de dados (GDIC) são ignoradas
+      if (!tbl?.descricao) {
+        console.log(`—  (sem descrição no GDIC, ignorada)`);
+        continue;
+      }
+
       const cols   = stmtCols.all(tableName);
       const fksOut = stmtFksOut.all(tableName);
       const fksIn  = stmtFksIn.all(tableName);
