@@ -2,11 +2,31 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import express from 'express';
 import { randomUUID } from 'node:crypto';
-import { closePool } from './services/db-client.js';
 import { registerDocTools } from './tools/doc-tools.js';
 import { registerQueryTools } from './tools/query-tools.js';
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
+const API_KEY = process.env.MCP_API_KEY ?? '';
+
+/** Middleware de autenticação via Bearer token */
+function requireApiKey(req: express.Request, res: express.Response, next: express.NextFunction): void {
+  if (!API_KEY) {
+    // Sem chave configurada: acesso livre (apenas aviso em stderr)
+    process.stderr.write('[AVISO] MCP_API_KEY não definida — servidor sem autenticação.\n');
+    next();
+    return;
+  }
+
+  const authHeader = req.headers['authorization'] ?? '';
+  const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
+
+  if (!token || token !== API_KEY) {
+    res.status(401).json({ error: 'Não autorizado. Forneça um Bearer token válido.' });
+    return;
+  }
+
+  next();
+}
 
 async function main(): Promise<void> {
   const app = express();
@@ -86,7 +106,6 @@ async function main(): Promise<void> {
   // Encerramento limpo
   const shutdown = async () => {
     httpServer.close();
-    await closePool();
     process.exit(0);
   };
 

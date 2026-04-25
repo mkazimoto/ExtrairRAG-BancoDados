@@ -2,7 +2,11 @@
   "servers": {
     "totvs-rm-database-mcp-server": {
       "type": "http",
-      "url": "http://localhost:3001/mcp"
+      "url": "http://localhost:3001/mcp",
+      "headers": {
+        "Authorization": "Bearer 12345"
+      }
     }
   }
+
 }
