@@ -85,22 +85,3 @@ Args:
   );
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-/**
- * Se a query não tiver TOP N, injeta TOP <max_rows> no primeiro SELECT.
- */
-function injectTopN(tsql: string, maxRows: number): string {
-  const topRe = /\bSELECT\s+(TOP\s+\d+)/i;
-  if (topRe.test(tsql)) return tsql; // já tem TOP
-
-  return tsql.replace(/\bSELECT\b/i, `SELECT TOP ${maxRows}`);
-}
-
-function formatCell(value: unknown): string {
-  if (value === null || value === undefined) return 'NULL';
-  if (value instanceof Date) return value.toISOString();
-  const str = String(value);
-  // Escapa pipe do markdown
-  return str.replace(/\|/g, '\\|').replace(/\n/g, ' ');
-}
