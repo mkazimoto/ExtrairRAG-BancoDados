@@ -45,7 +45,7 @@ DB_USER = "rm"
 DB_PASSWORD = "SENHA"
 ```
 
-### Execute o script para gerar a documentação dos arquivo .md
+### Execute o script para conectar com o banco de dados e gerar a documentação de arquivos .md
 ```bash
 npm run extract
 ```
