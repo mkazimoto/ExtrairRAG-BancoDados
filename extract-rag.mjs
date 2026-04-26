@@ -43,7 +43,7 @@ const CONFIG = {
   port:         1433,
   database:     'EXEMPLO1212606',
   user:         'rm',          // deixe vazio para usar Windows Auth
-  password:     'rm',
+  password:     '??',
   trustServerCertificate: true,
   // ── Extração ────────────────────────────────────────────────────────────
   schema:       'dbo',
