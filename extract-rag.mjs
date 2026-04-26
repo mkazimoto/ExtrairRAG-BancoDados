@@ -17,6 +17,8 @@
  *   node extract-rag.mjs --so-index                 (regera apenas db-index.md do cache)
  *   node extract-rag.mjs --todas                    (extrai todas as tabelas, sem filtro de prefixo)
  *   node extract-rag.mjs --timeout 120000            (timeout de requisição SQL em ms, padrão: 120000)
+ *   node extract-rag.mjs --so-regras                 (gera apenas .rules.md a partir do mapeamento-regras.md)
+ *   node extract-rag.mjs --sem-regras                (pula geração de .rules.md)
  */
 
 import sql from 'mssql';
@@ -41,7 +43,7 @@ const CONFIG = {
   port:         1433,
   database:     'EXEMPLO1212606',
   user:         'rm',          // deixe vazio para usar Windows Auth
-  password:     '??',
+  password:     'rm',
   trustServerCertificate: true,
   // ── Extração ────────────────────────────────────────────────────────────
   schema:       'dbo',
@@ -58,6 +60,10 @@ const CONFIG = {
   gerarIndex:   true,          // false com --sem-index
   todasTabelas:    true,       // false com --prefixo
   requestTimeout:  300000,     // ms — aumentar se houver muitas tabelas
+  // ── Regras ───────────────────────────────────────────────────────────────
+  mapeamentoRegras: './mapeamento-regras.md',
+  gerarRegras:  true,          // false com --sem-regras
+  soRegras:     false,         // true com --so-regras
 };
 
 // ─── Parse de argumentos CLI ─────────────────────────────────────────────────
@@ -78,6 +84,8 @@ for (let i = 0; i < args.length; i++) {
   if (args[i] === '--so-index')                 { CONFIG.soIndex     = true;  }
   if (args[i] === '--todas')                    { CONFIG.todasTabelas    = true; }
   if (args[i] === '--timeout'  && args[i + 1])  { CONFIG.requestTimeout  = Number(args[++i]); }
+  if (args[i] === '--sem-regras')                { CONFIG.gerarRegras = false; }
+  if (args[i] === '--so-regras')                 { CONFIG.soRegras    = true;  }
 }
 
 // ─── Cache SQLite ─────────────────────────────────────────────────────────────
@@ -284,6 +292,28 @@ async function main() {
     return;
   }
 
+  // ── Modo: só .rules.md (conecta ao SQL Server, gera apenas .rules.md) ──────
+  if (CONFIG.soRegras) {
+    const mapeamentoPath = mcpResolve(CONFIG.mapeamentoRegras);
+    if (!existsSync(mapeamentoPath)) {
+      console.error(`Arquivo de mapeamento não encontrado: ${mapeamentoPath}`);
+      db.close();
+      limparCache();
+      process.exit(1);
+    }
+    process.stdout.write('Conectando ao SQL Server... ');
+    await initSession();
+    console.log('OK');
+    const mapeamento = parseMapeamentoRegras(mapeamentoPath);
+    await gerarRulesMdDoBanco(mapeamento, outputPath);
+    await sql.close();
+    db.close();
+    limparCache();
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+    console.log(`  Tempo total de processamento: ${elapsed}s`);
+    return;
+  }
+
   // ── Modo: só .md (sem SQL Server) ──────────────────────────────────────
   if (CONFIG.soMd) {
     const names = loadAllTablesFromCache();
@@ -367,6 +397,17 @@ async function main() {
     await batchFetchAndSave(tablesToFetch);
   } else {
     console.log('Todas as tabelas já estão no cache SQLite.\n');
+  }
+
+  // 6.5. Gera .rules.md enquanto a conexão SQL ainda está aberta
+  if (CONFIG.gerarRegras) {
+    const mapeamentoPath = mcpResolve(CONFIG.mapeamentoRegras);
+    if (existsSync(mapeamentoPath)) {
+      const mapeamento = parseMapeamentoRegras(mapeamentoPath);
+      if (Object.keys(mapeamento).length > 0) {
+        await gerarRulesMdDoBanco(mapeamento, outputPath);
+      }
+    }
   }
 
   await sql.close();
@@ -707,6 +748,142 @@ function formatType(col) {
 
 function escapeSql(value) {
   return String(value).replace(/'/g, "''");
+}
+
+function escapeIdentifier(name) {
+  if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name)) {
+    throw new Error(`Identificador SQL inválido: "${name}"`);
+  }
+  return `[${name}]`;
+}
+
+// ─── Mapeamento de Regras (.rules.md) ────────────────────────────────────────
+
+/**
+ * Parseia o mapeamento-regras.md.
+ * Retorna: { [tabela]: { [coluna]: { tabela, codigo, descricao } } }
+ */
+function parseMapeamentoRegras(filePath) {
+  const lines = readFileSync(filePath, 'utf-8').split(/\r?\n/);
+  const result = {};
+  let tabelaAtual = null;
+  let colunaAtual = null;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('# ')) {
+      tabelaAtual = trimmed.slice(2).trim();
+      result[tabelaAtual] ??= {};
+      colunaAtual = null;
+    } else if (trimmed.startsWith('## ')) {
+      colunaAtual = trimmed.slice(3).trim();
+    } else if (trimmed.startsWith('|') && tabelaAtual && colunaAtual) {
+      const cells = trimmed.split('|').map(c => c.trim()).filter(Boolean);
+      if (cells.length < 3) continue;
+      if (cells[0].startsWith('---') || cells[0].toLowerCase() === 'tabela') continue;
+      result[tabelaAtual][colunaAtual] = {
+        tabela:    cells[0],
+        codigo:    cells[1],
+        descricao: cells[2],
+      };
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Lê as seções de um .rules.md existente (por cabeçalho ## COLUNA).
+ * Retorna { secoes: { [coluna]: string[] }, ordem: string[] }
+ */
+function lerSecoesRulesMd(filePath) {
+  if (!existsSync(filePath)) return { secoes: {}, ordem: [] };
+
+  const lines   = readFileSync(filePath, 'utf-8').split(/\r?\n/);
+  const secoes  = {};
+  const ordem   = [];
+  let curColuna = null;
+
+  for (const line of lines) {
+    if (line.trimStart().startsWith('## ')) {
+      curColuna = line.trimStart().slice(3).trim();
+      secoes[curColuna] = [line];
+      ordem.push(curColuna);
+    } else if (curColuna !== null) {
+      secoes[curColuna].push(line);
+    }
+  }
+
+  // Normaliza: cada seção termina com exatamente uma linha em branco
+  for (const col of Object.keys(secoes)) {
+    while (secoes[col].length > 1 && secoes[col][secoes[col].length - 1].trim() === '') {
+      secoes[col].pop();
+    }
+    secoes[col].push('');
+  }
+
+  return { secoes, ordem };
+}
+
+/**
+ * Gera/atualiza os arquivos .rules.md consultando o banco de dados.
+ */
+async function gerarRulesMdDoBanco(mapeamento, outputPath) {
+  if (!existsSync(outputPath)) mkdirSync(outputPath, { recursive: true });
+
+  const tabelas = Object.keys(mapeamento);
+  console.log(`\nGerando .rules.md para ${tabelas.length} tabela(s) do mapeamento...`);
+
+  let ok = 0, erros = 0;
+
+  for (const tabelaPrincipal of tabelas) {
+    const colunas = mapeamento[tabelaPrincipal];
+    const outFile = join(outputPath, `${tabelaPrincipal}.rules.md`);
+    const { secoes, ordem } = lerSecoesRulesMd(outFile);
+
+    for (const [coluna, mapping] of Object.entries(colunas)) {
+      process.stdout.write(`  ${tabelaPrincipal}.${coluna} → ${mapping.tabela}... `);
+      try {
+        const tId = escapeIdentifier(mapping.tabela);
+        const cId = escapeIdentifier(mapping.codigo);
+        const dId = escapeIdentifier(mapping.descricao);
+
+        const { rows } = await executeSQL(`
+          SELECT ${tId}.${cId} AS CODIGO, ${tId}.${dId} AS DESCRICAO
+          FROM   ${tId} (NOLOCK)
+          ORDER BY ${tId}.${cId}
+        `);
+
+        const sectionLines = [`## ${coluna}`, ''];
+        sectionLines.push('| Código | Descrição |');
+        sectionLines.push('| ------ | --------- |');
+        for (const row of rows) {
+          const cod  = String(row.CODIGO  ?? '').replace(/\|/g, '\\|');
+          const desc = String(row.DESCRICAO ?? '').replace(/\r?\n/g, ' ').replace(/\|/g, '\\|').trim();
+          sectionLines.push(`| ${cod} | ${desc} |`);
+        }
+        sectionLines.push('');
+
+        if (!secoes[coluna]) ordem.push(coluna);
+        secoes[coluna] = sectionLines;
+        console.log(`${rows.length} registros`);
+      } catch (err) {
+        console.log(`ERRO: ${err.message}`);
+        erros++;
+      }
+    }
+
+    const finalLines = [`# ${tabelaPrincipal}`, ''];
+    for (const col of ordem) {
+      if (secoes[col]) finalLines.push(...secoes[col]);
+    }
+
+    writeFileSync(outFile, finalLines.join('\n'), 'utf-8');
+    ok++;
+  }
+
+  console.log(`  .rules.md gerados: OK: ${ok} | Erros: ${erros}`);
+  return { ok, erros };
 }
 
 // ─── Gerador de Índice RAG ────────────────────────────────────────────────────
