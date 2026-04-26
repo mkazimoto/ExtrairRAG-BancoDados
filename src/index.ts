@@ -4,8 +4,8 @@ import express from 'express';
 import { randomUUID } from 'node:crypto';
 import { registerDocTools } from './tools/doc-tools.js';
 
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
-const API_KEY = process.env.MCP_API_KEY ?? '';
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const API_KEY = process.env.MCP_API_KEY ?? 'ed931c92-33db-4fdb-aa86-c78a236bf40e';
 
 /** Middleware de autenticação via Bearer token */
 function requireApiKey(req: express.Request, res: express.Response, next: express.NextFunction): void {
@@ -35,7 +35,7 @@ async function main(): Promise<void> {
   const transports = new Map<string, StreamableHTTPServerTransport>();
 
   // Endpoint único MCP — suporta GET (SSE), POST (mensagens) e DELETE (encerrar sessão)
-  app.all('/mcp', async (req, res) => {
+  app.all('/mcp', requireApiKey, async (req, res) => {
     const sessionId = req.headers['mcp-session-id'] as string | undefined;
 
     // ── Sessão existente: roteia ao transport correto ──────────────────────

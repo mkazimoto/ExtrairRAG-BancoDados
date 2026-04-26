@@ -57,7 +57,7 @@ npm install
 npm run build
 ```
 
-## Iniciar o servidor 0MCP
+## Iniciar o servidor MCP
 ```bash
 npm run start
 ```
@@ -72,7 +72,10 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
     "servers": {
       "totvs-rm-database-mcp-server": {
         "type": "http",
-        "url": "http://localhost:3001/mcp"
+        "url": "http://localhost:3000/mcp",
+        "headers": {
+          "Authorization": "Bearer ed931c92-33db-4fdb-aa86-c78a236bf40e"
+        }
       }
     }
   }
