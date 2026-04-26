@@ -1,7 +1,7 @@
 {
   "name": "totvs-rm-database-mcp-server",
   "version": "1.0.0",
-  "description": "MCP Server para banco de dados ERP TOTVS RM — consulta de esquemas e execução de queries T-SQL",
+  "description": "MCP Server para banco de dados ERP TOTVS RM — consulta de esquemas de tabelas e regras de negócio",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
