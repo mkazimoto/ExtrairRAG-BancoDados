@@ -19,6 +19,14 @@
  *   node extract-rag.mjs --timeout 120000            (timeout de requisição SQL em ms, padrão: 120000)
  *   node extract-rag.mjs --so-regras                 (gera apenas .rules.md a partir do mapeamento-regras.md)
  *   node extract-rag.mjs --sem-regras                (pula geração de .rules.md)
+ *
+ * Variáveis de ambiente (alternativa aos valores padrão):
+ *   DB_SERVER      — servidor SQL Server           (padrão: localhost)
+ *   DB_PORT        — porta                          (padrão: 1433)
+ *   DB_DATABASE    — nome do banco                 (padrão: EXEMPLO1212606)
+ *   DB_USER        — usuário SQL                   (padrão: rm; vazio = Windows Auth)
+ *   DB_PASSWORD    — senha SQL
+ *   DB_TRUST_CERT  — confiar no certificado TLS    (padrão: true; use "false" para desabilitar)
  */
 
 import sql from 'mssql';
@@ -39,12 +47,13 @@ function mcpResolve(...parts) {
 
 const CONFIG = {
   // ── Conexão SQL Server ──────────────────────────────────────────────────
-  server:       'localhost',
-  port:         1433,
-  database:     'EXEMPLO1212606',
-  user:         'rm',          // deixe vazio para usar Windows Auth
-  password:     '??',
-  trustServerCertificate: true,
+  // Prioridade: argumento CLI > variável de ambiente > valor padrão
+  server:       process.env.DB_SERVER   ?? 'localhost',
+  port:         process.env.DB_PORT     ? parseInt(process.env.DB_PORT, 10) : 1433,
+  database:     process.env.DB_DATABASE ?? 'EXEMPLO1212606',
+  user:         process.env.DB_USER     ?? 'rm',   // deixe vazio para usar Windows Auth
+  password:     process.env.DB_PASSWORD ?? '',
+  trustServerCertificate: process.env.DB_TRUST_CERT !== 'false',
   // ── Extração ────────────────────────────────────────────────────────────
   schema:       'dbo',
   tablePrefix:  'M',           // tabelas que começam com esta letra

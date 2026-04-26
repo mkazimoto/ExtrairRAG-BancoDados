@@ -12,27 +12,17 @@ Permite que modelos de linguagem consultem o esquema do banco, pesquisem tabelas
 | `totvs_list_tables_by_module` | Lista tabelas de um módulo específico (ex: P=Folha, F=Financeiro) |
 | `totvs_list_modules` | Lista todos os módulos e prefixos do ERP |
 | `totvs_get_db_index` | Retorna o índice completo de todas as tabelas |
-| `totvs_execute_query` | Executa SELECT T-SQL no banco (somente leitura) |
 | `totvs_suggest_query` | Gera modelo de query para uma tabela |
 
 ## Pré-requisitos
 
 - Node.js 18+
 - Acesso ao SQL Server do TOTVS RM
-- Documentação extraída em `docs/db/tables/` (via `npm run extract` na raiz do projeto)
-
-## Instalação
-
-```bash
-cd mcp-server
-npm install
-npm run build
-```
 
 ## Configuração
 
-Configure as variáveis de ambiente antes de executar. Você pode usar um arquivo `.env` ou
-definir diretamente na configuração do cliente MCP:
+Configure as variáveis de ambiente antes de executar. 
+Você pode usar um arquivo `.env` ou definir diretamente na configuração do cliente MCP:
 
 | Variável | Padrão | Descrição |
 |---|---|---|
@@ -43,6 +33,26 @@ definir diretamente na configuração do cliente MCP:
 | `DB_PASSWORD` | *(vazio)* | Senha SQL |
 | `DB_TRUST_CERT` | `true` | Confiar no certificado SSL |
 | `DB_REQUEST_TIMEOUT` | `30000` | Timeout de requisição em ms |
+
+## Extrair Documentação do Banco de Dados
+
+- Documentação extraída em `docs/db/tables/` (via `npm run extract` na raiz do projeto)
+
+```bash
+$env:DB_SERVER = "localhost"
+$env:DB_DATABASE = "EXEMPLO1212606"
+$env:DB_USER = "rm"
+$env:DB_PASSWORD = "SENHA"
+npm run extract
+```
+
+## Instalação do MCP
+
+```bash
+cd mcp-server
+npm install
+npm run build
+```
 
 ## Configuração no VS Code (GitHub Copilot)
 
@@ -65,7 +75,7 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
 
 - Apenas queries `SELECT` são executadas — INSERT, UPDATE, DELETE, DROP, EXEC e outros comandos destrutivos são **bloqueados** na camada da aplicação.
 - Parâmetros de query são passados via prepared statements (`mssql` input params) para prevenir SQL Injection.
-- A conexão com o banco é estabelecida apenas quando a ferramenta `totvs_execute_query` ou `totvs_suggest_query` é chamada.
+- A conexão com o banco é estabelecida apenas quando a ferramenta `totvs_suggest_query` é chamada.
 - Ferramentas de documentação (schema, busca de tabelas) funcionam **sem conexão com o banco**, lendo apenas os arquivos `.md` locais.
 
 ## Estrutura do Projeto
