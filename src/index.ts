@@ -3,7 +3,6 @@ import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/
 import express from 'express';
 import { randomUUID } from 'node:crypto';
 import { registerDocTools } from './tools/doc-tools.js';
-import { registerQueryTools } from './tools/query-tools.js';
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
 const API_KEY = process.env.MCP_API_KEY ?? '';
@@ -75,7 +74,6 @@ async function main(): Promise<void> {
       version: '1.0.0',
     });
     registerDocTools(sessionServer);
-    registerQueryTools(sessionServer);
 
     sessionServer.registerResource(
       'totvs-db-index',

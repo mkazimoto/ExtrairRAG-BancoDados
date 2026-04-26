@@ -1,7 +1,7 @@
 # TOTVS RM MCP Server
 
 MCP (Model Context Protocol) Server para o banco de dados **ERP TOTVS RM**.  
-Permite que modelos de linguagem consultem o esquema do banco, pesquisem tabelas e executem queries T-SQL de leitura.
+Permite que modelos de linguagem consultem o esquema do banco e pesquisem tabelas do ERP.
 
 ## Ferramentas disponíveis
 
@@ -12,7 +12,6 @@ Permite que modelos de linguagem consultem o esquema do banco, pesquisem tabelas
 | `totvs_list_tables_by_module` | Lista tabelas de um módulo específico (ex: P=Folha, F=Financeiro) |
 | `totvs_list_modules` | Lista todos os módulos e prefixos do ERP |
 | `totvs_get_db_index` | Retorna o índice completo de todas as tabelas |
-| `totvs_suggest_query` | Gera modelo de query para uma tabela |
 
 ## Pré-requisitos
 
@@ -38,20 +37,29 @@ Você pode usar um arquivo `.env` ou definir diretamente na configuração do cl
 
 - Documentação extraída em `docs/db/tables/` (via `npm run extract` na raiz do projeto)
 
+### Crie um arquivo .env na raiz com a configuração
 ```bash
-$env:DB_SERVER = "localhost"
-$env:DB_DATABASE = "EXEMPLO1212606"
-$env:DB_USER = "rm"
-$env:DB_PASSWORD = "SENHA"
+DB_SERVER = "localhost"
+DB_DATABASE = "EXEMPLO1212606"
+DB_USER = "rm"
+DB_PASSWORD = "SENHA"
+```
+
+### Execute o script para gerar a documentação dos arquivo .md
+```bash
 npm run extract
 ```
 
 ## Instalação do MCP
 
 ```bash
-cd mcp-server
 npm install
 npm run build
+```
+
+## Iniciar o servidor 0MCP
+```bash
+npm run start
 ```
 
 ## Configuração no VS Code (GitHub Copilot)
@@ -73,10 +81,7 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
 
 ## Segurança
 
-- Apenas queries `SELECT` são executadas — INSERT, UPDATE, DELETE, DROP, EXEC e outros comandos destrutivos são **bloqueados** na camada da aplicação.
-- Parâmetros de query são passados via prepared statements (`mssql` input params) para prevenir SQL Injection.
-- A conexão com o banco é estabelecida apenas quando a ferramenta `totvs_suggest_query` é chamada.
-- Ferramentas de documentação (schema, busca de tabelas) funcionam **sem conexão com o banco**, lendo apenas os arquivos `.md` locais.
+- Todas as ferramentas funcionam **sem conexão com o banco**, lendo apenas os arquivos `.md` locais.
 
 ## Estrutura do Projeto
 
@@ -86,11 +91,9 @@ ExtrairRAG-BancoDados
 │   ├── index.ts              # Entry point — inicializa o servidor MCP (stdio)
 │   ├── types.ts              # Interfaces e constantes (módulos ERP, ResponseFormat)
 │   ├── services/
-│   │   ├── db-client.ts      # Cliente SQL Server (mssql) — somente leitura
 │   │   └── docs-reader.ts    # Leitor de documentação .md das tabelas
 │   └── tools/
-│       ├── doc-tools.ts      # Ferramentas de schema e documentação
-│       └── query-tools.ts    # Ferramentas de execução de SQL
+│       └── doc-tools.ts      # Ferramentas de schema e documentação
 ├── dist/                     # Arquivos compilados (gerados pelo build)
 ├── package.json
 └── tsconfig.json
