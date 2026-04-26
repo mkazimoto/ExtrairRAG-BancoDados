@@ -69,20 +69,23 @@ function normalizePhonetic(text: string): string {
 }
 
 /**
- * Busca tabelas pelo nome ou descrição com suporte a busca multi-palavra e fonética.
+ * Busca tabelas pelo nome ou descrição com suporte a busca multi-palavra.
+ * @param phonetic Habilita normalização fonética (padrão: false)
  */
-export function searchTables(query: string, limit = 20, offset = 0): { items: TableSummary[]; total: number } {
+export function searchTables(query: string, limit = 20, offset = 0, phonetic = false): { items: TableSummary[]; total: number } {
   const index = loadTableIndex();
 
-  // Divide a query em palavras, remove plural ('s' final) e normaliza foneticamente
+  const normalize = phonetic ? normalizePhonetic : (s: string) => s.toLowerCase();
+
+  // Divide a query em palavras e normaliza conforme o modo escolhido
   const words = query
     .split(/\s+/)
     .map(w => w.trim())
     .filter(w => w.length > 0)
     .map(w => {
-      const normalized = normalizePhonetic(w);
-      // Remove 's' final para lidar com plural
-      return normalized.endsWith('s') && normalized.length > 2
+      const normalized = normalize(w);
+      // Remove 's' final para lidar com plural (apenas na busca fonética)
+      return phonetic && normalized.endsWith('s') && normalized.length > 2
         ? normalized.slice(0, -1)
         : normalized;
     });
@@ -91,10 +94,10 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
     return { items: [], total: 0 };
   }
 
-  // Filtra se QUALQUER palavra (foneticamente normalizada) aparece no nome ou descrição
+  // Filtra se QUALQUER palavra aparece no nome ou descrição
   const filtered = index.filter(t => {
-    const name = normalizePhonetic(t.name);
-    const desc = normalizePhonetic(t.description);
+    const name = normalize(t.name);
+    const desc = normalize(t.description);
     return words.some(word => name.includes(word) || desc.includes(word));
   });
 
