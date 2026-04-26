@@ -785,6 +785,8 @@ function parseMapeamentoRegras(filePath) {
         tabela:    cells[0],
         codigo:    cells[1],
         descricao: cells[2],
+        coligada:  cells[3] ?? null,
+        filtro:    cells[4] ?? null,
       };
     }
   }
@@ -848,9 +850,14 @@ async function gerarRulesMdDoBanco(mapeamento, outputPath) {
         const cId = escapeIdentifier(mapping.codigo);
         const dId = escapeIdentifier(mapping.descricao);
 
+        const whereClause = (mapping.coligada && mapping.filtro)
+          ? `WHERE ${tId}.${escapeIdentifier(mapping.coligada)} = ${Number.isFinite(Number(mapping.filtro)) ? mapping.filtro : `'${escapeSql(mapping.filtro)}'`}`
+          : '';
+
         const { rows } = await executeSQL(`
           SELECT ${tId}.${cId} AS CODIGO, ${tId}.${dId} AS DESCRICAO
           FROM   ${tId} (NOLOCK)
+          ${whereClause}
           ORDER BY ${tId}.${cId}
         `);
 

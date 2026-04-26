@@ -6,6 +6,14 @@
 | ------ | ------ | --------- |
 | PCODSITUACAO | CODCLIENTE | DESCRICAO |
 
+# TMOV
+
+## CODTMV
+
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |   
+| TTMV | CODTMV | NOME | CODCOLIGADA | 1 |
+
 # XVENDA
 
 ## COD_SIT_VENDA
