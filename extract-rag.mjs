@@ -41,7 +41,7 @@ const CONFIG = {
   port:         1433,
   database:     'EXEMPLO1212606',
   user:         'rm',          // deixe vazio para usar Windows Auth
-  password:     '??',
+  password:     'rm',
   trustServerCertificate: true,
   // ── Extração ────────────────────────────────────────────────────────────
   schema:       'dbo',
@@ -416,7 +416,7 @@ async function batchFetchAndSave(tables) {
       g.ANONIMIZAVEL  AS GDIC_ANONIMIZAVEL,
       CASE WHEN pk.TABLE_NAME IS NOT NULL THEN 1 ELSE 0 END AS IS_PK
     FROM INFORMATION_SCHEMA.COLUMNS c
-    LEFT JOIN GDIC g
+    JOIN GDIC g
       ON  g.TABELA = c.TABLE_NAME
       AND g.COLUNA = c.COLUMN_NAME
     LEFT JOIN (
@@ -604,7 +604,6 @@ function generateMarkdown(tableName, tableDesc, columns, fksOut = [], fksIn = []
   lines.push('');
   lines.push('| Atributo | Valor |');
   lines.push('|---|---|');
-  lines.push(`| Nome da tabela | \`${tableName}\` |`);
   if (pkCols.length > 0) {
     lines.push(`| Chave primária | ${pkCols.map(k => `\`${k}\``).join(', ')} |`);
   }
