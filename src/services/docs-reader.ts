@@ -49,14 +49,55 @@ export function loadTableIndex(): TableSummary[] {
 }
 
 /**
- * Busca tabelas pelo nome ou descrição.
+ * Normaliza texto para busca fonética:
+ * - Remove acentos e diacríticos (NFD)
+ * - Converte para minúsculas
+ * - Aplica equivalências fonéticas do português
+ */
+function normalizePhonetic(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')  // remove diacríticos (ã→a, ç→c, é→e, etc.)
+    .toLowerCase()
+    .replace(/ph/g, 'f')
+    .replace(/nh/g, 'n')
+    .replace(/lh/g, 'l')
+    .replace(/ch/g, 'x')
+    .replace(/qu/g, 'k')
+    .replace(/[yw]/g, 'i')
+    .replace(/([a-z])\1+/g, '$1');   // reduz letras duplicadas (ss→s, rr→r)
+}
+
+/**
+ * Busca tabelas pelo nome ou descrição com suporte a busca multi-palavra e fonética.
  */
 export function searchTables(query: string, limit = 20, offset = 0): { items: TableSummary[]; total: number } {
   const index = loadTableIndex();
-  const q = query.toLowerCase();
-  const filtered = index.filter(
-    t => t.name.toLowerCase().includes(q) || t.description.toLowerCase().includes(q),
-  );
+
+  // Divide a query em palavras, remove plural ('s' final) e normaliza foneticamente
+  const words = query
+    .split(/\s+/)
+    .map(w => w.trim())
+    .filter(w => w.length > 0)
+    .map(w => {
+      const normalized = normalizePhonetic(w);
+      // Remove 's' final para lidar com plural
+      return normalized.endsWith('s') && normalized.length > 2
+        ? normalized.slice(0, -1)
+        : normalized;
+    });
+
+  if (words.length === 0) {
+    return { items: [], total: 0 };
+  }
+
+  // Filtra se QUALQUER palavra (foneticamente normalizada) aparece no nome ou descrição
+  const filtered = index.filter(t => {
+    const name = normalizePhonetic(t.name);
+    const desc = normalizePhonetic(t.description);
+    return words.some(word => name.includes(word) || desc.includes(word));
+  });
+
   return {
     total: filtered.length,
     items: filtered.slice(offset, offset + limit),
