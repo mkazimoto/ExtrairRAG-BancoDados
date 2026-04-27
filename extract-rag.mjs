@@ -954,7 +954,7 @@ function generateIndex(tables, modulos, outputFile) {
   lines.push('|--------|-------------------|');
   for (const t of tables) {
     const desc = t.descricao || '*(sem descrição no GDIC)*';
-    lines.push(`| [\`${t.name}\`](../docs/db/tables/${t.name}.md) | ${desc} |`);
+    lines.push(`| \`${t.name}\` | ${desc} |`);
   }
   lines.push('');
 
