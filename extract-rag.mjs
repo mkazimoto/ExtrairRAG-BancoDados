@@ -974,7 +974,10 @@ function generateIndex(tables, modulos, outputFile) {
  */
 function extrairDescricaoMd(filePath) {
   try {
-    const content = readFileSync(filePath, 'utf-8');
+    const resolvedPath = filePath.endsWith('.rules.md')
+      ? filePath.slice(0, -9) + '.md'
+      : filePath;
+    const content = readFileSync(resolvedPath, 'utf-8');
     const match   = content.match(/##\s+Descri[çc][aã]o\s*\n+([^\n#][^\n]*)/);
     return match ? match[1].trim() : '';
   } catch {
@@ -1037,7 +1040,7 @@ async function runGenerateIndex() {
   let mdExtras      = 0;
 
   if (existsSync(tablesDir)) {
-    const mdFiles = readdirSync(tablesDir).filter(f => f.endsWith('.md') && !f.endsWith('.rules.md'));
+    const mdFiles = readdirSync(tablesDir).filter(f => f.endsWith('.md'));
     for (const file of mdFiles) {
       const name = file.slice(0, -3).toUpperCase();
       if (!cachedNames.has(name)) {
