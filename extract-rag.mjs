@@ -587,7 +587,7 @@ function gerarMdDaCache(outputPath, tableNames) {
 
       // Tabelas sem descrição no dicionário de dados (GDIC) são ignoradas
       if (!tbl?.descricao) {
-        console.log(`—  (sem descrição no GDIC, ignorada)`);
+        console.log(`—  (sem descricao no GDIC, ignorada)`);
         continue;
       }
 
@@ -871,7 +871,7 @@ async function gerarRulesMdDoBanco(mapeamento, outputPath) {
         `);
 
         const sectionLines = [`## ${coluna}`, ''];
-        sectionLines.push('| Código | Descrição |');
+        sectionLines.push('| Codigo | Descricao |');
         sectionLines.push('| ------ | --------- |');
         for (const row of rows) {
           const cod  = String(row.CODIGO  ?? '').replace(/\|/g, '\\|');
