@@ -31,8 +31,8 @@ export function loadTableIndex(): TableSummary[] {
   const content = readFileSync(INDEX_FILE, 'utf-8');
   const rows: TableSummary[] = [];
 
-  // Parseia as linhas da tabela markdown: | [`NOME`](link) | Descrição |
-  const lineRe = /^\|\s*\[`([A-Z0-9_]+)`\][^\|]+\|\s*(.*?)\s*\|/;
+  // Parseia as linhas da tabela markdown: | `TABELA` | Descrição |
+  const lineRe = /^\|\s*`([A-Z0-9_]+)`\s*\|\s*(.*?)\s*\|/;
   for (const line of content.split('\n')) {
     const m = lineRe.exec(line);
     if (!m) continue;
