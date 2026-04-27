@@ -70,18 +70,22 @@ function normalizePhonetic(text: string): string {
 
 /**
  * Busca tabelas pelo nome ou descrição com suporte a busca multi-palavra.
- * @param phonetic Habilita normalização fonética (padrão: false)
+ * @param phonetic Habilita normalização fonética (padrão: true)
  */
-export function searchTables(query: string, limit = 20, offset = 0, phonetic = false): { items: TableSummary[]; total: number } {
+export function searchTables(query: string, limit = 20, offset = 0, phonetic = true): { items: TableSummary[]; total: number } {
   const index = loadTableIndex();
 
   const normalize = phonetic ? normalizePhonetic : (s: string) => s.toLowerCase();
 
-  // Divide a query em palavras e normaliza conforme o modo escolhido
+  // Palavras irrelevantes (stopwords) a serem ignoradas na busca
+  const STOPWORDS = new Set(['/', '-', 'p/', 'de', 'do', 'da', 'dos', 'das', 'por', 'para', 'pelo', 'pela', 'em', 'no', 'na', 'nos', 'nas', 'a', 'o', 'e', 'ao', 'ou', 'com', 'sem']);
+
+  // Divide a query em palavras, remove stopwords e normaliza conforme o modo escolhido
   const words = query
     .split(/\s+/)
     .map(w => w.trim())
     .filter(w => w.length > 0)
+    .filter(w => !STOPWORDS.has(w.toLowerCase()))
     .map(w => {
       const normalized = normalize(w);
       // Remove 's' final para lidar com plural (apenas na busca fonética)

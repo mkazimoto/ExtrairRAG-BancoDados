@@ -38,7 +38,7 @@ Exemplos:
         query: z.string().min(1).max(200).describe('Texto para buscar no nome ou descrição da tabela'),
         limit: z.number().int().min(1).max(100).default(20).describe('Máximo de resultados'),
         offset: z.number().int().min(0).default(0).describe('Deslocamento para paginação'),
-        phonetic: z.boolean().default(false).describe('Habilita busca fonética (ignora acentos e aplica equivalências sonoras do português). Padrão: false'),
+        phonetic: z.boolean().default(false).describe('Habilita busca fonética (ignora acentos e aplica equivalências sonoras do português). Padrão: true'),
         response_format: z.nativeEnum(ResponseFormat).default(ResponseFormat.MARKDOWN).describe("Formato: 'markdown' ou 'json'"),
       },
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
