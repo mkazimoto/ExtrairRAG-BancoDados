@@ -70,7 +70,7 @@ async function main(): Promise<void> {
 
     // Cria uma nova instância de servidor MCP por sessão
     const sessionServer = new McpServer({
-      name: 'totvs-rm-mcp-server',
+      name: 'totvs-rm-database-mcp-server',
       version: '1.0.0',
     });
     registerDocTools(sessionServer);
