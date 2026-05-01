@@ -162,19 +162,40 @@ export function searchTables(query: string, limit = 20, offset = 0, phonetic = t
     return { items: [], total: 0 };
   }
 
-  // Busca primária: tabelas cujo nome ou descrição contenha alguma palavra
-  const primaryMatches = index.filter(t => {
-    const name = normalize(t.name);
-    const desc = normalize(t.description);
-    return words.some(word => name.includes(word) || desc.includes(word));
-  });
+  // Pesos: +10 por palavra no módulo, +3 por palavra no nome, +1 por palavra na descrição
+  // O nome do módulo sempre usa normalização sem acentos para evitar falhas em queries sem acento
+  const normalizeModule = (s: string) =>
+    s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+  const primaryMatches = index
+    .map(t => {
+      const name = normalize(t.name);
+      const desc = normalize(t.description);
+      const mod = normalizeModule(t.module);
+      let score = 0;
+      for (const word of words) {
+        const wordPlain = word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        if (mod.includes(wordPlain)) score += 10;
+        if (name.includes(word)) score += 3;
+        if (desc.includes(word)) score += 1;
+      }
+      return { ...t, score };
+    })
+    .filter(t => t.score > 0)
+    .sort((a, b) => b.score - a.score);
 
   const primaryNames = new Set(primaryMatches.map(t => t.name));
 
   // Busca secundária: tabelas com colunas (nome ou descrição GDIC) que contenham a query
-  const columnMatches = searchColumnInCache(rawWords, primaryNames);
+  // Pontua pela quantidade de colunas que corresponderam
+  const columnMatches = searchColumnInCache(rawWords, primaryNames).map(t => ({
+    ...t,
+    score: t.matchedColumns?.length ?? 1,
+  }));
 
-  const combined = [...columnMatches, ...primaryMatches];
+  // Combina e ordena o resultado final por relevância (score desc)
+  const combined = [...columnMatches, ...primaryMatches]
+    .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
 
   return {
     total: combined.length,

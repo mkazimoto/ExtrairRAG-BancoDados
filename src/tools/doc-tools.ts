@@ -54,14 +54,15 @@ Exemplos:
         '',
         `Encontradas **${result.total}** tabelas (exibindo ${result.items.length}):`,
         '',
-        '| Tabela | Regras | Descrição | Módulo |',
-        '|--------|--------|-----------|--------|',
+        '| Relevância | Tabela | Regras | Descrição | Módulo |',
+        '|:----------:|--------|--------|-----------|--------|',
         ...result.items.map(t => {
           const rules = hasTableRules(t.name) ? '✓' : '-';
           const colInfo = t.matchedColumns && t.matchedColumns.length > 0
             ? ` *(via coluna: ${t.matchedColumns.map(c => `\`${c.name}\``).join(', ')})*`
             : '';
-          return `| \`${t.name}\` | ${rules} | ${t.description}${colInfo} | ${t.module} |`;
+          const score = t.score ?? 0;
+          return `| ${score} | \`${t.name}\` | ${rules} | ${t.description}${colInfo} | ${t.module} |`;
         }),
       ];
 

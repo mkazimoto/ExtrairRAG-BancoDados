@@ -5,6 +5,8 @@ export interface TableSummary {
   module: string;
   /** Colunas que corresponderam à busca (preenchido apenas em buscas por coluna via cache) */
   matchedColumns?: Array<{ name: string; description: string }>;
+  /** Pontuação de relevância: quanto maior, mais palavras da query foram satisfeitas */
+  score?: number;
 }
 
 /** Detalhes completos de uma tabela — lidos do arquivo .md individual */
