@@ -2,7 +2,12 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import express from 'express';
 import { randomUUID } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { registerDocTools } from './tools/doc-tools.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const API_KEY = process.env.MCP_API_KEY ?? 'ed931c92-33db-4fdb-aa86-c78a236bf40e';
@@ -30,6 +35,13 @@ function requireApiKey(req: express.Request, res: express.Response, next: expres
 async function main(): Promise<void> {
   const app = express();
   app.use(express.json());
+
+  // Página de teste do MCP (sem autenticação — apenas UI local)
+  app.get('/', (_req, res) => {
+    const html = readFileSync(join(__dirname, '../mcp-test.html'), 'utf-8');
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.send(html);
+  });
 
   // Mapa de transports ativos por sessionId
   const transports = new Map<string, StreamableHTTPServerTransport>();

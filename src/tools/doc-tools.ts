@@ -58,7 +58,10 @@ Exemplos:
         '|--------|--------|-----------|--------|',
         ...result.items.map(t => {
           const rules = hasTableRules(t.name) ? '✓' : '-';
-          return `| \`${t.name}\` | ${rules} | ${t.description} | ${t.module} |`;
+          const colInfo = t.matchedColumns && t.matchedColumns.length > 0
+            ? ` *(via coluna: ${t.matchedColumns.map(c => `\`${c.name}\``).join(', ')})*`
+            : '';
+          return `| \`${t.name}\` | ${rules} | ${t.description}${colInfo} | ${t.module} |`;
         }),
       ];
 

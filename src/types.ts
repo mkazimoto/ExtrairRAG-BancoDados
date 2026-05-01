@@ -3,6 +3,8 @@ export interface TableSummary {
   name: string;
   description: string;
   module: string;
+  /** Colunas que corresponderam à busca (preenchido apenas em buscas por coluna via cache) */
+  matchedColumns?: Array<{ name: string; description: string }>;
 }
 
 /** Detalhes completos de uma tabela — lidos do arquivo .md individual */
@@ -61,6 +63,5 @@ export const MODULES: Record<string, string> = {
 };
 
 export enum ResponseFormat {
-  MARKDOWN = 'markdown',
-  JSON = 'json',
+  MARKDOWN = 'markdown'
 }

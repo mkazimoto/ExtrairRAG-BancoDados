@@ -295,7 +295,6 @@ async function main() {
   if (CONFIG.soIndex) {
     await runGenerateIndex();
     db.close();
-    limparCache();
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
     console.log(`  Tempo total de processamento: ${elapsed}s`);
     return;
@@ -307,7 +306,6 @@ async function main() {
     if (!existsSync(mapeamentoPath)) {
       console.error(`Arquivo de mapeamento não encontrado: ${mapeamentoPath}`);
       db.close();
-      limparCache();
       process.exit(1);
     }
     process.stdout.write('Conectando ao SQL Server... ');
@@ -317,7 +315,6 @@ async function main() {
     await gerarRulesMdDoBanco(mapeamento, outputPath);
     await sql.close();
     db.close();
-    limparCache();
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
     console.log(`  Tempo total de processamento: ${elapsed}s`);
     return;
@@ -329,13 +326,11 @@ async function main() {
     if (names.length === 0) {
       console.error('Cache vazio. Execute sem --so-md para popular o cache primeiro.');
       db.close();
-      limparCache();
       process.exit(1);
     }
     gerarMdDaCache(outputPath, names);
     if (CONFIG.gerarIndex) await runGenerateIndex();
     db.close();
-    limparCache();
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
     console.log(`  Tempo total de processamento: ${elapsed}s`);
     return;
@@ -435,7 +430,6 @@ async function main() {
   }
 
   db.close();
-  limparCache();
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
   console.log(`  Tempo total de processamento: ${elapsed}s`);
 }

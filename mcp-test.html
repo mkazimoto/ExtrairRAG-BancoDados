@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCP Test — TOTVS RM Database</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d2e;
+      --surface2: #252840;
+      --border: #2e3358;
+      --accent: #6c8ef5;
+      --accent2: #4ade80;
+      --danger: #f87171;
+      --warning: #fbbf24;
+      --text: #e2e8f0;
+      --text-dim: #94a3b8;
+      --radius: 8px;
+      --font: 'Segoe UI', system-ui, sans-serif;
+      --mono: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+    }
+
+    body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header h1 { font-size: 1.1rem; font-weight: 600; }
+    header .badge {
+      font-size: 0.7rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .status-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--danger);
+      flex-shrink: 0;
+      transition: background .3s;
+    }
+    .status-dot.connected { background: var(--accent2); box-shadow: 0 0 6px var(--accent2); }
+
+    .layout { display: grid; grid-template-columns: 280px 1fr; height: calc(100vh - 57px); }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .sidebar-section { padding: 16px; border-bottom: 1px solid var(--border); }
+    .sidebar-section label { font-size: .75rem; color: var(--text-dim); display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: .05em; }
+    .sidebar-section input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      padding: 7px 10px;
+      font-size: .85rem;
+      font-family: var(--mono);
+      outline: none;
+    }
+    .sidebar-section input:focus { border-color: var(--accent); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      font-size: .85rem;
+      font-weight: 500;
+      transition: opacity .15s, transform .1s;
+    }
+    .btn:active { transform: scale(.97); }
+    .btn:disabled { opacity: .45; cursor: not-allowed; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-success { background: var(--accent2); color: #000; }
+    .btn-danger  { background: var(--danger); color: #fff; }
+    .btn-ghost   { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
+    .btn-sm      { padding: 4px 10px; font-size: .78rem; }
+
+    .tool-list { flex: 1; overflow-y: auto; padding: 8px; }
+    .tool-item {
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      margin-bottom: 2px;
+      transition: background .15s;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .tool-item:hover { background: var(--surface2); }
+    .tool-item.active { background: var(--surface2); border-left: 3px solid var(--accent); }
+    .tool-item .tool-name { font-size: .82rem; font-weight: 600; color: var(--accent); font-family: var(--mono); }
+    .tool-item .tool-desc { font-size: .72rem; color: var(--text-dim); line-height: 1.3; }
+
+    /* ── Main Panel ── */
+    .main { display: flex; flex-direction: column; overflow: hidden; }
+
+    .tool-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .tool-header h2 { font-size: 1rem; font-weight: 600; }
+    .tool-header p { font-size: .8rem; color: var(--text-dim); margin-top: 2px; }
+
+    .tool-body { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0; overflow: hidden; }
+
+    /* ── Form Panel ── */
+    .form-panel {
+      padding: 20px;
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label { font-size: .78rem; color: var(--text-dim); font-weight: 500; }
+    .field input, .field select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: .85rem;
+      font-family: var(--mono);
+      outline: none;
+      width: 100%;
+    }
+    .field input:focus, .field select:focus { border-color: var(--accent); }
+    .field .hint { font-size: .72rem; color: var(--text-dim); }
+    .field input[type="checkbox"] { width: auto; }
+    .checkbox-row { display: flex; align-items: center; gap: 8px; }
+
+    .form-actions { display: flex; gap: 8px; align-items: center; padding-top: 4px; }
+    .elapsed { font-size: .75rem; color: var(--text-dim); }
+
+    /* ── Result Panel ── */
+    .result-panel { display: flex; flex-direction: column; overflow: hidden; }
+    .result-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      background: var(--surface);
+    }
+    .result-tab {
+      padding: 10px 14px;
+      font-size: .8rem;
+      cursor: pointer;
+      color: var(--text-dim);
+      border-bottom: 2px solid transparent;
+      transition: color .15s;
+    }
+    .result-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .result-content { flex: 1; overflow-y: auto; padding: 16px; }
+
+    .result-placeholder {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      gap: 8px;
+      text-align: center;
+    }
+    .result-placeholder svg { opacity: .3; }
+    .result-placeholder p { font-size: .85rem; }
+
+    pre.json {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      font-family: var(--mono);
+      font-size: .78rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      line-height: 1.5;
+    }
+    pre.json .key   { color: #7dd3fc; }
+    pre.json .str   { color: #86efac; }
+    pre.json .num   { color: #fca5a5; }
+    pre.json .bool  { color: #c4b5fd; }
+    pre.json .null  { color: var(--text-dim); }
+
+    /* markdown rendered */
+    .md-render { font-size: .85rem; line-height: 1.7; }
+    .md-render h1 { font-size: 1.15rem; margin-bottom: 12px; color: var(--accent); }
+    .md-render h2 { font-size: 1rem; margin: 16px 0 8px; }
+    .md-render h3 { font-size: .9rem; margin: 12px 0 6px; }
+    .md-render p  { margin-bottom: 8px; }
+    .md-render code { background: var(--bg); padding: 1px 5px; border-radius: 4px; font-family: var(--mono); font-size: .8rem; }
+    .md-render pre { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; overflow-x: auto; margin: 10px 0; }
+    .md-render table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: .8rem; }
+    .md-render th { background: var(--surface2); padding: 6px 10px; text-align: left; border: 1px solid var(--border); font-size: .75rem; }
+    .md-render td { padding: 5px 10px; border: 1px solid var(--border); }
+    .md-render tr:nth-child(even) td { background: rgba(255,255,255,.03); }
+    .md-render blockquote { border-left: 3px solid var(--accent); padding-left: 12px; color: var(--text-dim); margin: 8px 0; }
+    .md-render ul, .md-render ol { padding-left: 20px; margin-bottom: 8px; }
+    .md-render a { color: var(--accent); }
+
+    /* toast */
+    #toast {
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      font-size: .82rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+      z-index: 999;
+      max-width: 320px;
+    }
+    #toast.show { opacity: 1; }
+    #toast.error { border-color: var(--danger); color: var(--danger); }
+    #toast.success { border-color: var(--accent2); color: var(--accent2); }
+
+    /* log panel */
+    .log-panel {
+      height: 160px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      overflow-y: auto;
+      padding: 8px 12px;
+      font-family: var(--mono);
+      font-size: .72rem;
+      flex-shrink: 0;
+    }
+    .log-entry { margin-bottom: 2px; color: var(--text-dim); }
+    .log-entry.req { color: #7dd3fc; }
+    .log-entry.res { color: #86efac; }
+    .log-entry.err { color: var(--danger); }
+    .log-entry .ts { opacity: .5; margin-right: 6px; }
+
+    /* loading spinner */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.2);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div id="statusDot" class="status-dot" title="Desconectado"></div>
+  <h1>TOTVS RM — MCP Test Client</h1>
+  <span class="badge">MCP 2024-11-05</span>
+</header>
+
+<div class="layout">
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <label>URL do Servidor</label>
+      <input id="serverUrl" type="url" value="http://localhost:3000/mcp" />
+    </div>
+    <div class="sidebar-section">
+      <label>API Key (Bearer)</label>
+      <input id="apiKey" type="text" value="ed931c92-33db-4fdb-aa86-c78a236bf40e" />
+    </div>
+    <div class="sidebar-section" style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-primary" id="btnConnect">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 1.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zM7 5v3H4.5v1.5H7V12h1.5V9.5H11V8H8.5V5H7z"/></svg>
+        Conectar
+      </button>
+      <button class="btn btn-ghost btn-sm" id="btnDisconnect" disabled>Encerrar</button>
+      <span id="sessionLabel" style="font-size:.7rem;color:var(--text-dim);align-self:center;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+    </div>
+
+    <nav class="tool-list" id="toolList">
+      <!-- populated by JS -->
+    </nav>
+  </aside>
+
+  <!-- ── Main Panel ── -->
+  <main class="main">
+    <div class="tool-header" id="toolHeader">
+      <div>
+        <h2>Selecione uma ferramenta</h2>
+        <p>Conecte ao servidor MCP e escolha uma tool na barra lateral para testar.</p>
+      </div>
+    </div>
+
+    <div class="tool-body">
+      <!-- Form -->
+      <div class="form-panel" id="formPanel">
+        <div style="color:var(--text-dim);font-size:.85rem;margin-top:40px;text-align:center">
+          Nenhuma ferramenta selecionada.
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="result-panel">
+        <div class="result-tabs">
+          <div class="result-tab active" data-tab="rendered">Markdown</div>
+          <div class="result-tab" data-tab="raw">JSON Raw</div>
+        </div>
+        <div class="result-content" id="resultContent">
+          <div class="result-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <p>Nenhum resultado ainda.<br>Execute uma ferramenta para ver o retorno.</p>
+          </div>
+        </div>
+        <div class="log-panel" id="logPanel">
+          <div class="log-entry" style="color:var(--text-dim)">▸ Console de requisições MCP</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ─────────────────── Estado ─────────────────── */
+let sessionId = null;
+let requestId  = 0;
+let activeTab  = 'rendered';
+let lastRawResult = null;
+
+/* ─────────────────── Ferramentas ─────────────────── */
+const TOOLS = [
+  {
+    name: 'totvs_list_modules',
+    title: 'Listar Módulos',
+    description: 'Retorna todos os módulos ERP TOTVS RM com prefixos.',
+    fields: [],
+    args: () => ({})
+  },
+  {
+    name: 'totvs_search_tables',
+    title: 'Buscar Tabelas',
+    description: 'Busca tabelas por nome ou descrição.',
+    fields: [
+      { id: 'query',    label: 'Query',    type: 'text',   default: 'funcionario', hint: 'Nome ou descrição (ex: funcionario, folha, PFUNC)' },
+      { id: 'limit',    label: 'Limit',    type: 'number', default: '20',          hint: 'Máx. resultados (1-100)' },
+      { id: 'offset',   label: 'Offset',   type: 'number', default: '0',           hint: 'Paginação' },
+      { id: 'phonetic', label: 'Fonética', type: 'checkbox', default: false,       hint: 'Habilitar busca fonética' },
+    ],
+    args: (f) => ({
+      query:    f.query,
+      limit:    parseInt(f.limit) || 20,
+      offset:   parseInt(f.offset) || 0,
+      phonetic: f.phonetic === true || f.phonetic === 'true'
+    })
+  },
+  {
+    name: 'totvs_get_table_schema',
+    title: 'Esquema de Tabela',
+    description: 'Retorna colunas, tipos e relacionamentos de uma tabela.',
+    fields: [
+      { id: 'table_name', label: 'Nome da Tabela', type: 'text', default: 'PFUNC', hint: 'Ex: PFUNC, FCFO, TITMMOV' },
+    ],
+    args: (f) => ({ table_name: f.table_name })
+  },
+  {
+    name: 'totvs_get_table_rules',
+    title: 'Regras de Colunas',
+    description: 'Retorna os valores possíveis para colunas codificadas.',
+    fields: [
+      { id: 'table_name', label: 'Nome da Tabela', type: 'text', default: 'PFUNC', hint: 'Ex: PFUNC, AHORARIO' },
+    ],
+    args: (f) => ({ table_name: f.table_name })
+  },
+  {
+    name: 'totvs_list_tables_by_module',
+    title: 'Tabelas por Módulo',
+    description: 'Lista todas as tabelas de um módulo específico.',
+    fields: [
+      { id: 'module_prefix', label: 'Prefixo do Módulo', type: 'text', default: 'P', hint: 'P=Folha, F=Financeiro, T=Estoque, C=Contábil...' },
+      { id: 'limit',         label: 'Limit',             type: 'number', default: '50' },
+      { id: 'offset',        label: 'Offset',            type: 'number', default: '0' },
+    ],
+    args: (f) => ({
+      module_prefix: f.module_prefix,
+      limit:  parseInt(f.limit)  || 50,
+      offset: parseInt(f.offset) || 0
+    })
+  },
+  {
+    name: 'totvs_get_db_index',
+    title: 'Índice Completo',
+    description: 'Retorna o índice completo de todas as tabelas (arquivo grande).',
+    fields: [],
+    args: () => ({})
+  },
+];
+
+/* ─────────────────── DOM helpers ─────────────────── */
+const $ = (id) => document.getElementById(id);
+
+function toast(msg, type = 'info', ms = 3000) {
+  const el = $('toast');
+  el.textContent = msg;
+  el.className   = `show ${type}`;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), ms);
+}
+
+function log(msg, type = '') {
+  const panel = $('logPanel');
+  const ts    = new Date().toLocaleTimeString('pt-BR');
+  const div   = document.createElement('div');
+  div.className = `log-entry ${type}`;
+  div.innerHTML = `<span class="ts">${ts}</span>${msg}`;
+  panel.appendChild(div);
+  panel.scrollTop = panel.scrollHeight;
+}
+
+function setConnected(yes) {
+  const dot = $('statusDot');
+  dot.className = 'status-dot' + (yes ? ' connected' : '');
+  dot.title     = yes ? 'Conectado' : 'Desconectado';
+  $('btnConnect').disabled    = yes;
+  $('btnDisconnect').disabled = !yes;
+}
+
+/* ─────────────────── JSON Syntax Highlight ─────────────────── */
+function highlight(json) {
+  return JSON.stringify(json, null, 2)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, (match) => {
+      let cls = 'num';
+      if (/^"/.test(match)) cls = /:$/.test(match) ? 'key' : 'str';
+      else if (/true|false/.test(match)) cls = 'bool';
+      else if (/null/.test(match)) cls = 'null';
+      return `<span class="${cls}">${match}</span>`;
+    });
+}
+
+/* ─────────────────── Resultado ─────────────────── */
+function showResult(raw) {
+  lastRawResult = raw;
+  renderTab();
+}
+
+function renderTab() {
+  const el = $('resultContent');
+  if (!lastRawResult) return;
+
+  if (activeTab === 'raw') {
+    el.innerHTML = `<pre class="json">${highlight(lastRawResult)}</pre>`;
+    return;
+  }
+
+  // Markdown: extrai texto do conteúdo
+  try {
+    const content = lastRawResult?.result?.content;
+    if (Array.isArray(content)) {
+      const texts = content.filter(c => c.type === 'text').map(c => c.text).join('\n\n');
+      el.innerHTML = `<div class="md-render">${marked.parse(texts)}</div>`;
+      return;
+    }
+  } catch (_) {}
+  el.innerHTML = `<pre class="json">${highlight(lastRawResult)}</pre>`;
+}
+
+/* ─────────────────── Tabs ─────────────────── */
+document.querySelectorAll('.result-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.result-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeTab = tab.dataset.tab;
+    renderTab();
+  });
+});
+
+/* ─────────────────── MCP Client ─────────────────── */
+async function mcpPost(body) {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Accept':       'application/json, text/event-stream',
+  };
+  const apiKey = $('apiKey').value.trim();
+  if (apiKey) headers['Authorization'] = `Bearer ${apiKey}`;
+  if (sessionId) headers['mcp-session-id'] = sessionId;
+
+  const url = $('serverUrl').value.trim();
+  log(`→ POST ${url} | method: ${body.method}`, 'req');
+
+  const res = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
+
+  // Captura sessionId do header
+  const sid = res.headers.get('mcp-session-id');
+  if (sid && !sessionId) {
+    sessionId = sid;
+    $('sessionLabel').textContent = `Session: ${sid.slice(0, 12)}…`;
+    setConnected(true);
+    log(`✓ Session iniciada: ${sid}`, 'res');
+  }
+
+  const contentType = res.headers.get('content-type') || '';
+
+  // SSE response — lê até primeira mensagem completa
+  if (contentType.includes('text/event-stream')) {
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const msgs = buffer.split('\n\n');
+      for (let i = 0; i < msgs.length - 1; i++) {
+        const msg = msgs[i];
+        const dataLine = msg.split('\n').find(l => l.startsWith('data:'));
+        if (dataLine) {
+          try { return JSON.parse(dataLine.slice(5).trim()); } catch (_) {}
+        }
+      }
+      buffer = msgs[msgs.length - 1];
+    }
+    return null;
+  }
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`HTTP ${res.status}: ${errText}`);
+  }
+
+  const text = await res.text();
+  if (!text.trim()) return null;
+  return JSON.parse(text);
+}
+
+/* ─────────────────── Conectar ─────────────────── */
+$('btnConnect').addEventListener('click', async () => {
+  sessionId = null;
+  $('sessionLabel').textContent = '';
+  try {
+    $('btnConnect').disabled = true;
+    const init = await mcpPost({
+      jsonrpc: '2.0', id: ++requestId,
+      method: 'initialize',
+      params: {
+        protocolVersion: '2024-11-05',
+        capabilities: {},
+        clientInfo: { name: 'mcp-test-html', version: '1.0.0' }
+      }
+    });
+
+    if (!init) throw new Error('Sem resposta do servidor. Verifique URL e API Key.');
+    log(`✓ initialize OK — serverInfo: ${JSON.stringify(init?.result?.serverInfo ?? {})}`, 'res');
+
+    // Notificação initialized (sem esperar resposta)
+    const headers = { 'Content-Type': 'application/json' };
+    const apiKey  = $('apiKey').value.trim();
+    if (apiKey) headers['Authorization'] = `Bearer ${apiKey}`;
+    if (sessionId) headers['mcp-session-id'] = sessionId;
+    fetch($('serverUrl').value.trim(), {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ jsonrpc: '2.0', method: 'notifications/initialized' })
+    }).catch(() => {});
+
+    toast('Conectado com sucesso!', 'success');
+  } catch (err) {
+    $('btnConnect').disabled = false;
+    log(`✗ ${err.message}`, 'err');
+    toast(err.message, 'error', 5000);
+  }
+});
+
+/* ─────────────────── Desconectar ─────────────────── */
+$('btnDisconnect').addEventListener('click', async () => {
+  if (sessionId) {
+    try {
+      const headers = { 'Content-Type': 'application/json' };
+      const apiKey  = $('apiKey').value.trim();
+      if (apiKey) headers['Authorization'] = `Bearer ${apiKey}`;
+      headers['mcp-session-id'] = sessionId;
+      await fetch($('serverUrl').value.trim(), { method: 'DELETE', headers });
+    } catch (_) {}
+  }
+  sessionId = null;
+  $('sessionLabel').textContent = '';
+  setConnected(false);
+  log('Sessão encerrada.', '');
+  toast('Sessão encerrada.');
+});
+
+/* ─────────────────── Sidebar Tools ─────────────────── */
+let activeTool = null;
+
+function buildForm(tool) {
+  const panel = $('formPanel');
+  panel.innerHTML = '';
+
+  if (tool.fields.length === 0) {
+    const info = document.createElement('div');
+    info.style.cssText = 'color:var(--text-dim);font-size:.83rem;margin-top:8px;';
+    info.textContent = 'Esta ferramenta não requer parâmetros.';
+    panel.appendChild(info);
+  }
+
+  tool.fields.forEach(field => {
+    const wrap = document.createElement('div');
+    wrap.className = 'field';
+
+    const lbl = document.createElement('label');
+    lbl.htmlFor   = `field_${field.id}`;
+    lbl.textContent = field.label;
+    wrap.appendChild(lbl);
+
+    if (field.type === 'checkbox') {
+      const row = document.createElement('div');
+      row.className = 'checkbox-row';
+      const inp = document.createElement('input');
+      inp.type    = 'checkbox';
+      inp.id      = `field_${field.id}`;
+      inp.checked = field.default;
+      row.appendChild(inp);
+      const span = document.createElement('span');
+      span.style.fontSize = '.82rem';
+      span.textContent = field.hint || '';
+      row.appendChild(span);
+      wrap.appendChild(row);
+    } else {
+      const inp = document.createElement('input');
+      inp.type    = field.type;
+      inp.id      = `field_${field.id}`;
+      inp.value   = field.default ?? '';
+      if (field.type === 'number') { inp.min = '0'; inp.style.width = '100px'; }
+      wrap.appendChild(inp);
+      if (field.hint) {
+        const hint = document.createElement('div');
+        hint.className = 'hint';
+        hint.textContent = field.hint;
+        wrap.appendChild(hint);
+      }
+    }
+
+    panel.appendChild(wrap);
+  });
+
+  // Actions
+  const actions = document.createElement('div');
+  actions.className = 'form-actions';
+
+  const btnRun = document.createElement('button');
+  btnRun.className = 'btn btn-primary';
+  btnRun.id        = 'btnRun';
+  btnRun.innerHTML = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2l10 6-10 6V2z"/></svg> Executar`;
+  btnRun.addEventListener('click', () => runTool(tool));
+  actions.appendChild(btnRun);
+
+  const elapsed = document.createElement('span');
+  elapsed.id        = 'elapsed';
+  elapsed.className = 'elapsed';
+  actions.appendChild(elapsed);
+
+  panel.appendChild(actions);
+}
+
+function selectTool(tool) {
+  activeTool = tool;
+  document.querySelectorAll('.tool-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.tool === tool.name);
+  });
+
+  const header = $('toolHeader');
+  header.innerHTML = `
+    <div>
+      <h2><code style="font-family:var(--mono);color:var(--accent)">${tool.name}</code></h2>
+      <p>${tool.description}</p>
+    </div>`;
+
+  buildForm(tool);
+}
+
+function buildSidebar() {
+  const list = $('toolList');
+  list.innerHTML = '';
+  TOOLS.forEach(tool => {
+    const item = document.createElement('div');
+    item.className   = 'tool-item';
+    item.dataset.tool = tool.name;
+    item.innerHTML = `
+      <span class="tool-name">${tool.name}</span>
+      <span class="tool-desc">${tool.title}</span>`;
+    item.addEventListener('click', () => selectTool(tool));
+    list.appendChild(item);
+  });
+}
+
+/* ─────────────────── Run Tool ─────────────────── */
+async function runTool(tool) {
+  if (!sessionId) {
+    toast('Conecte ao servidor primeiro.', 'error');
+    return;
+  }
+
+  // Coleta campos
+  const fieldValues = {};
+  tool.fields.forEach(f => {
+    const el = document.getElementById(`field_${f.id}`);
+    fieldValues[f.id] = f.type === 'checkbox' ? el.checked : el.value;
+  });
+
+  const args = tool.args(fieldValues);
+  const btnRun = $('btnRun');
+  const elapsedEl = $('elapsed');
+
+  btnRun.disabled = true;
+  btnRun.innerHTML = `<div class="spinner"></div> Executando…`;
+  elapsedEl.textContent = '';
+  $('resultContent').innerHTML = `<div class="result-placeholder"><div class="spinner" style="width:32px;height:32px;border-width:3px"></div><p>Aguardando resposta…</p></div>`;
+
+  const t0 = performance.now();
+  try {
+    log(`→ tools/call "${tool.name}" args: ${JSON.stringify(args)}`, 'req');
+    const result = await mcpPost({
+      jsonrpc: '2.0', id: ++requestId,
+      method:  'tools/call',
+      params:  { name: tool.name, arguments: args }
+    });
+
+    const ms = (performance.now() - t0).toFixed(0);
+    elapsedEl.textContent = `${ms}ms`;
+    log(`✓ Resposta em ${ms}ms`, 'res');
+
+    if (result?.error) {
+      throw new Error(result.error.message ?? JSON.stringify(result.error));
+    }
+
+    showResult(result);
+    toast('Executado com sucesso!', 'success');
+  } catch (err) {
+    const ms = (performance.now() - t0).toFixed(0);
+    elapsedEl.textContent = `${ms}ms`;
+    log(`✗ ${err.message}`, 'err');
+    $('resultContent').innerHTML = `
+      <div style="color:var(--danger);padding:16px;font-size:.85rem;background:rgba(248,113,113,.06);border-radius:var(--radius);border:1px solid rgba(248,113,113,.2)">
+        <strong>Erro:</strong> ${escHtml(err.message)}
+      </div>`;
+    toast(err.message, 'error', 5000);
+  } finally {
+    btnRun.disabled = false;
+    btnRun.innerHTML = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2l10 6-10 6V2z"/></svg> Executar`;
+  }
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ─────────────────── Init ─────────────────── */
+buildSidebar();
+</script>
+</body>
+</html>

@@ -1,13 +1,30 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { DatabaseSync } from 'node:sqlite';
 import { MODULES, type ColumnInfo, type ForeignKey, type TableDetail, type TableSummary } from '../types.js';
 
 /** Caminho base para a documentação de tabelas */
 const DOCS_DIR = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'), '..', '..', '..', 'docs', 'db', 'tables');
 const INDEX_FILE = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'), '..', '..', '..', 'ai', 'db-index.md');
+const CACHE_FILE = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'), '..', '..', '..', 'docs', 'db', 'cache.sqlite');
 
 /** Cache em memória dos índices e detalhes de tabelas */
 let tableIndex: TableSummary[] | null = null;
+
+/** Instância lazy do SQLite de cache (somente leitura) */
+let cacheDb: DatabaseSync | null | undefined;
+
+function getCacheDb(): DatabaseSync | null {
+  if (cacheDb !== undefined) return cacheDb;
+  if (!existsSync(CACHE_FILE)) { cacheDb = null; return null; }
+  try {
+    cacheDb = new DatabaseSync(CACHE_FILE);
+    return cacheDb;
+  } catch {
+    cacheDb = null;
+    return null;
+  }
+}
 
 /**
  * Retorna o módulo do ERP com base no prefixo da tabela.
@@ -72,6 +89,52 @@ function normalizePhonetic(text: string): string {
  * Busca tabelas pelo nome ou descrição com suporte a busca multi-palavra.
  * @param phonetic Habilita normalização fonética (padrão: true)
  */
+/**
+ * Busca tabelas no cache SQLite pelo nome ou descrição de colunas.
+ * Retorna tabelas que NÃO estejam em `excludeNames` (já encontradas pelo índice).
+ */
+function searchColumnInCache(
+  rawWords: string[],
+  excludeNames: Set<string>,
+): TableSummary[] {
+  if (rawWords.length === 0) return [];
+  const db = getCacheDb();
+  if (!db) return [];
+
+  try {
+    const conditions = rawWords
+      .map(() => `(LOWER(c.nome) LIKE ? OR (c.gdic_descricao IS NOT NULL AND LOWER(c.gdic_descricao) LIKE ?))`)
+      .join(' OR ');
+    const params = rawWords.flatMap(w => [`%${w}%`, `%${w}%`]);
+
+    const rows = db.prepare(`
+      SELECT c.tabela, COALESCE(t.descricao, '') AS tabela_descricao,
+             c.nome, COALESCE(c.gdic_descricao, '') AS gdic_descricao
+      FROM   colunas c
+      LEFT JOIN tabelas t ON t.nome = c.tabela
+      WHERE  ${conditions}
+      ORDER  BY c.tabela, c.ordinal
+    `).all(...params) as Array<{ tabela: string; tabela_descricao: string; nome: string; gdic_descricao: string }>;
+
+    // Agrupa colunas por tabela, ignorando as já encontradas pelo índice
+    const byTable = new Map<string, { desc: string; cols: Array<{ name: string; description: string }> }>();
+    for (const row of rows) {
+      if (excludeNames.has(row.tabela)) continue;
+      if (!byTable.has(row.tabela)) byTable.set(row.tabela, { desc: row.tabela_descricao, cols: [] });
+      byTable.get(row.tabela)!.cols.push({ name: row.nome, description: row.gdic_descricao });
+    }
+
+    return [...byTable.entries()].map(([tableName, { desc, cols }]) => ({
+      name: tableName,
+      description: desc,
+      module: getModule(tableName),
+      matchedColumns: cols,
+    }));
+  } catch {
+    return [];
+  }
+}
+
 export function searchTables(query: string, limit = 20, offset = 0, phonetic = true): { items: TableSummary[]; total: number } {
   const index = loadTableIndex();
 
@@ -80,34 +143,42 @@ export function searchTables(query: string, limit = 20, offset = 0, phonetic = t
   // Palavras irrelevantes (stopwords) a serem ignoradas na busca
   const STOPWORDS = new Set(['/', '-', 'p/', 'de', 'do', 'da', 'dos', 'das', 'por', 'para', 'pelo', 'pela', 'em', 'no', 'na', 'nos', 'nas', 'a', 'o', 'e', 'ao', 'ou', 'com', 'sem']);
 
-  // Divide a query em palavras, remove stopwords e normaliza conforme o modo escolhido
-  const words = query
+  // rawWords: apenas lowercase, sem fonética (para busca SQL no cache)
+  const rawWords = query
     .split(/\s+/)
-    .map(w => w.trim())
-    .filter(w => w.length > 0)
-    .filter(w => !STOPWORDS.has(w.toLowerCase()))
-    .map(w => {
-      const normalized = normalize(w);
-      // Remove 's' final para lidar com plural (apenas na busca fonética)
-      return phonetic && normalized.endsWith('s') && normalized.length > 2
-        ? normalized.slice(0, -1)
-        : normalized;
-    });
+    .map(w => w.trim().toLowerCase())
+    .filter(w => w.length > 0 && !STOPWORDS.has(w));
+
+  // words: normalização fonética (para busca no índice em memória)
+  const words = rawWords.map(w => {
+    const normalized = normalize(w);
+    // Remove 's' final para lidar com plural (apenas na busca fonética)
+    return phonetic && normalized.endsWith('s') && normalized.length > 2
+      ? normalized.slice(0, -1)
+      : normalized;
+  });
 
   if (words.length === 0) {
     return { items: [], total: 0 };
   }
 
-  // Filtra se QUALQUER palavra aparece no nome ou descrição
-  const filtered = index.filter(t => {
+  // Busca primária: tabelas cujo nome ou descrição contenha alguma palavra
+  const primaryMatches = index.filter(t => {
     const name = normalize(t.name);
     const desc = normalize(t.description);
     return words.some(word => name.includes(word) || desc.includes(word));
   });
 
+  const primaryNames = new Set(primaryMatches.map(t => t.name));
+
+  // Busca secundária: tabelas com colunas (nome ou descrição GDIC) que contenham a query
+  const columnMatches = searchColumnInCache(rawWords, primaryNames);
+
+  const combined = [...columnMatches, ...primaryMatches];
+
   return {
-    total: filtered.length,
-    items: filtered.slice(offset, offset + limit),
+    total: combined.length,
+    items: combined.slice(offset, offset + limit),
   };
 }
 
