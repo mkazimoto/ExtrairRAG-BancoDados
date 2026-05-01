@@ -178,7 +178,10 @@ function searchColumnInCache(
 export function searchTables(query: string, limit = 20, offset = 0, phonetic = true): { items: TableSummary[]; total: number } {
   const index = loadTableIndex();
 
-  const normalize = phonetic ? normalizePhonetic : (s: string) => s.toLowerCase();
+  // Normalização base (sempre remove acentos). Phonetic adiciona equivalências sonoras.
+  const normalizeBase = (s: string) =>
+    s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const normalize = phonetic ? normalizePhonetic : normalizeBase;
 
   // Palavras irrelevantes (stopwords) a serem ignoradas na busca
   const STOPWORDS = new Set(['/', '-', 'p/', 'de', 'do', 'da', 'dos', 'das', 'por', 'para', 'pelo', 'pela', 'em', 'no', 'na', 'nos', 'nas', 'a', 'o', 'e', 'ao', 'ou', 'com', 'sem']);
