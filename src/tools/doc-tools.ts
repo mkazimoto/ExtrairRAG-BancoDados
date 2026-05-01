@@ -4,6 +4,7 @@ import {
   getDbIndexMarkdown,
   getTableDetail,
   getTableRules,
+  hasTableRules,
   listTablesByModule,
   searchTables
 } from '../services/docs-reader.js';
@@ -53,9 +54,12 @@ Exemplos:
         '',
         `Encontradas **${result.total}** tabelas (exibindo ${result.items.length}):`,
         '',
-        '| Tabela | Módulo | Descrição |',
-        '|--------|--------|-----------|',
-        ...result.items.map(t => `| \`${t.name}\` | ${t.module} | ${t.description} |`),
+        '| Tabela | Regras | Descrição | Módulo |',
+        '|--------|--------|-----------|--------|',
+        ...result.items.map(t => {
+          const rules = hasTableRules(t.name) ? '✓' : '-';
+          return `| \`${t.name}\` | ${rules} | ${t.description} | ${t.module} |`;
+        }),
       ];
 
       if (result.total > offset + result.items.length) {

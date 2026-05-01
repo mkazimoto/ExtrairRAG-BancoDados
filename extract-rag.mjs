@@ -1040,7 +1040,7 @@ async function runGenerateIndex() {
   let mdExtras      = 0;
 
   if (existsSync(tablesDir)) {
-    const mdFiles = readdirSync(tablesDir).filter(f => f.endsWith('.md'));
+    const mdFiles = readdirSync(tablesDir).filter(f => f.endsWith('.md') && !f.endsWith('.rules.md'));
     for (const file of mdFiles) {
       const name = file.slice(0, -3).toUpperCase();
       if (!cachedNames.has(name)) {

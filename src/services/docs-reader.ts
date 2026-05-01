@@ -162,6 +162,14 @@ export function getTableRules(tableName: string): string | null {
 }
 
 /**
+ * Verifica se existe arquivo de regras para a tabela sem ler seu conteúdo.
+ */
+export function hasTableRules(tableName: string): boolean {
+  const upper = tableName.toUpperCase();
+  return existsSync(join(DOCS_DIR, `${upper}.rules.md`));
+}
+
+/**
  * Retorna o conteúdo do db-index.md.
  */
 export function getDbIndexMarkdown(): string {
