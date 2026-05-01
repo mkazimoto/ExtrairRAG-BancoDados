@@ -86,9 +86,49 @@ function normalizePhonetic(text: string): string {
 }
 
 /**
- * Busca tabelas pelo nome ou descrição com suporte a busca multi-palavra.
- * @param phonetic Habilita normalização fonética (padrão: true)
+ * Retorna o coeficiente de Dice baseado em bigramas entre duas strings.
+ * Resultado entre 0 (sem semelhança) e 1 (idêntico).
  */
+function bigramSimilarity(a: string, b: string): number {
+  if (a === b) return 1;
+  if (a.length < 2 || b.length < 2) return 0;
+
+  const getBigrams = (s: string): Map<string, number> => {
+    const map = new Map<string, number>();
+    for (let i = 0; i < s.length - 1; i++) {
+      const bg = s.slice(i, i + 2);
+      map.set(bg, (map.get(bg) ?? 0) + 1);
+    }
+    return map;
+  };
+
+  const bigramsA = getBigrams(a);
+  const bigramsB = getBigrams(b);
+  let intersection = 0;
+  for (const [bg, countA] of bigramsA) {
+    intersection += Math.min(countA, bigramsB.get(bg) ?? 0);
+  }
+
+  return (2 * intersection) / (a.length - 1 + b.length - 1);
+}
+
+/**
+ * Calcula a maior similaridade de bigrama entre uma palavra e qualquer token
+ * (palavra) do texto alvo. Retorna valor entre 0 e 1.
+ * Só é executado quando não houve match exato e a palavra tem >= 4 chars.
+ */
+function maxBigramSim(word: string, text: string): number {
+  if (word.length < 4) return 0;
+  const tokens = text.split(/\W+/).filter(t => t.length >= 3);
+  let max = 0;
+  for (const token of tokens) {
+    const sim = bigramSimilarity(word, token);
+    if (sim > max) max = sim;
+    if (max === 1) break; // não tem como melhorar
+  }
+  return max;
+}
+
 /**
  * Busca tabelas no cache SQLite pelo nome ou descrição de colunas.
  * Retorna tabelas que NÃO estejam em `excludeNames` (já encontradas pelo índice).
@@ -167,6 +207,9 @@ export function searchTables(query: string, limit = 20, offset = 0, phonetic = t
   const normalizeModule = (s: string) =>
     s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
+  // Limiar mínimo de similaridade por bigrama para considerar um match aproximado
+  const BIGRAM_THRESHOLD = 0.6;
+
   const primaryMatches = index
     .map(t => {
       const name = normalize(t.name);
@@ -175,9 +218,27 @@ export function searchTables(query: string, limit = 20, offset = 0, phonetic = t
       let score = 0;
       for (const word of words) {
         const wordPlain = word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        if (mod.includes(wordPlain)) score += 10;
-        if (name.includes(word)) score += 3;
-        if (desc.includes(word)) score += 1;
+        // Módulo: match exato +10, bigrama proporcional como fallback
+        if (mod.includes(wordPlain)) {
+          score += 10;
+        } else {
+          const sim = maxBigramSim(wordPlain, mod);
+          if (sim >= BIGRAM_THRESHOLD) score += Math.round(sim * 10);
+        }
+        // Nome: match exato +3, bigrama proporcional como fallback
+        if (name.includes(word)) {
+          score += 10;
+        } else {
+          const sim = maxBigramSim(word, name);
+          if (sim >= BIGRAM_THRESHOLD) score += Math.round(sim * 3);
+        }
+        // Descrição: match exato +1, bigrama proporcional como fallback
+        if (desc.includes(word)) {
+          score += 3;
+        } else {
+          const sim = maxBigramSim(word, desc);
+          if (sim >= BIGRAM_THRESHOLD) score += Math.round(sim * 1);
+        }
       }
       return { ...t, score };
     })
