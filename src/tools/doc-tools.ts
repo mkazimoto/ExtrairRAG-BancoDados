@@ -25,8 +25,7 @@ Args:
   - query (string): Texto para buscar no nome ou descrição da tabela (ex: "funcionario", "folha", "PFUNC")
   - limit (number): Máximo de resultados (padrão: 20, máx: 100)
   - offset (number): Deslocamento para paginação (padrão: 0)
-  - response_format ('markdown' | 'json'): Formato de saída (padrão: 'markdown')
-
+  
 Returns:
   Lista de tabelas com nome, descrição e módulo do ERP.
 
@@ -39,27 +38,14 @@ Exemplos:
         limit: z.number().int().min(1).max(100).default(20).describe('Máximo de resultados'),
         offset: z.number().int().min(0).default(0).describe('Deslocamento para paginação'),
         phonetic: z.boolean().default(false).describe('Habilita busca fonética (ignora acentos e aplica equivalências sonoras do português). Padrão: true'),
-        response_format: z.nativeEnum(ResponseFormat).default(ResponseFormat.MARKDOWN).describe("Formato: 'markdown' ou 'json'"),
       },
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     },
-    async ({ query, limit, offset, phonetic, response_format }) => {
+    async ({ query, limit, offset, phonetic }) => {
       const result = searchTables(query, limit, offset, phonetic);
 
       if (result.items.length === 0) {
         return { content: [{ type: 'text', text: `Nenhuma tabela encontrada para: "${query}"` }] };
-      }
-
-      if (response_format === ResponseFormat.JSON) {
-        const out = {
-          total: result.total,
-          count: result.items.length,
-          offset,
-          has_more: result.total > offset + result.items.length,
-          next_offset: result.total > offset + result.items.length ? offset + result.items.length : undefined,
-          tables: result.items,
-        };
-        return { content: [{ type: 'text', text: JSON.stringify(out, null, 2) }], structuredContent: out };
       }
 
       const lines = [
@@ -92,7 +78,6 @@ Indispensável para saber quais colunas existem, seus tipos e como as tabelas se
 
 Args:
   - table_name (string): Nome da tabela (ex: "PFUNC", "FCFO", "TITMMOV")
-  - response_format ('markdown' | 'json'): Formato de saída (padrão: 'markdown')
 
 Returns:
   - Descrição da tabela
@@ -105,28 +90,15 @@ Importante:
   - Use (NOLOCK) em queries de leitura para evitar bloqueios.`,
       inputSchema: {
         table_name: z.string().min(1).max(100).describe('Nome da tabela (ex: PFUNC, TITMMOV)'),
-        response_format: z.nativeEnum(ResponseFormat).default(ResponseFormat.MARKDOWN).describe("Formato: 'markdown' ou 'json'"),
       },
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     },
-    async ({ table_name, response_format }) => {
+    async ({ table_name }) => {
       let detail: TableDetail;
       try {
         detail = getTableDetail(table_name);
       } catch (err) {
         return { content: [{ type: 'text', text: (err as Error).message }] };
-      }
-
-      if (response_format === ResponseFormat.JSON) {
-        const out = {
-          name: detail.name,
-          description: detail.description,
-          primaryKey: detail.primaryKey,
-          columns: detail.columns,
-          outboundFks: detail.outboundFks,
-          inboundFks: detail.inboundFks,
-        };
-        return { content: [{ type: 'text', text: JSON.stringify(out, null, 2) }], structuredContent: out };
       }
 
       return { content: [{ type: 'text', text: detail.rawMarkdown }] };
@@ -154,37 +126,21 @@ Cada módulo é identificado por uma letra prefixo no nome da tabela:
 Args:
   - module_prefix (string): Letra prefixo do módulo (ex: "P", "F", "T")
   - limit (number): Máximo de resultados (padrão: 50, máx: 200)
-  - offset (number): Deslocamento para paginação (padrão: 0)
-  - response_format ('markdown' | 'json'): Formato de saída (padrão: 'markdown')`,
+  - offset (number): Deslocamento para paginação (padrão: 0)`,
       inputSchema: {
         module_prefix: z.string().length(1).describe('Letra prefixo do módulo (ex: P, F, T, C, V)'),
         limit: z.number().int().min(1).max(200).default(50).describe('Máximo de resultados'),
         offset: z.number().int().min(0).default(0).describe('Deslocamento para paginação'),
-        response_format: z.nativeEnum(ResponseFormat).default(ResponseFormat.MARKDOWN).describe("Formato: 'markdown' ou 'json'"),
-      },
+     },
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     },
-    async ({ module_prefix, limit, offset, response_format }) => {
+    async ({ module_prefix, limit, offset }) => {
       const prefix = module_prefix.toUpperCase();
       const moduleName = MODULES[prefix] ?? `Módulo '${prefix}' não identificado`;
       const result = listTablesByModule(prefix, limit, offset);
 
       if (result.items.length === 0) {
         return { content: [{ type: 'text', text: `Nenhuma tabela encontrada para o módulo: ${prefix}` }] };
-      }
-
-      if (response_format === ResponseFormat.JSON) {
-        const out = {
-          module_prefix: prefix,
-          module_name: moduleName,
-          total: result.total,
-          count: result.items.length,
-          offset,
-          has_more: result.total > offset + result.items.length,
-          next_offset: result.total > offset + result.items.length ? offset + result.items.length : undefined,
-          tables: result.items,
-        };
-        return { content: [{ type: 'text', text: JSON.stringify(out, null, 2) }], structuredContent: out };
       }
 
       const lines = [
