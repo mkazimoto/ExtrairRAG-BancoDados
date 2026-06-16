@@ -19,6 +19,7 @@
  *   node extract-rag.mjs --timeout 120000            (timeout de requisição SQL em ms, padrão: 120000)
  *   node extract-rag.mjs --so-regras                 (gera apenas .rules.md a partir do mapeamento-regras.md)
  *   node extract-rag.mjs --sem-regras                (pula geração de .rules.md)
+ *   node extract-rag.mjs --sem-desativadas           (ignora tabelas-desativadas.md, documento todas)
  *
  * Variáveis de ambiente (alternativa aos valores padrão):
  *   DB_SERVER      — servidor SQL Server           (padrão: localhost)
@@ -73,6 +74,9 @@ const CONFIG = {
   mapeamentoRegras: './mapeamento-regras.md',
   gerarRegras:  true,          // false com --sem-regras
   soRegras:     false,         // true com --so-regras
+  // ── Tabelas desativadas ──────────────────────────────────
+  tabelasDesativadas: './tabelas-desativadas.md',
+  semDesativadas: false,      // true com --sem-desativadas
 };
 
 // ─── Parse de argumentos CLI ─────────────────────────────────────────────────
@@ -95,6 +99,7 @@ for (let i = 0; i < args.length; i++) {
   if (args[i] === '--timeout'  && args[i + 1])  { CONFIG.requestTimeout  = Number(args[++i]); }
   if (args[i] === '--sem-regras')                { CONFIG.gerarRegras = false; }
   if (args[i] === '--so-regras')                 { CONFIG.soRegras    = true;  }
+  if (args[i] === '--sem-desativadas')           { CONFIG.semDesativadas = true; }
 }
 
 // ─── Cache SQLite ─────────────────────────────────────────────────────────────
@@ -246,6 +251,45 @@ function loadAllTablesFromCache() {
   return db.prepare('SELECT nome FROM tabelas ORDER BY nome').all().map(r => r.nome);
 }
 
+// ─── Tabelas Desativadas ──────────────────────────────────────────────────────
+
+/**
+ * Parseia o arquivo tabelas-desativadas.md e retorna um Set com os nomes
+ * das tabelas que não devem ser documentadas.
+ *
+ * Formato esperado: linhas de tabela markdown com `NOMETABELA` na primeira coluna.
+ */
+function carregarTabelasDesativadas() {
+  if (CONFIG.semDesativadas) {
+    return new Set();
+  }
+
+  const filePath = mcpResolve(CONFIG.tabelasDesativadas);
+  if (!existsSync(filePath)) {
+    return new Set();
+  }
+
+  const content = readFileSync(filePath, 'utf-8');
+  const lines = content.split(/\r?\n/);
+  const desativadas = new Set();
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    // Pula cabeçalho, separadores e linhas vazias
+    if (!trimmed.startsWith('|') || trimmed.includes('---|---|---')) continue;
+    if (trimmed.startsWith('| Tabela') || trimmed.startsWith('|---')) continue;
+
+    // Extrai o nome entre backticks na primeira coluna
+    // Formato: | `NOMETABELA` | descricao | modulo |
+    const match = trimmed.match(/^\|\s*`([^`]+)`/);
+    if (match) {
+      desativadas.add(match[1].toUpperCase());
+    }
+  }
+
+  return desativadas;
+}
+
 // ─── Conexão SQL Server ───────────────────────────────────────────────────────
 
 let pool = null;
@@ -328,7 +372,13 @@ async function main() {
       db.close();
       process.exit(1);
     }
-    gerarMdDaCache(outputPath, names);
+    const desativadas = carregarTabelasDesativadas();
+    const nomesFiltrados = names.filter(t => !desativadas.has(t));
+    const removidas = names.length - nomesFiltrados.length;
+    if (removidas > 0) {
+      console.log(`  → ${removidas} tabela(s) desativada(s) removidas (tabelas-desativadas.md)`);
+    }
+    gerarMdDaCache(outputPath, nomesFiltrados);
     if (CONFIG.gerarIndex) await runGenerateIndex();
     db.close();
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
@@ -385,12 +435,20 @@ async function main() {
     return;
   }
 
+  // 4b. Remove tabelas desativadas (tabelas-desativadas.md)
+  const desativadas = carregarTabelasDesativadas();
+  const allTablesFiltradas = allTables.filter(t => !desativadas.has(t));
+  const removidas = allTables.length - allTablesFiltradas.length;
+  if (removidas > 0) {
+    console.log(`  → ${removidas} tabela(s) desativada(s) removidas (tabelas-desativadas.md)`);
+  }
+
   // 5. Separa tabelas em cache vs. a extrair do SQL Server
-  let tablesToFetch = allTables;
+  let tablesToFetch = allTablesFiltradas;
   if (CONFIG.usarCache) {
     const cached = getCachedTableNames();
-    tablesToFetch = allTables.filter(t => !cached.has(t));
-    const fromCache = allTables.length - tablesToFetch.length;
+    tablesToFetch = allTablesFiltradas.filter(t => !cached.has(t));
+    const fromCache = allTablesFiltradas.length - tablesToFetch.length;
     if (fromCache > 0) {
       console.log(`  → ${fromCache} tabela(s) já em cache | ${tablesToFetch.length} a extrair do SQL Server`);
     }
@@ -417,7 +475,7 @@ async function main() {
   await sql.close();
 
   // 7. Gera arquivos .md a partir do cache
-  const { ok, erros } = gerarMdDaCache(outputPath, allTables);
+  const { ok, erros } = gerarMdDaCache(outputPath, allTablesFiltradas);
 
   console.log('\n───────────────────────────────────────────────────');
   console.log(`  Concluído!  OK: ${ok}  |  Erros: ${erros}`);
@@ -994,12 +1052,20 @@ async function runGenerateIndex() {
 
   const tableNames = db.prepare('SELECT nome FROM tabelas ORDER BY nome').all().map(r => r.nome);
 
-  console.log(`Carregando ${tableNames.length} tabela(s) do cache...`);
+  // Remove tabelas desativadas do índice
+  const desativadas = carregarTabelasDesativadas();
+  const nomesFiltrados = tableNames.filter(t => !desativadas.has(t));
+  const removidasIndex = tableNames.length - nomesFiltrados.length;
+  if (removidasIndex > 0) {
+    console.log(`  → ${removidasIndex} tabela(s) desativada(s) removidas do índice`);
+  }
+
+  console.log(`Carregando ${nomesFiltrados.length} tabela(s) do cache...`);
 
   const stmtCols = db.prepare('SELECT * FROM colunas WHERE tabela = ? ORDER BY ordinal');
   const stmtTab  = db.prepare('SELECT * FROM tabelas WHERE nome = ?');
 
-  const tables = tableNames.map(name => {
+  const tables = nomesFiltrados.map(name => {
     const tbl  = stmtTab.get(name);
     const cols = stmtCols.all(name);
 
@@ -1030,7 +1096,7 @@ async function runGenerateIndex() {
 
   // Complementa com arquivos .md que não estão no cache
   const tablesDir   = mcpResolve(CONFIG.outputDir);
-  const cachedNames = new Set(tableNames);
+  const cachedNames = new Set(nomesFiltrados);
   let mdExtras      = 0;
 
   if (existsSync(tablesDir)) {
