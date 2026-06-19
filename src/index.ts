@@ -6,6 +6,7 @@ import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { registerDocTools } from './tools/doc-tools.js';
+import { registerSqlValidator } from './tools/sql-validator.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -86,6 +87,7 @@ async function main(): Promise<void> {
       version: '1.0.0',
     });
     registerDocTools(sessionServer);
+    registerSqlValidator(sessionServer);
 
     sessionServer.registerResource(
       'totvs-db-index',

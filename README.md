@@ -12,6 +12,7 @@ Permite que modelos de linguagem consultem o esquema do banco e pesquisem tabela
 | `totvs_list_tables_by_module` | Lista tabelas de um módulo específico (ex: P=Folha, F=Financeiro) |
 | `totvs_list_modules` | Lista todos os módulos e prefixos do ERP |
 | `totvs_get_db_index` | Retorna o índice completo de todas as tabelas |
+| `totvs_validate_sql` | Valida a sintaxe T-SQL sem executar a consulta |
 
 ## Pré-requisitos
 
