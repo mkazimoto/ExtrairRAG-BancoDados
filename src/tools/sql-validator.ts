@@ -35,7 +35,7 @@ async function validateSqlSyntax(sqlQuery: string): Promise<{
   }
 
   // Import dinâmico para não travar o startup caso mssql não esteja disponível
-  const sql = await import('mssql');
+  const { default: sql } = await import('mssql');
 
   let pool: MssqlPool | null = null;
 
