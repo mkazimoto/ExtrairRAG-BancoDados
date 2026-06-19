@@ -71,14 +71,14 @@ const CONFIG = {
   todasTabelas:    true,       // false com --prefixo
   requestTimeout:  300000,     // ms — aumentar se houver muitas tabelas
   // ── Regras ───────────────────────────────────────────────────────────────
-  mapeamentoRegras: './mapeamento-regras.md',
+  mapeamentoRegras: './regras-script-extract-rag/mapeamento-regras.md',
   gerarRegras:  true,          // false com --sem-regras
   soRegras:     false,         // true com --so-regras
   // ── Tabelas desativadas ──────────────────────────────────
-  tabelasDesativadas: './tabelas-desativadas.md',
+  tabelasDesativadas: './regras-script-extract-rag/tabelas-desativadas.md',
   semDesativadas: false,      // true com --sem-desativadas
   // ── Colunas desativadas ─────────────────────────────────
-  colunasDesativadas: './mapeamento-tabelas/colunas-desativadas.md',
+  colunasDesativadas: './regras-script-extract-rag/colunas-desativadas.md',
 };
 
 // ─── Parse de argumentos CLI ─────────────────────────────────────────────────
