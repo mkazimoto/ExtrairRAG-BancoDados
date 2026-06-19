@@ -34,12 +34,35 @@ function getParser(): TsqlParser {
 }
 
 /**
+ * Remove cláusulas OPTION (... ) do final da string SQL.
+ *
+ * O parser PEG.js do node-sql-parser não suporta a sintaxe
+ * OPTION (MAXRECURSION N, RECOMPILE, OPTIMIZE FOR UNKNOWN, …)
+ * que é específica do T-SQL. Esta função as remove antes da validação.
+ */
+function stripOptionClauses(sql: string): string {
+  let result = sql.trimEnd();
+
+  // OPTION (...) seguido opcionalmente de comentário (-- ou /* */) e/ou ;
+  const optionRe = /\s*\bOPTION\s*\(((?:[^()]+|\([^()]*\))*)\)\s*(?:--[^\n]*)?(?:\/\*[\s\S]*?\*\/)?\s*;?\s*$/i;
+
+  while (optionRe.test(result)) {
+    result = result.replace(optionRe, '').trimEnd();
+  }
+
+  return result || sql.trimEnd();
+}
+
+/**
  * Valida a sintaxe de uma consulta T-SQL localmente usando PEG.js.
  *
  * Não requer conexão com banco de dados — o parsing é feito 100% offline
  * pelo parser TransactSQL do node-sql-parser, que entende a maior parte
  * da sintaxe T-SQL (SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP,
  * CTE, JOIN, subqueries, TOP, OUTPUT, MERGE, PIVOT/UNPIVOT, etc.).
+ *
+ * Antes de validar, remove automaticamente cláusulas OPTION (...)
+ * do final da consulta, pois não são suportadas pelo parser PEG.js.
  */
 function validateSqlSyntax(sqlQuery: string): {
   isValid: boolean;
@@ -52,8 +75,10 @@ function validateSqlSyntax(sqlQuery: string): {
     return { isValid: false, message: 'A consulta SQL está vazia.' };
   }
 
+  const cleanedSql = stripOptionClauses(sqlQuery);
+
   try {
-    getParser().astify(sqlQuery);
+    getParser().astify(cleanedSql);
     return { isValid: true, message: 'Sintaxe SQL válida.' };
   } catch (err: unknown) {
     const e = err as ParseException;
