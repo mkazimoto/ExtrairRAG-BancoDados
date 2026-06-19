@@ -399,28 +399,6 @@ const TOOLS = [
     args: (f) => ({ table_name: f.table_name })
   },
   {
-    name: 'totvs_list_tables_by_module',
-    title: 'Tabelas por Módulo',
-    description: 'Lista todas as tabelas de um módulo específico.',
-    fields: [
-      { id: 'module_prefix', label: 'Prefixo do Módulo', type: 'text', default: 'P', hint: 'P=Folha, F=Financeiro, T=Estoque, C=Contábil...' },
-      { id: 'limit',         label: 'Limit',             type: 'number', default: '50' },
-      { id: 'offset',        label: 'Offset',            type: 'number', default: '0' },
-    ],
-    args: (f) => ({
-      module_prefix: f.module_prefix,
-      limit:  parseInt(f.limit)  || 50,
-      offset: parseInt(f.offset) || 0
-    })
-  },
-  {
-    name: 'totvs_get_db_index',
-    title: 'Índice Completo',
-    description: 'Retorna o índice completo de todas as tabelas (arquivo grande).',
-    fields: [],
-    args: () => ({})
-  },
-  {
     name: 'totvs_validate_sql',
     title: 'Validar SQL',
     description: 'Valida a sintaxe de uma consulta T-SQL sem executá-la (SET PARSEONLY ON).',
