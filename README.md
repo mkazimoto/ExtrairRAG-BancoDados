@@ -9,10 +9,18 @@ Permite que modelos de linguagem consultem o esquema do banco e pesquisem tabela
 |---|---|
 | `totvs_search_tables` | Busca tabelas por nome ou descrição |
 | `totvs_get_table_schema` | Retorna colunas, PKs e FKs de uma tabela |
-| `totvs_list_tables_by_module` | Lista tabelas de um módulo específico (ex: P=Folha, F=Financeiro) |
 | `totvs_list_modules` | Lista todos os módulos e prefixos do ERP |
 | `totvs_get_db_index` | Retorna o índice completo de todas as tabelas |
 | `totvs_validate_sql` | Valida a sintaxe T-SQL sem executar a consulta |
+
+## Transportes suportados
+
+O servidor pode operar em **dois modos de transporte**:
+
+| Modo | Variável | Descrição |
+|---|---|---|
+| **HTTP** (StreamableHTTP) | `MCP_TRANSPORT=http` (padrão) | Comunicação via requisições HTTP — suporta múltiplas sessões concorrentes |
+| **stdio** | `MCP_TRANSPORT=stdio` | Comunicação via stdin/stdout — ideal para integração direta com clientes MCP |
 
 ## Pré-requisitos
 
@@ -26,6 +34,7 @@ Você pode usar um arquivo `.env` ou definir diretamente na configuração do cl
 
 | Variável | Padrão | Descrição |
 |---|---|---|
+| `MCP_TRANSPORT` | `http` | Modo de transporte: `http` (StreamableHTTP) ou `stdio` |
 | `DB_SERVER` | `localhost` | Endereço do SQL Server |
 | `DB_PORT` | `1433` | Porta do SQL Server |
 | `DB_DATABASE` | *(obrigatório)* | Nome do banco de dados RM |
@@ -59,11 +68,27 @@ npm run build
 ```
 
 ## Iniciar o servidor MCP
+
+### Modo HTTP (padrão)
 ```bash
+# Via variável de ambiente
+MCP_TRANSPORT=http npm run start
+
+# Ou apenas (http é o padrão)
 npm run start
 ```
 
+### Modo stdio
+```bash
+# Defina MCP_TRANSPORT=stdio no .env ou diretamente
+MCP_TRANSPORT=stdio npm run start
+```
+
+> **Nota:** No modo stdio, as mensagens de log são escritas em **stderr** para não interferir no protocolo MCP (que usa stdout).
+
 ## Configuração no VS Code (GitHub Copilot)
+
+### Via HTTP (StreamableHTTP)
 
 Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
 
@@ -76,6 +101,26 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
         "url": "http://localhost:3000/mcp",
         "headers": {
           "Authorization": "Bearer ed931c92-33db-4fdb-aa86-c78a236bf40e"
+        }
+      }
+    }
+  }
+}
+```
+
+### Via stdio
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "totvs-rm-database-mcp-server": {
+        "type": "stdio",
+        "command": "node",
+        "args": ["dist/index.js"],
+        "env": {
+          "MCP_TRANSPORT": "stdio",
+          "MCP_API_KEY": "ed931c92-33db-4fdb-aa86-c78a236bf40e"
         }
       }
     }

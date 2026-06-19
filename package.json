@@ -6,7 +6,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node --env-file=dist/.env dist/index.js",
+    "start": "node --env-file=.env --env-file=dist/.env dist/index.js",
+    "start:stdio": "node --env-file=.env --env-file=dist/.env dist/index.js",
+    "start:http": "node --env-file=.env --env-file=dist/.env dist/index.js",
     "dev": "tsc --watch",
     "extract": "node --no-warnings=ExperimentalWarning --env-file=.env extract-rag.mjs"
   },

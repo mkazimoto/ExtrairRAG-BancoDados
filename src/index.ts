@@ -1,4 +1,5 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import express from 'express';
 import { randomUUID } from 'node:crypto';
@@ -12,6 +13,37 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const API_KEY = process.env.MCP_API_KEY ?? 'ed931c92-33db-4fdb-aa86-c78a236bf40e';
+const TRANSPORT = (process.env.MCP_TRANSPORT ?? 'http').toLowerCase();
+
+/** Cria o servidor MCP com todas as ferramentas e recursos registrados */
+function createMcpServer(): McpServer {
+  const server = new McpServer({
+    name: 'totvs-rm-database-mcp-server',
+    version: '1.0.0',
+  });
+  registerDocTools(server);
+  registerSqlValidator(server);
+
+  server.registerResource(
+    'totvs-db-index',
+    'totvs://db-index',
+    {
+      title: 'Índice do Banco de Dados TOTVS RM',
+      description: 'Índice completo de todas as tabelas do ERP TOTVS RM com descrição e módulo.',
+      mimeType: 'text/markdown',
+    },
+    async () => {
+      const { getDbIndexMarkdown } = await import('./services/docs-reader.js');
+      try {
+        return { contents: [{ uri: 'totvs://db-index', mimeType: 'text/markdown', text: getDbIndexMarkdown() }] };
+      } catch (err) {
+        return { contents: [{ uri: 'totvs://db-index', mimeType: 'text/plain', text: (err as Error).message }] };
+      }
+    },
+  );
+
+  return server;
+}
 
 /** Middleware de autenticação via Bearer token */
 function requireApiKey(req: express.Request, res: express.Response, next: express.NextFunction): void {
@@ -33,7 +65,16 @@ function requireApiKey(req: express.Request, res: express.Response, next: expres
   next();
 }
 
-async function main(): Promise<void> {
+/** Inicia o servidor no modo stdio (comunicação via stdin/stdout) */
+async function startStdio(): Promise<void> {
+  const server = createMcpServer();
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
+  process.stderr.write('TOTVS RM MCP Server iniciado (stdio)\n');
+}
+
+/** Inicia o servidor no modo HTTP (StreamableHTTP via Express) */
+async function startHttp(): Promise<void> {
   const app = express();
   app.use(express.json());
 
@@ -82,31 +123,7 @@ async function main(): Promise<void> {
     };
 
     // Cria uma nova instância de servidor MCP por sessão
-    const sessionServer = new McpServer({
-      name: 'totvs-rm-database-mcp-server',
-      version: '1.0.0',
-    });
-    registerDocTools(sessionServer);
-    registerSqlValidator(sessionServer);
-
-    sessionServer.registerResource(
-      'totvs-db-index',
-      'totvs://db-index',
-      {
-        title: 'Índice do Banco de Dados TOTVS RM',
-        description: 'Índice completo de todas as tabelas do ERP TOTVS RM com descrição e módulo.',
-        mimeType: 'text/markdown',
-      },
-      async () => {
-        const { getDbIndexMarkdown } = await import('./services/docs-reader.js');
-        try {
-          return { contents: [{ uri: 'totvs://db-index', mimeType: 'text/markdown', text: getDbIndexMarkdown() }] };
-        } catch (err) {
-          return { contents: [{ uri: 'totvs://db-index', mimeType: 'text/plain', text: (err as Error).message }] };
-        }
-      },
-    );
-
+    const sessionServer = createMcpServer();
     await sessionServer.connect(transport);
     await transport.handleRequest(req, res, req.body);
   });
@@ -123,6 +140,14 @@ async function main(): Promise<void> {
 
   process.on('SIGINT', shutdown);
   process.on('SIGTERM', shutdown);
+}
+
+async function main(): Promise<void> {
+  if (TRANSPORT === 'stdio') {
+    await startStdio();
+  } else {
+    await startHttp();
+  }
 }
 
 main().catch(err => {
