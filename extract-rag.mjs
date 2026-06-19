@@ -77,6 +77,8 @@ const CONFIG = {
   // ── Tabelas desativadas ──────────────────────────────────
   tabelasDesativadas: './tabelas-desativadas.md',
   semDesativadas: false,      // true com --sem-desativadas
+  // ── Colunas desativadas ─────────────────────────────────
+  colunasDesativadas: './mapeamento-tabelas/colunas-desativadas.md',
 };
 
 // ─── Parse de argumentos CLI ─────────────────────────────────────────────────
@@ -196,6 +198,7 @@ function toDb(v) {
 /** Salva (upsert) dados em batch numa única transação SQLite. */
 function saveToCache(tableNames, allColumns, allDescs, allFksOut, allFksIn) {
   const today = new Date().toISOString().slice(0, 10);
+  const colunasDesativadas = carregarColunasDesativadas();
 
   const byTable    = (arr, key) => arr.reduce((m, r) => { (m[r[key]] ??= []).push(r); return m; }, {});
   const colsMap    = byTable(allColumns, 'TABLE_NAME');
@@ -218,7 +221,11 @@ function saveToCache(tableNames, allColumns, allDescs, allFksOut, allFksIn) {
       const descricao = descsMap[t]?.[0]?.DESCRICAO ?? '';
       stmts.upsertTabela.run(t, descricao, today);
 
+      const colsDesativadasTab = colunasDesativadas.get(t);
       for (const c of (colsMap[t] ?? [])) {
+        // Pula colunas desativadas
+        if (colsDesativadasTab?.has(c.COLUMN_NAME.toUpperCase())) continue;
+
         stmts.upsertColuna.run(
           t,
           toDb(c.ORDINAL_POSITION), toDb(c.COLUMN_NAME), toDb(c.DATA_TYPE),
@@ -288,6 +295,51 @@ function carregarTabelasDesativadas() {
   }
 
   return desativadas;
+}
+
+// ─── Colunas Desativadas ─────────────────────────────────────────────────────
+
+/**
+ * Parseia o arquivo colunas-desativadas.md e retorna um Map
+ * onde a chave é o nome da tabela (upper case) e o valor é um Set
+ * de nomes de colunas (upper case) que devem ser ignoradas.
+ *
+ * Formato esperado:
+ *   # NOMETABELA
+ *   ## NOMECOLUNA
+ */
+function carregarColunasDesativadas() {
+  const filePath = mcpResolve(CONFIG.colunasDesativadas);
+  if (!existsSync(filePath)) {
+    return new Map();
+  }
+
+  const content = readFileSync(filePath, 'utf-8');
+  const lines = content.split(/\r?\n/);
+  const resultado = new Map();
+  let tabelaAtual = null;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    // Cabeçalho de tabela: # NOME
+    const tableMatch = trimmed.match(/^#\s+(\S+)/);
+    if (tableMatch) {
+      tabelaAtual = tableMatch[1].toUpperCase();
+      if (!resultado.has(tabelaAtual)) {
+        resultado.set(tabelaAtual, new Set());
+      }
+      continue;
+    }
+
+    // Cabeçalho de coluna: ## NOME
+    const colMatch = trimmed.match(/^##\s+(\S+)/);
+    if (colMatch && tabelaAtual) {
+      resultado.get(tabelaAtual).add(colMatch[1].toUpperCase());
+    }
+  }
+
+  return resultado;
 }
 
 // ─── Conexão SQL Server ───────────────────────────────────────────────────────
@@ -643,9 +695,16 @@ function gerarMdDaCache(outputPath, tableNames) {
         continue;
       }
 
-      const cols   = stmtCols.all(tableName);
+      let cols   = stmtCols.all(tableName);
       const fksOut = stmtFksOut.all(tableName);
       const fksIn  = stmtFksIn.all(tableName);
+
+      // Remove colunas desativadas
+      const colunasDesativadas = carregarColunasDesativadas();
+      const colsDesativadasTab = colunasDesativadas.get(tableName);
+      if (colsDesativadasTab) {
+        cols = cols.filter(c => !colsDesativadasTab.has(c.nome.toUpperCase()));
+      }
 
       // Adapta nomes snake_case do SQLite para o formato esperado por generateMarkdown
       const columns = cols.map(c => ({
@@ -771,9 +830,6 @@ function generateMarkdown(tableName, tableDesc, columns, fksOut = [], fksIn = []
 
   // ── Rodapé ────────────────────────────────────────────────────────────────
   lines.push('---');
-  lines.push('');
-  lines.push(`*Gerado automaticamente em ${today} — Banco: ${CONFIG.database}*`);
-  lines.push('');
 
   return lines.join('\n');
 }
@@ -1011,9 +1067,6 @@ function generateIndex(tables, modulos, outputFile) {
   lines.push('');
 
   lines.push('---');
-  lines.push('');
-  lines.push(`*Índice gerado automaticamente em ${today}. Banco: \`${CONFIG.database}\` — ${tables.length} tabelas.*`);
-  lines.push('');
 
   const outDir = outputFile.substring(0, Math.max(outputFile.lastIndexOf('/'), outputFile.lastIndexOf('\\')));
   if (outDir && !existsSync(outDir)) mkdirSync(outDir, { recursive: true });
