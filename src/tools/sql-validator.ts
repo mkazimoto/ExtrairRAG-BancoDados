@@ -1,88 +1,74 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
-import type { ConnectionPool as MssqlPool } from 'mssql';
+import { createRequire } from 'node:module';
 
-/** Configuração da conexão SQL Server — lida de variáveis de ambiente */
-function getDbConfig() {
-  return {
-    server: process.env.DB_SERVER ?? 'localhost',
-    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 1433,
-    database: process.env.DB_DATABASE ?? 'EXEMPLO1212606',
-    user: process.env.DB_USER ?? '',
-    password: process.env.DB_PASSWORD ?? '',
-    trustServerCertificate: process.env.DB_TRUST_CERT !== 'false',
-    requestTimeout: process.env.DB_REQUEST_TIMEOUT ? parseInt(process.env.DB_REQUEST_TIMEOUT, 10) : 30000,
-  };
+/** @import SyntaxError do parser Peggy do node-sql-parser */
+interface ParseErrorLocation {
+  start: { offset: number; line: number; column: number };
+  end: { offset: number; line: number; column: number };
+}
+interface ParseException extends Error {
+  location?: ParseErrorLocation;
+  found?: string;
+  expected?: unknown[];
 }
 
 /**
- * Valida a sintaxe de uma consulta T-SQL usando SET PARSEONLY ON.
+ * Factory sob demanda do parser TransactSQL.
  *
- * O SQL Server apenas analisa sintaticamente o comando sem compilá-lo ou executá-lo.
- * Se houver erro de sintaxe, o SQL Server lança uma exceção detalhada.
+ * Usa createRequire para carregar o parser CommonJS do node-sql-parser
+ * em um contexto ESM. O parser é criado apenas na primeira chamada e
+ * reutilizado nas chamadas seguintes (lazy singleton).
  */
-async function validateSqlSyntax(sqlQuery: string): Promise<{
+type TsqlParser = { astify: (sql: string) => unknown };
+
+let _parser: TsqlParser | null = null;
+
+function getParser(): TsqlParser {
+  if (!_parser) {
+    const require = createRequire(import.meta.url);
+    const { Parser } = require('node-sql-parser/build/transactsql') as { Parser: new () => TsqlParser };
+    _parser = new Parser();
+  }
+  return _parser;
+}
+
+/**
+ * Valida a sintaxe de uma consulta T-SQL localmente usando PEG.js.
+ *
+ * Não requer conexão com banco de dados — o parsing é feito 100% offline
+ * pelo parser TransactSQL do node-sql-parser, que entende a maior parte
+ * da sintaxe T-SQL (SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP,
+ * CTE, JOIN, subqueries, TOP, OUTPUT, MERGE, PIVOT/UNPIVOT, etc.).
+ */
+function validateSqlSyntax(sqlQuery: string): {
   isValid: boolean;
   message: string;
   errorDetails?: string;
   errorLine?: number;
   errorColumn?: number;
-}> {
-  const cfg = getDbConfig();
-
+} {
   if (!sqlQuery || sqlQuery.trim().length === 0) {
     return { isValid: false, message: 'A consulta SQL está vazia.' };
   }
 
-  // Import dinâmico para não travar o startup caso mssql não esteja disponível
-  const { default: sql } = await import('mssql');
-
-  let pool: MssqlPool | null = null;
-
   try {
-    pool = await sql.connect({
-      server: cfg.server,
-      port: cfg.port,
-      database: cfg.database,
-      user: cfg.user || undefined,
-      password: cfg.password || undefined,
-      options: {
-        trustServerCertificate: cfg.trustServerCertificate,
-      },
-      requestTimeout: cfg.requestTimeout,
-    });
-
-    // SET PARSEONLY ON: apenas analisa sintaxe, não executa
-    await pool.request().query(`SET PARSEONLY ON; ${sqlQuery}; SET PARSEONLY OFF;`);
-
+    getParser().astify(sqlQuery);
     return { isValid: true, message: 'Sintaxe SQL válida.' };
-  } catch (err: any) {
-    // Extrai detalhes do erro do SQL Server
-    const originalError = err?.originalError ?? err;
-    const message = originalError?.message ?? String(err);
-    const number = originalError?.number ?? null;
-    const lineNumber = originalError?.lineNumber ?? null;
-    const state = originalError?.state ?? null;
-
-    // Tenta extrair número da linha da mensagem de erro
-    const lineMatch = message.match(/line\s+(\d+)/i);
-    const errorLine = lineNumber ?? (lineMatch ? parseInt(lineMatch[1], 10) : undefined);
-
-    // Tenta extrair posição da coluna
-    const colMatch = message.match(/(?:position|column)\s+(\d+)/i);
-    const errorColumn = colMatch ? parseInt(colMatch[1], 10) : undefined;
+  } catch (err: unknown) {
+    const e = err as ParseException;
+    const loc = e.location?.start;
+    const summary = loc
+      ? `[Linha ${loc.line}, Coluna ${loc.column}] ${e.message}`
+      : e.message;
 
     return {
       isValid: false,
       message: 'Erro de sintaxe SQL encontrado.',
-      errorDetails: `[${number ?? '??? '}] ${message}`,
-      errorLine: errorLine ?? undefined,
-      errorColumn: errorColumn ?? undefined,
+      errorDetails: summary,
+      errorLine: loc?.line,
+      errorColumn: loc?.column,
     };
-  } finally {
-    if (pool) {
-      try { await pool.close(); } catch { /* ignora erro no fechamento */ }
-    }
   }
 }
 
@@ -92,10 +78,11 @@ export function registerSqlValidator(server: McpServer): void {
     'totvs_validate_sql',
     {
       title: 'Validar Sintaxe SQL T-SQL',
-      description: `Valida a sintaxe de uma consulta T-SQL sem executá-la.
+      description: `Valida a sintaxe de uma consulta T-SQL localmente (offline).
 
-Conecta-se ao SQL Server e utiliza SET PARSEONLY ON para verificar se a sintaxe SQL está correta.
-Conexão usa as variáveis de ambiente DB_SERVER, DB_DATABASE, DB_USER, DB_PASSWORD.
+Usa o parser PEG.js (node-sql-parser/transactsql) para analisar a sintaxe
+T-SQL sem conectar ao banco de dados. Não requer credenciais nem conexão de rede.
+Suporta a maior parte da sintaxe T-SQL incluindo TOP, OUTPUT, MERGE, PIVOT/UNPIVOT.
 
 Args:
   - sql (string): Consulta T-SQL a ser validada. Pode conter múltiplas statements.
@@ -110,16 +97,16 @@ Returns:
 Exemplos:
   - "SELECT * FROM PFUNC WHERE CODFUNC = 1" → válido
   - "SELECTR * FROM PFUNC" → inválido (SELECTR não reconhecido)
-  - "SELECT * FROM TABELA NAOEXISTENTE" → válido sintaticamente (PARSEONLY não valida objetos)
+  - "SELECT * FROM TABELA NAOEXISTENTE" → válido sintaticamente (não valida objetos)
 
-Nota: SET PARSEONLY valida apenas sintaxe, NÃO verifica se tabelas/colunas existem.`,
+Nota: valida apenas sintaxe, NÃO verifica se tabelas/colunas existem.`,
       inputSchema: {
         sql: z.string().min(1).max(100000).describe('Consulta T-SQL a ser validada'),
       },
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     },
     async ({ sql }) => {
-      const result = await validateSqlSyntax(sql);
+      const result = validateSqlSyntax(sql);
 
       const lines = [
         `# Validação de Sintaxe SQL`,
