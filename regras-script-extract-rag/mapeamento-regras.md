@@ -328,6 +328,46 @@
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
 
+# XALGIMOVELCARACTERISTICA
+
+## CODINDICARACIMOVEL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XINDICECARACTERISTICALOTE | COD_INDI_CARAC | DSC_INDI_CARAC |
+
+# XCARACTERISTICALOTE
+
+## COD_INDI_CARAC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XINDICECARACTERISTICALOTE | COD_INDI_CARAC | DSC_INDI_CARAC |
+
+# XCONDMEDIDOR
+
+## CODTIPOCONSUMOMED
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XCONDTIPCONSMED | CODMED | DSCMED |
+
+# XINDICEEMPREENDIMENTO
+
+## CODINDICARAC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XINDICECARACTERISTICALOTE | COD_INDI_CARAC | DSC_INDI_CARAC |
+
+# XPDCAPPCUSTOMURLCOLIGADAS
+
+## IDURLPORTALAPP
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XPDCAPPCUSTOMURL | IDURLPORTALAPP | DESCRICAO |
+
 # PFUNC
 
 ## SITUACAOFGTS
@@ -473,6 +513,14 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
+
+# PTIPOTAREFAAGRARIA
+
+## CODTPATIVEXEC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTPATIVEXEC | CODTPATIVEXEC | DESCRICAO |
 
 # QCUBO
 
@@ -1133,6 +1181,126 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | VRSTIPOSSOLICIT | CODCLIENTE | DESCRICAO |
+
+# VADPARTICIPANTES
+
+## CODTIPOAVALIADOR
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VADTPAVALIADOR | CODCLIENTE | DESCRICAO |
+
+# VADPESOTIPOAVALIADOR
+
+## CODTIPOAVALIADOR
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VADTPAVALIADOR | CODCLIENTE | DESCRICAO |
+
+# VADVERTENCIA
+
+## CODPUNICAO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| VPUNICAO | CODPUNICAO | NOME | CODCOLIGADA | 1 |
+
+# VBENEFFORNECEDORES
+
+## CODTIPOFORNECEDORBENEFICIO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VBENEFTPOFORN | CODCLIENTE | DESCRICAO |
+
+# VCERTIFICACAO
+
+## CODCLIENTE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTPCERTIFICACAO | CODCLIENTE | DESCRICAO |
+
+# VDEFICIENCIA
+
+## CODTIPODEFICIENCIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTPDEFICIENCIA | CODCLIENTE | DESCRICAO |
+
+# VLNTPESSOAS
+
+## TPDEMANDATREINA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VLNTTPDEMATREIN | CODCLIENTE | DESCRICAO |
+
+# VLNTTPDEMANDASCALC
+
+## TPDEMANDATREINA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VLNTTPDEMATREIN | CODCLIENTE | DESCRICAO |
+
+# VPVVEVENTO
+
+## CODVPPTPEVENTO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| VPVVTPEVENTO | CODVPPTPEVENTO | NOME | CODCOLIGADA | 1 |
+
+# VREPAROSMANUT
+
+## CODREPARO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VREPAROSEXTINT | CODREPARO | DESCRICAO |
+
+# VREQTIPO
+
+## CODCATEGORIAREQUISICAO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| VREQGERALCATEGORIA | CODCATEGORIA | CATEGORIAREQUISICAO | CODCOLIGADA | 1 |
+
+# VREQTREINAMENTOFUNCIND
+
+## CODTPDEMANDA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VRNTTPDEMANDAS | CODCLIENTE | DESCRICAO |
+
+# VRNTREGDEMANDAS
+
+## CODTPDEMANDAS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VRNTTPDEMANDAS | CODCLIENTE | DESCRICAO |
+
+# VTAREFA
+
+## CODTPATIVEXEC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTPATIVEXEC | CODTPATIVEXEC | DESCRICAO |
+
+# VVALORPARAMETROREQUISICAO
+
+## NOMPARAMETRO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VPARAMETROREQUISICAO | NOMPARAMETRO | DSPARAMETRO |
 
 # SACEITETERMO
 
@@ -1986,6 +2154,18 @@
 | ------ | ------ | --------- | ----------- | ------ |
 | TSTACNT | CODSTACNT | DESCRICAO | CODCOLIGADA | 1 |
 
+## CODTIP
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTIP | CODTIP | DESCRICAO | CODCOLIGADA | 1 |
+
+## CODTCN
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTCN | CODTCN | DESCRICAO | CODCOLIGADA | 1 |
+
 # TCUSTOTIPOAPL
 
 ## CODTIPOAPL
@@ -2009,6 +2189,26 @@
 | Tabela | Codigo | Descricao | CodColigada | Filtro |
 | ------ | ------ | --------- | ----------- | ------ |
 | TSTACNT | CODSTACNT | DESCRICAO | CODCOLIGADA | 1 |
+
+## CODTIP
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTIP | CODTIP | DESCRICAO | CODCOLIGADA | 1 |
+
+## CODTMV
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTMV | CODTMV | NOME | CODCOLIGADA | 1 |
+
+# TITMMOV
+
+## CODTIP
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTIP | CODTIP | DESCRICAO | CODCOLIGADA | 1 |
 
 # TLOTEPRD
 
@@ -2034,6 +2234,12 @@
 | ------ | ------ | --------- |
 | TSTATUSLOTEPRD | IDSTATUS | DESCRICAO |
 
+## CODTMV
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTMV | CODTMV | NOME | CODCOLIGADA | 1 |
+
 # TSTATUSLOTEPRDTMV
 
 ## IDSTATUS
@@ -2041,6 +2247,12 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | TSTATUSLOTEPRD | IDSTATUS | DESCRICAO |
+
+## CODTMV
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTMV | CODTMV | NOME | CODCOLIGADA | 1 |
 
 # TMOVCFOTEMP
 
@@ -2065,6 +2277,50 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | TTIPOAPL | CODTIPOAPL | DESCTIPOAPL | CODCOLIGADA | 1 |
+
+## CODTIP
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTIP | CODTIP | DESCRICAO | CODCOLIGADA | 1 |
+
+# TLOT
+
+## CODTIP
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTIP | CODTIP | DESCRICAO | CODCOLIGADA | 1 |
+
+## CODTMV
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTMV | CODTMV | NOME | CODCOLIGADA | 1 |
+
+# TTCNWFLUIG
+
+## CODTCN
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTCN | CODTCN | DESCRICAO | CODCOLIGADA | 1 |
+
+# TTIPFIL
+
+## CODTIP
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTIP | CODTIP | DESCRICAO | CODCOLIGADA | 1 |
+
+# TTMVEXTWFLUIG
+
+## CODTMV
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TTMVEXT | CODTMV | CODTMV | CODCOLIGADA | 1 |
 
 # DCODIFICACAOLOGRADOURO
 
@@ -2466,6 +2722,14 @@
 | ------ | ------ | --------- |
 | XXSITUACAOPARCELA | CODTIPOSITPARC | DSCSITPARC |
 
+# XXCONTRATOSUBSTATUS
+
+## CODCONTRATOSTATUS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XXCONTRATOSTATUS | CODCONTRATOSTATUS | DSCCONTRATOSTATUS |
+
 # UCURSOS
 
 ## TIPOCURSO
@@ -2487,6 +2751,18 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | USITMAT | CODSITMAT | DESCRICAO |
+
+## TIPO2GRAU
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| UTIP2GRAU | CODTIPO2GRAU | TIPO2GRAU |
+
+## TIPOINGRESSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| UTABINGRS | CODTIPING | TIPOINGRESSO |
 
 # UHISTMATALUN
 
@@ -2547,4 +2823,12 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | ETIPOPROT | CODTIPO | DESCRICAO |
+
+# USELECAO
+
+## CODTIPING
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| UTABINGRS | CODTIPING | TIPOINGRESSO |
 
