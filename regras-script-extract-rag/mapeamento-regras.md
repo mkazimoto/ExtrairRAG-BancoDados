@@ -61,3 +61,12 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | XSITUACAOMINUTA | COD_SIT_MINUTA | DSC_SIT_MINUTA |
+
+# XALGCONTRATOLOC
+
+## SITUACAOCONTLOC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XALGSITUACAOCONTLOC | CODSITUACAOCONTLOC | DESCSITUACAOCONTLOC |
+
