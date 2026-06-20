@@ -1978,6 +1978,14 @@
 | ------ | ------ | --------- | -------- | ------ |
 | SZTIPODOC | CODTIPODOC | DESCTIPODOC | CODCOLIGADA | 1 |
 
+# TCNT
+
+## CODSTACNT
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TSTACNT | CODSTACNT | DESCRICAO | CODCOLIGADA | 1 |
+
 # TCUSTOTIPOAPL
 
 ## CODTIPOAPL
@@ -1993,6 +2001,14 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | TTIPOENTREGA | CODENTREGA | DSCENTREGA | CODCOLIGADA | 1 |
+
+# TITMCNT
+
+## CODSTACNT
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| TSTACNT | CODSTACNT | DESCRICAO | CODCOLIGADA | 1 |
 
 # TLOTEPRD
 
@@ -2179,6 +2195,14 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | EWEBTIPOMATERIAL | IDTIPOMATERIAL | DESCRICAO |
+
+# EPARAMGLB
+
+## STATUSTRANC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| USITMAT | CODSITMAT | DESCRICAO |
 
 # FAPLFIN
 
@@ -2450,6 +2474,36 @@
 | ------ | ------ | --------- |
 | UTIPOCURSOS | CODTIPOCURSO | NOME |
 
+# UALUCURSO
+
+## STATUS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| USITMAT | CODSITMAT | DESCRICAO |
+
+## STATUSANT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| USITMAT | CODSITMAT | DESCRICAO |
+
+# UHISTMATALUN
+
+## STATUS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| USITMAT | CODSITMAT | DESCRICAO |
+
+# UHISTMATALUNEXT
+
+## STATUS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| USITMAT | CODSITMAT | DESCRICAO |
+
 # UMATALUN
 
 ## CODTIPOMATRICULA
@@ -2458,6 +2512,12 @@
 | ------ | ------ | --------- | -------- | ------ |
 | UTIPOMATRICULA | CODTIPOMATRICULA | DESCRICAO | CODCOLIGADA | 1 |
 
+## STATUS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| USITMAT | CODSITMAT | DESCRICAO |
+
 # UMATRICPL
 
 ## CODTIPOMATRICULA
@@ -2465,6 +2525,12 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | UTIPOMATRICULA | CODTIPOMATRICULA | DESCRICAO | CODCOLIGADA | 1 |
+
+## STATUS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| USITMAT | CODSITMAT | DESCRICAO |
 
 # UPROCEDPROT
 
