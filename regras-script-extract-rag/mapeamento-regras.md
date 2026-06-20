@@ -70,6 +70,22 @@
 | ------ | ------ | --------- |
 | XALGSITUACAOCONTLOC | CODSITUACAOCONTLOC | DESCSITUACAOCONTLOC |
 
+# XALGENDERECOADIC
+
+## TIPOLOGRADOURO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
+# XALGIMOVEL
+
+## TIPOLOGRADOURO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
 # PFUNC
 
 ## SITUACAOFGTS
@@ -175,6 +191,22 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PINTCONTSTATUS | CODSTATUS | DESCRICAO |
+
+# PFCONVOCACAO
+
+## CODTIPORUA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
+# PSECAO
+
+## CODTIPORUA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
 
 # VTIPOATESTADO
 
@@ -376,6 +408,14 @@
 | ------ | ------ | --------- |
 | VSTATUSPARECER | IDSTATUSPARECER | NOMSTATUSPARECER |
 
+# VOCORRENCIA
+
+## TPLOGRADOUROACIDENTE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
 # SALUNO
 
 ## CODTIPOALUNO
@@ -502,6 +542,22 @@
 | ------ | ------ | --------- |
 | TSTATUSLOTEPRD | IDSTATUS | DESCRICAO |
 
+# TMOVCFOTEMP
+
+## TIPORUA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
+# DCODIFICACAOLOGRADOURO
+
+## CODLOGRADOURO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
 # EALUNOS
 
 ## STATUS
@@ -532,6 +588,86 @@
 | ------ | ------ | --------- |
 | ESITMAT | CODSITMAT | DESCRICAO |
 
+# FCFO
+
+## TIPOBAIRRO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPOBAIRRO | CODIGO | DESCRICAO |
+
+## TIPOBAIRROENTREGA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPOBAIRRO | CODIGO | DESCRICAO |
+
+## TIPOBAIRROPGTO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPOBAIRRO | CODIGO | DESCRICAO |
+
+## TIPORUA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
+## TIPORUAENTREGA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
+## TIPORUAPGTO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
+# FCFOHISTORICO
+
+## TIPOBAIRRO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPOBAIRRO | CODIGO | DESCRICAO |
+
+## TIPORUA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
+# GFILIAL
+
+## TIPOBAIRRO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPOBAIRRO | CODIGO | DESCRICAO |
+
+## TIPORUA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
+# SPSPARAMETROPS
+
+## CODTIPOBAIRRODEFAULT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPOBAIRRO | CODIGO | DESCRICAO |
+
+## CODTIPORUADEFAULT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| DTIPORUA | CODIGO | DESCRICAO |
+
 # LEXEMPLAR
 
 ## CODSITUACAO
@@ -539,6 +675,30 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | LSITUACAOEXEMPLAR | CODSITUACAO | NOME |
+
+# MBIMTEMPLATE
+
+## IDTIPOTAREFA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| MTIPOTAREFA | IDTIPOTAREFA | DESCRICAO |
+
+# MTAREFA
+
+## IDTIPOTAREFA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| MTIPOTAREFA | IDTIPOTAREFA | DESCRICAO |
+
+# MTIPOTAREFAFORMULA
+
+## IDTIPOTAREFA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| MTIPOTAREFA | IDTIPOTAREFA | DESCRICAO |
 
 # XXCONTRATO
 
