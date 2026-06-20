@@ -482,6 +482,14 @@
 | ------ | ------ | --------- |
 | QTIPOCUBO | IDTIPOCUBO | DESCRICAO |
 
+# VBIBRIGADA
+
+## TIPOBRIGADA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VBITIPOBRIGADA | CODBITIPO | DESCRICAO |
+
 # VTIPOATESTADO
 
 ## CODAFAST
@@ -489,6 +497,14 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PCODSITUACAO | CODCLIENTE | DESCRICAO |
+
+# VABONOTPATESTADO
+
+## CODTPATESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOATESTADO | CODTPATESTADO | NOMETPATESTADO |
 
 # VAFASTMOTIVOAPI
 
@@ -498,6 +514,54 @@
 | ------ | ------ | --------- |
 | PMUDSITUACAO | CODCLIENTE | DESCRICAO |
 
+# VAGENDAEXAM
+
+## TIPOEXAME
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXAME | CODCLIENTE | DESCRICAO |
+
+# VATESTADO
+
+## CODTPATESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOATESTADO | CODTPATESTADO | NOMETPATESTADO |
+
+# VAUDIENCIAS
+
+## CODTIPOAUDIENCIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOAUDIENCIA | CODIGO | DESCRICAO |
+
+# VBATERIAEXAMES
+
+## TIPOEXAME
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXAME | CODCLIENTE | DESCRICAO |
+
+# VBENEFICIOS
+
+## CODTIPOBENEFICIO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOBENEFICIO | CODTIPOBENEFICIO | NOME |
+
+# VCAMPOSREQGERAL
+
+## IDTIPOREQ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+
 # VCHAPAATESTADO
 
 ## MOTIVOAFAST
@@ -505,6 +569,116 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PMUDSITUACAO | CODCLIENTE | DESCRICAO |
+
+# VCLASAVALIADORAD
+
+## CODTIPOAVALIADOR
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOAVALIADORAD | CODTIPOAVALIADOR | DESCTIPOAVALIADOR |
+
+# VCOMPETENCIA
+
+## TIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOCOMP | CODCLIENTE | DESCRICAO |
+
+# VDEPOSITOREC
+
+## TIPODEPOSITO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPODEPOSITO | CODIGO | DESCRICAO |
+
+# VDESPESAS
+
+## TIPODESPESA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPODESPESA | CODCLIENTE | DESCRICAO |
+
+# VEXAMESPEND
+
+## TIPOEXAME
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXAME | CODCLIENTE | DESCRICAO |
+
+# VEXAMESPRONT
+
+## TIPOEXAME
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXAME | CODCLIENTE | DESCRICAO |
+
+# VEXTINTORES
+
+## CODTIPOEPC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEPC | CODCLIENTE | DESCRICAO |
+
+## CODTIPOEXTINT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXTINTOR | CODTIPOEXTINT | NOME |
+
+# VFASESPROCESSO
+
+## CODFASE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOSFASESPROC | CODCLIENTE | DESCRICAO |
+
+# VGRAFICOS
+
+## CODTIPOGRAF
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOGRAF | CODCLIENTE | DESCRICAO |
+
+# VHISTMAPARISCO
+
+## CODTIPOEXPOSICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+# VITENSRECLAMADOS
+
+## CODITEMRECLAMATORIO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPORECLAMATORIA | CODITEMRECLAMATORIO | DESCRICAO |
+
+# VMAPARISCO
+
+## CODTIPOEXPOSICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+# VMOTIVOREQUISICAO
+
+## IDTIPOREQUISICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOREQUISICAO | IDTIPOREQUISICAO | NOMTIPOREQUISICAO |
 
 # VREQABERTTURMA
 
@@ -554,6 +728,14 @@
 | ------ | ------ | --------- |
 | VREQSTATUS | CODCLIENTE | DESCRICAO |
 
+# VREQFLUXOREPASSEHIERARQUIA
+
+## TIPOREQ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+
 # VREQGERAL
 
 ## CODSTATUS
@@ -561,6 +743,12 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | VREQSTATUS | CODCLIENTE | DESCRICAO |
+
+## FINALIDADE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
 
 # VREQGERALPARECER
 
@@ -577,6 +765,12 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | VREQSTATUS | CODCLIENTE | DESCRICAO |
+
+## IDTIPOREQUISICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
 
 # VREQPROMOCAO
 
@@ -609,6 +803,38 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | VREQSTATUS | CODCLIENTE | DESCRICAO |
+
+# VREQTIPOACOESNIVELHIERARQUIA
+
+## IDTIPOREQUISICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+
+# VREQTIPOALERTA
+
+## IDTIPOREQUISICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+
+# VREQTIPOPARAMS
+
+## IDTIPOREQUISICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+
+# VREQTIPOPERMISSAO
+
+## IDTIPOREQUISICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
 
 # VREQTRANSFERENCIA
 
@@ -666,6 +892,14 @@
 | ------ | ------ | --------- |
 | VREQSTATUS | CODCLIENTE | DESCRICAO |
 
+# VPARAMETROREQUISICAO
+
+## IDTIPOREQUISICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOREQUISICAO | IDTIPOREQUISICAO | NOMTIPOREQUISICAO |
+
 # VPARECERREQUISICAO
 
 ## IDSTATUSPARECER
@@ -673,6 +907,132 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | VSTATUSPARECER | IDSTATUSPARECER | NOMSTATUSPARECER |
+
+# VPERFILPESSOAL
+
+## CODPERFIL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOPERFIL | CODPERFIL | DESCRICAO |
+
+# VPERMISSAOCAMPOTPPESSOACURR
+
+## IDTIPOPESSOA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOPESSOA | IDTIPOPESSOA | DESCRICAO |
+
+# VPPRADANOSAUDE
+
+## CODTIPOAGENTE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOSAGENTE | CODTIPOAGENTE | NOME |
+
+# VPPRAHISTRISCOPOSTOTRABALHO
+
+## CODTIPOEXPOSICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+# VPPRAHISTRISCOSLOTACAO
+
+## CODTIPOEXPOSICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+# VPPRAHISTRISCOSSECAO
+
+## CODTIPOEXPOSICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+# VPPRAHISTRISCOSTAREFA
+
+## CODTIPOEXPOSICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+# VPPRARISCOS
+
+## CODTIPOAGENTE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOSAGENTE | CODTIPOAGENTE | NOME |
+
+# VPPRARISCOPOSTOTRABALHO
+
+## CODTIPOEXPOSICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+# VPPRARISCOSLOTACAO
+
+## CODTIPOEXPOSICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+# VPPRARISCOSSECAO
+
+## CODTIPOEXPOSICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+# VPPRARISCOSTAREFA
+
+## CODTIPOEXPOSICAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+# VPVV
+
+## CODTPPVV
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VPVVTIPO | CODTPPVV | NOME |
+
+# VPREATESTADO
+
+## CODTPATESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOATESTADO | CODTPATESTADO | NOMETPATESTADO |
+
+# VPROCESSOS
+
+## TIPOPROCESSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOPROCESSO | CODIGO | DESCRICAO |
+
+## INDDESCISAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOSDECISAO | CODCLIENTE | DESCRICAO |
 
 # VREQUISICAOADMISSAO
 
@@ -689,6 +1049,90 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
+
+## TIPOCAT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VOCTIPOESOCIAL | CODCLIENTE | DESCRICAO |
+
+## CODTIPOOCORRENCIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOOCORRENCIA | CODTIPOOCORRENCIA | NOME |
+
+# VRELATORIO
+
+## CODTIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPORELATORIO | CODTIPO | TITULO |
+
+# VSUSPENSAOTRIB
+
+## INDSUSPENSAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOSDECISAO | CODCLIENTE | DESCRICAO |
+
+# VTIPOCONSULTA
+
+## ESOCIAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPOEXAME | CODCLIENTE | DESCRICAO |
+
+# VTIPORELATORIOITEM
+
+## CODTIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VTIPORELATORIO | CODTIPO | TITULO |
+
+# VRSPERGUNTASCAPTACAO
+
+## CODTIPOPERGUNTA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VRSTIPOPERGUNTACAPTACAO | CODTIPOPERGUNTA | NOME |
+
+# VRSSELECOESPESSOASETAPAS
+
+## CODSTATUS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VRSTIPOSPESSOA | CODCLIENTE | DESCRICAO |
+
+# VRSSELECOESVAGAS
+
+## CODSTATUS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VRSTIPOSVAGA | CODCLIENTE | DESCRICAO |
+
+# VRSSELECOESVAGASETAPAS
+
+## CODSTATUS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VRSTIPOSETAPA | CODCLIENTE | DESCRICAO |
+
+# VRSSOLICITACOES
+
+## CODSTATUS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VRSTIPOSSOLICIT | CODCLIENTE | DESCRICAO |
 
 # SACEITETERMO
 
@@ -1997,6 +2441,30 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | XXSITUACAOPARCELA | CODTIPOSITPARC | DSCSITPARC |
+
+# UCURSOS
+
+## TIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| UTIPOCURSOS | CODTIPOCURSO | NOME |
+
+# UMATALUN
+
+## CODTIPOMATRICULA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| UTIPOMATRICULA | CODTIPOMATRICULA | DESCRICAO |
+
+# UMATRICPL
+
+## CODTIPOMATRICULA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| UTIPOMATRICULA | CODTIPOMATRICULA | DESCRICAO |
 
 # UPROCEDPROT
 
