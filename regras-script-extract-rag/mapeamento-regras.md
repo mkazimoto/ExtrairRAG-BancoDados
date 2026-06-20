@@ -70,6 +70,156 @@
 | ------ | ------ | --------- |
 | LTIPOUSUARIO | CODIGOTPUSUARIO | DESCRICAO |
 
+# NMENU
+
+## CODTIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| NTIPOMENU | CODIGO | DESCRICAO |
+
+# NPERGUNTAENQT
+
+## CODTIPOOPCAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| NTIPOOPCAOENQT | CODIGO | DESCRICAO |
+
+# OFATENDIMENTO
+
+## IDTIPOATENDIMENTO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOATENDIMENTO | IDTIPOATENDIMENTO | DESCRICAO |
+
+# OFEVENTOPROC
+
+## TIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOEVENTOPROC | CODTIPO | DESCRICAO |
+
+# OFINDICE
+
+## IDTIPOOBJ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# OFMODELO
+
+## IDTIPOOBJ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# OFMOTIVOAGREGACAOOBJFILHO
+
+## IDTIPOOBJ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# OFMOTIVOSUCATEAMENTO
+
+## IDTIPOOBJ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# OFMOTIVOTRANSFERENCIA
+
+## IDTIPOOBJ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# OFOBJPNEU
+
+## CODTIPOBORRACHA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOBORRACHAPNEU | CODTIPOBORRACHA | DESCRICAO |
+
+# OFOBJOFICINA
+
+## IDTIPOOBJ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# OFOPCAOAGREGACAO
+
+## IDTIPOOBJORIGEM
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+## IDTIPOOBJDESTINO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# OFPARAMSPRD
+
+## TIPOMATERIAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOMATERIAL | IDTIPOMATERIAL | DESCRICAO |
+
+# OFPARAMS
+
+## IDTIPOOBJPNEU
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# OFPOSICAOFILHO
+
+## IDTIPOOBJ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# OFPROBLEMA
+
+## IDTIPOOBJ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# OFREFORMAPNEU
+
+## CODTIPOBORRACHA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOBORRACHAPNEU | CODTIPOBORRACHA | DESCRICAO |
+
+# OFTIPOOBJCOLIGADA
+
+## IDTIPOOBJ
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
 # PFUNC
 
 ## CODSITUACAO
