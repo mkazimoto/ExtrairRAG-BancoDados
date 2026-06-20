@@ -180,6 +180,12 @@
 | ------ | ------ | --------- |
 | OFTIPOMATERIAL | IDTIPOMATERIAL | DESCRICAO |
 
+## TIPOSERVICO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| OFTIPOSERVICO | IDTIPOSERVICO | DESCRICAO |
+
 # OFPARAMS
 
 ## IDTIPOOBJPNEU
@@ -219,6 +225,14 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | OFTIPOOBJ | IDTIPOOBJ | DESCRICAO |
+
+# PDIRSPT
+
+## TIPOEVENTO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PTIPOEVTPT | CODCLIENTE | DESCRICAO |
 
 # PFUNC
 
@@ -322,6 +336,14 @@
 | ------ | ------ | --------- |
 | PCODSITRAIS | CODCLIENTE | DESCRICAO |
 
+# PFUNCAO
+
+## CODTIPOFUNCAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PTIPOFUNCAO | CODCLIENTE | DESCRICAO |
+
 # PEXTERNO
 
 ## CODSITUACAO
@@ -382,6 +404,22 @@
 | ------ | ------ | --------- |
 | PMUDSITUACAO | CODCLIENTE | DESCRICAO |
 
+# PEVENTO
+
+## CODTPBENEFICIO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PTIPOBENEFICIO | CODCLIENTE | DESCRICAO |
+
+# PEVTCOMPOSICAOPT
+
+## TIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PTIPOEVTPT | CODCLIENTE | DESCRICAO |
+
 # PORCAMENTOLOTACAOCAD
 
 ## CODSITUACAO
@@ -429,6 +467,14 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
+
+# QCUBO
+
+## IDTIPOCUBO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| QTIPOCUBO | IDTIPOCUBO | DESCRICAO |
 
 # VTIPOATESTADO
 
@@ -670,6 +716,14 @@
 | ------ | ------ | --------- |
 | SSTATUS | CODSTATUS | DESCRICAO |
 
+# SEXTTIPOAUXILIO
+
+## CODCLIENTETIPOAUXILIO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SCODTIPOAUXILIO | CODCLIENTE | DESCRICAO |
+
 # SHISTALUNOCOL
 
 ## CODSTATUS
@@ -702,6 +756,34 @@
 | ------ | ------ | --------- |
 | SSTATUS | CODSTATUS | DESCRICAO |
 
+# SINOVINVENTO
+
+## CODCLIENTETIPOTECNOLO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SCODTIPOTECNOLO | CODCLIENTE | DESCRICAO |
+
+# SINOVINVENTOR
+
+## CODCLIENTETIPOTRAB
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SCODTIPOTRAB | CODCLIENTE | DESCRICAO |
+
+## CODCLIENTETIPOVINCEXT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SCODTIPOVINC | CODCLIENTE | DESCRICAO |
+
+## CODCLIENTETIPOVINCINT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SCODTIPOVINC | CODCLIENTE | DESCRICAO |
+
 # SMATRICPL
 
 ## CODSTATUS
@@ -717,6 +799,106 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | SSTATUS | CODSTATUS | DESCRICAO |
+
+# SMISICURSO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SMISITIPOCURSO | CODTIPOCURSO | DESTIPOCURSO |
+
+# SMISISASEANALISEFINANC
+
+## CODTIPOANALISE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SMISISASETIPOANALISE | CODTIPOANALISE | DESCRICAO |
+
+# SMISISASEANALISEFINANCAUXILIOS
+
+## CODTIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SMISISASETIPOAUXILIO | CODTIPO | DESTIPO |
+
+# SMISISASEBALMERCADORIA
+
+## CODTIPOBALANCO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SMISISASETIPOBALANCO | CODTIPOBALANCO | DESTIPOBALANCO |
+
+# SMISISASESEGACIDENTE
+
+## CODTIPOACIDENTE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SMISITIPOACIDENTE | CODTIPOACIDENTE | DESTIPOACIDENTE |
+
+## CODTIPOIDENT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SMISITIPOIDENTIFICACAO | CODTIPOIDENT | DESTIPOIDENT |
+
+# SOCORRENCIAALUNO
+
+## CODOCORRENCIATIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO |
+
+# SOCORRENCIAPROFESSOR
+
+## CODOCORRENCIATIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO |
+
+# SOCORRENCIATIPOTRANSF
+
+## CODOCORRENCIATIPOORIGEM
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO |
+
+## CODOCORRENCIATIPODESTINO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO |
+
+# SPROJEDITAL
+
+## CODCLIENTETIPOEDITAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SCODTIPOEDITAL | CODCLIENTE | DESCRICAO |
+
+# SPSATIVIDADEAGENDADAPS
+
+## IDTIPOATIVIDADEAGENDADA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SPSTIPOATIVIDADEAGENDADA | IDTIPOATIVIDADEAGENDADA | NOME |
+
+# SPSLOCAL
+
+## IDTIPOLOCAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SPSTIPOLOCAL | IDTIPOLOCAL | NOME |
 
 # SSTATUS
 

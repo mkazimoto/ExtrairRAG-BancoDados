@@ -38,7 +38,7 @@ Para cada tabela dependente que ainda não exista no mapeamento, adicione:
 
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
-| <TABELA_ORIGEM> | <COLUNA_DESTINO> | DESCRICAO |
+| <TABELA_ORIGEM> | <COLUNA_PK> | <COLUNA_DESCRICAO> |
 ```
 
 ### 5. Finalizar
@@ -65,7 +65,8 @@ A entrada gerada em `mapeamento-regras.md` é:
 
 ## Regras importantes
 - A "Tabela" na linha de dados é sempre a **tabela referenciada** (FK de saída), não a dependente
-- O "Codigo" é a coluna FK na **tabela dependente**
+- O "Codigo" é a coluna PK na **tabela referenciada**
+- A "Descricao" é a coluna de titulo ou descrição na **tabela referenciada**
 - Para colunas que usam `CODCOLIGADA` compondo a FK, mapeie apenas a coluna semântica (ex: `CODTIPOALUNO`)
 - Mantenha a **ordem alfabética** das seções `# <TABELA>` no arquivo
 - Se a tabela dependente já existir no mapeamento, adicione apenas a nova subseção `## <COLUNA_FK>`
