@@ -14,9 +14,9 @@
 
 ## CODIGOTR
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| LTIPOREF | CODIGOTR | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| LTIPOREF | CODIGOTR | DESCRICAO | CODCOLIGADA | 1 |
 
 ## TIPOPUBLIC
 
@@ -36,9 +36,9 @@
 
 ## CODTIPOUSU
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| LTIPOUSUARIO | CODTIPOUSU | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| LTIPOUSUARIO | CODTIPOUSU | DESCRICAO | CODCOLIGADA | 1 |
 
 # LSUGESTAO
 
@@ -52,9 +52,9 @@
 
 ## TIPOUSUARIO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| LTIPOUSUARIO | TIPOUSUARIO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| LTIPOUSUARIO | TIPOUSUARIO | DESCRICAO | CODCOLIGADA | 1 |
 
 # LUSUMAXEMP
 
@@ -66,9 +66,9 @@
 
 ## CODIGOTPUSUARIO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| LTIPOUSUARIO | CODIGOTPUSUARIO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| LTIPOUSUARIO | CODIGOTPUSUARIO | DESCRICAO | CODCOLIGADA | 1 |
 
 # NMENU
 
@@ -90,17 +90,17 @@
 
 ## IDTIPOATENDIMENTO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| OFTIPOATENDIMENTO | IDTIPOATENDIMENTO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| OFTIPOATENDIMENTO | IDTIPOATENDIMENTO | DESCRICAO | CODCOLIGADA | 1 |
 
 # OFEVENTOPROC
 
 ## TIPO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| OFTIPOEVENTOPROC | CODTIPO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| OFTIPOEVENTOPROC | CODTIPO | DESCRICAO | CODCOLIGADA | 1 |
 
 # OFINDICE
 
@@ -252,9 +252,9 @@
 
 ## CODENTREGA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| TTIPOENTREGA | CODENTREGA | DSCENTREGA |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| TTIPOENTREGA | CODENTREGA | DSCENTREGA | CODCOLIGADA | 1 |
 
 # XVENDA
 
@@ -368,47 +368,47 @@
 
 ## MOTIVO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| PMUDSITUACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
 
 # PFHSTAFT
 
 ## MOTIVO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| PMUDSITUACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
 
 # PFHSTMOTIVOAFAST
 
 ## MOTIVO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| PMUDSITUACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
 
 ## MOTIVOANTERIOR
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| PMUDSITUACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
 
 # PMOTIVAFASTCLIENTE
 
 ## CODTOTVS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| PMUDSITUACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
 
 # PESOCIALPARAMAFAST
 
 ## MOTIVOLABORE
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| PMUDSITUACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
 
 # PEVENTO
 
@@ -486,9 +486,9 @@
 
 ## TIPOBRIGADA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VBITIPOBRIGADA | CODBITIPO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VBITIPOBRIGADA | CODBITIPO | DESCRICAO | CODCOLIGADA | 1 |
 
 # VTIPOATESTADO
 
@@ -510,9 +510,9 @@
 
 ## MOTIVO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| PMUDSITUACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
 
 # VAGENDAEXAM
 
@@ -550,25 +550,25 @@
 
 ## CODTIPOBENEFICIO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VTIPOBENEFICIO | CODTIPOBENEFICIO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VTIPOBENEFICIO | CODTIPOBENEFICIO | NOME | CODCOLIGADA | 1 |
 
 # VCAMPOSREQGERAL
 
 ## IDTIPOREQ
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO | CODCOLIGADA | 1 |
 
 # VCHAPAATESTADO
 
 ## MOTIVOAFAST
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| PMUDSITUACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
 
 # VCLASAVALIADORAD
 
@@ -660,9 +660,9 @@
 
 ## CODITEMRECLAMATORIO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VTIPORECLAMATORIA | CODITEMRECLAMATORIO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VTIPORECLAMATORIA | CODITEMRECLAMATORIO | DESCRICAO | CODCOLIGADA | 1 |
 
 # VMAPARISCO
 
@@ -732,9 +732,9 @@
 
 ## TIPOREQ
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO | CODCOLIGADA | 1 |
 
 # VREQGERAL
 
@@ -746,9 +746,9 @@
 
 ## FINALIDADE
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO | CODCOLIGADA | 1 |
 
 # VREQGERALPARECER
 
@@ -768,9 +768,9 @@
 
 ## IDTIPOREQUISICAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO | CODCOLIGADA | 1 |
 
 # VREQPROMOCAO
 
@@ -808,33 +808,33 @@
 
 ## IDTIPOREQUISICAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO | CODCOLIGADA | 1 |
 
 # VREQTIPOALERTA
 
 ## IDTIPOREQUISICAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO | CODCOLIGADA | 1 |
 
 # VREQTIPOPARAMS
 
 ## IDTIPOREQUISICAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO | CODCOLIGADA | 1 |
 
 # VREQTIPOPERMISSAO
 
 ## IDTIPOREQUISICAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VREQTIPO | IDTIPOREQUISICAO | TIPOREQUISICAO | CODCOLIGADA | 1 |
 
 # VREQTRANSFERENCIA
 
@@ -912,9 +912,9 @@
 
 ## CODPERFIL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VTIPOPERFIL | CODPERFIL | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VTIPOPERFIL | CODPERFIL | DESCRICAO | CODCOLIGADA | 1 |
 
 # VPERMISSAOCAMPOTPPESSOACURR
 
@@ -1008,9 +1008,9 @@
 
 ## CODTPPVV
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VPVVTIPO | CODTPPVV | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VPVVTIPO | CODTPPVV | NOME | CODCOLIGADA | 1 |
 
 # VPREATESTADO
 
@@ -1058,17 +1058,17 @@
 
 ## CODTIPOOCORRENCIA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VTIPOOCORRENCIA | CODTIPOOCORRENCIA | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VTIPOOCORRENCIA | CODTIPOOCORRENCIA | NOME | CODCOLIGADA | 1 |
 
 # VRELATORIO
 
 ## CODTIPO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VTIPORELATORIO | CODTIPO | TITULO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VTIPORELATORIO | CODTIPO | TITULO | CODCOLIGADA | 1 |
 
 # VSUSPENSAOTRIB
 
@@ -1090,9 +1090,9 @@
 
 ## CODTIPO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| VTIPORELATORIO | CODTIPO | TITULO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VTIPORELATORIO | CODTIPO | TITULO | CODCOLIGADA | 1 |
 
 # VRSPERGUNTASCAPTACAO
 
@@ -1138,343 +1138,343 @@
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SACEITETERMOUSOIMAGEMVOZ
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SAGDAGENDA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SAGDEVENTO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SAGDPARAM
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SALUNO
 
 ## CODTIPOALUNO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOALUNO | CODTIPOALUNO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 |
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SAREACONHECIMENTOHIS
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SASSINATURACONTRATO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SATIVIDADEEXTRA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SAUTORIZACAOFILIAL
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SBANNER
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SBOLSA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SBOLSAIRMAOS
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SCCOMREGRAFILTROAVANCADO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SCOMPETENCIA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SCOMPLDISC
 
 ## TIPO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME | CODCOLIGADA | 1 |
 
 # SCOMPONENTE
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SCONTEXTOSINSTITUICAOMEC
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SCONTRATO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SCURSO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SCURSOHISTORICO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SCURSOPROCSEL
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SDIRECAOFILIAL
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SDISCIPLINA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SDISCIPLINAHIST
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SEQUIVALENCIA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SEXTVISITAEVENTO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SFICHAMEDICAMODELO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SFICHAMEDICAPESSOAOBSERVACOES
 
 ## CODTIPOCURSOORIGEM
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SFORMULARIO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SGRUPOCONCEITO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SGRUPODISC
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SGRUPOHIST
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SGRUPOSERIE
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SHABILITACAOALUNO
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SSTATUS | CODSTATUS | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
 
 # SINSTITUICAOMEC
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SITINERARIOFORMATIVOHIST
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SMODELOLAYOUT
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SMOTIVOALTMAT
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SATIVIDADEALUNO
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SSTATUS | CODSTATUS | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
 
 # SDISCGRADECOMPLDISC
 
 ## TIPO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME | CODCOLIGADA | 1 |
 
 # SDISCNAOAPROVEITADAS
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SSTATUS | CODSTATUS | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
 
 # SEXTTIPOAUXILIO
 
@@ -1488,49 +1488,49 @@
 
 ## CODTIPOCOMPLEMENTO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME | CODCOLIGADA | 1 |
 
 # SHISTALUNOCOL
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SSTATUS | CODSTATUS | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
 
 # SHISTDISCCOL
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SSTATUS | CODSTATUS | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
 
 # SHISTDISCFAC
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SSTATUS | CODSTATUS | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
 
 # SHISTDISCFACEXT
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SSTATUS | CODSTATUS | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
 
 # SHORARIOTURMA
 
 ## CODTIPOSALA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOSALA | CODTIPOSALA | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 |
 
 # SINOVINVENTO
 
@@ -1564,37 +1564,37 @@
 
 ## CODTIPOSALA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOSALA | CODTIPOSALA | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 |
 
 # SMATRICPL
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SSTATUS | CODSTATUS | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
 
 ## CODTIPOMAT
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOMATRICULA | CODTIPOMAT | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOMATRICULA | CODTIPOMAT | DESCRICAO | CODCOLIGADA | 1 |
 
 # SMATRICULA
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SSTATUS | CODSTATUS | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
 
 ## TIPOMAT
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOMATRICULA | CODTIPOMAT | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOMATRICULA | CODTIPOMAT | DESCRICAO | CODCOLIGADA | 1 |
 
 # SMISICURSO
 
@@ -1646,103 +1646,103 @@
 
 ## CODOCORRENCIATIPO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 |
 
 # SOCORRENCIAPROFESSOR
 
 ## CODOCORRENCIATIPO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 |
 
 # SOCORRENCIATIPOTRANSF
 
 ## CODOCORRENCIATIPOORIGEM
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 |
 
 ## CODOCORRENCIATIPODESTINO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 |
 
 # SOCORRENCIAGRUPO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SPARAM
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SPARAMRELAT
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SPARTEHIST
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SPLANILHA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SPLANOPGTO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SPLETIVO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SPREPARACENSO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SPROJPROJETO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SPROJEDITAL
 
@@ -1772,173 +1772,173 @@
 
 ## CODTIPOSALA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOSALA | CODTIPOSALA | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 |
 
 # SSALA
 
 ## CODTIPOSALA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOSALA | CODTIPOSALA | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 |
 
 # SSERIEHISTORICO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SSERVICO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SSTATUS
 
 ## PLCODTIPOALUNO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOALUNO | CODTIPOALUNO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 |
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STCC
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STCCLINHAPESQUISA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STCCTIPO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STIPOALUNO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STIPOALUNOTRANSF
 
 ## CODTIPOALUNOORIGEM
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOALUNO | CODTIPOALUNO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 |
 
 ## CODTIPOALUNODESTINO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOALUNO | CODTIPOALUNO | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 |
 
 # STIPOATENDIMENTO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STIPOCURSOFILIAL
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STIPOCURSOPT
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STIPOCURSOTIPOATEND
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STIPOINGRESSO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STIPOMATRICULA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STOTVSSIGNDOCUMENTO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STURMA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STURMADISC
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # STURNO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SWEBMATERIALSEC
 
@@ -1950,49 +1950,49 @@
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SWIDGETCONFIGURACAO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| STIPOCURSO | CODTIPOCURSO | NOME |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
 
 # SZARQUIVO
 
 ## CODTIPODOC
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPODOC | CODTIPODOC | DESCTIPODOC |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SZTIPODOC | CODTIPODOC | DESCTIPODOC | CODCOLIGADA | 1 |
 
 # SZCONTROLEDOC
 
 ## CODTIPODOC
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPODOC | CODTIPODOC | DESCTIPODOC |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| SZTIPODOC | CODTIPODOC | DESCTIPODOC | CODCOLIGADA | 1 |
 
 # TCUSTOTIPOAPL
 
 ## CODTIPOAPL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| TTIPOAPL | CODTIPOAPL | DESCTIPOAPL |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| TTIPOAPL | CODTIPOAPL | DESCTIPOAPL | CODCOLIGADA | 1 |
 
 # TFAIXAENTREGA
 
 ## CODENTREGA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| TTIPOENTREGA | CODENTREGA | DSCENTREGA |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| TTIPOENTREGA | CODENTREGA | DSCENTREGA | CODCOLIGADA | 1 |
 
 # TLOTEPRD
 
@@ -2006,9 +2006,9 @@
 
 ## CODTIPOMOV
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| TTIPOMOV | CODTIPOMOV | DSCTIPOMOV |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| TTIPOMOV | CODTIPOMOV | DSCTIPOMOV | CODCOLIGADA | 1 |
 
 # TITMTMV
 
@@ -2046,9 +2046,9 @@
 
 ## CODTIPOAPL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| TTIPOAPL | CODTIPOAPL | DESCTIPOAPL |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| TTIPOAPL | CODTIPOAPL | DESCTIPOAPL | CODCOLIGADA | 1 |
 
 # DCODIFICACAOLOGRADOURO
 
@@ -2062,17 +2062,17 @@
 
 ## IDTIPOAPLFIN
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO | CODCOLIGADA | 1 |
 
 # DFILTROTRIBUTO
 
 ## IDTIPOAPLFIN
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO | CODCOLIGADA | 1 |
 
 # EALUBOLSA
 
@@ -2184,17 +2184,17 @@
 
 ## IDTIPOAPLFIN
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO | CODCOLIGADA | 1 |
 
 # FAPLFINCONTA
 
 ## IDTIPOAPLFIN
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO | CODCOLIGADA | 1 |
 
 # FCFO
 
@@ -2252,25 +2252,25 @@
 
 ## IDTIPOAPLFIN
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO | CODCOLIGADA | 1 |
 
 # FTIPOAPLFINCONT
 
 ## IDAPLFIN
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO | CODCOLIGADA | 1 |
 
 # FTIPOAPLFINCTB
 
 ## IDTIPOAPLFIN
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO | CODCOLIGADA | 1 |
 
 # GFILIAL
 
@@ -2290,65 +2290,65 @@
 
 ## CODTIPOACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| HTIPOACAO | CODTIPOACAO | TITULO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| HTIPOACAO | CODTIPOACAO | TITULO | CODCOLIGADA | 1 |
 
 # HACAORESULTADO
 
 ## CODTIPOACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| HTIPOACAO | CODTIPOACAO | TITULO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| HTIPOACAO | CODTIPOACAO | TITULO | CODCOLIGADA | 1 |
 
 # HATENDENTE
 
 ## CODTIPOATENDENTE
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| HTIPOATENDENTE | CODTIPOATENDENTE | TITULO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| HTIPOATENDENTE | CODTIPOATENDENTE | TITULO | CODCOLIGADA | 1 |
 
 # HCAMPTIPOACAO
 
 ## CODTIPOACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| HTIPOACAO | CODTIPOACAO | TITULO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| HTIPOACAO | CODTIPOACAO | TITULO | CODCOLIGADA | 1 |
 
 # HESQUEMAREPASSETIPOATEND
 
 ## CODTIPOATENDENTE
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| HTIPOATENDENTE | CODTIPOATENDENTE | TITULO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| HTIPOATENDENTE | CODTIPOATENDENTE | TITULO | CODCOLIGADA | 1 |
 
 # HEVENTOS
 
 ## CODTIPOEVENTO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| HTIPOEVENTO | CODTIPOEVENTO | TITULO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| HTIPOEVENTO | CODTIPOEVENTO | TITULO | CODCOLIGADA | 1 |
 
 # HPROCESSOS
 
 ## CODTIPOPROCESSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| HTIPOPROCESSOS | CODTIPOPROCESSO | TITULO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| HTIPOPROCESSOS | CODTIPOPROCESSO | TITULO | CODCOLIGADA | 1 |
 
 # HRECCATALOGO
 
 ## CODTIPOMIDIA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| HTIPOMIDIA | CODTIPOMIDIA | TITULO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| HTIPOMIDIA | CODTIPOMIDIA | TITULO | CODCOLIGADA | 1 |
 
 # HTIPOATENDIMENTO
 
@@ -2454,17 +2454,17 @@
 
 ## CODTIPOMATRICULA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| UTIPOMATRICULA | CODTIPOMATRICULA | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| UTIPOMATRICULA | CODTIPOMATRICULA | DESCRICAO | CODCOLIGADA | 1 |
 
 # UMATRICPL
 
 ## CODTIPOMATRICULA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| UTIPOMATRICULA | CODTIPOMATRICULA | DESCRICAO |
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| UTIPOMATRICULA | CODTIPOMATRICULA | DESCRICAO | CODCOLIGADA | 1 |
 
 # UPROCEDPROT
 
