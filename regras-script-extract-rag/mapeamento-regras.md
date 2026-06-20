@@ -250,6 +250,12 @@
 | ------ | ------ | --------- | -------- | ------ |   
 | TTMV | CODTMV | NOME | CODCOLIGADA | 1 |
 
+## CODENTREGA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| TTIPOENTREGA | CODENTREGA | DSCENTREGA |
+
 # XVENDA
 
 ## COD_SIT_VENDA
@@ -684,6 +690,46 @@
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
 
+# SACEITETERMO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SACEITETERMOUSOIMAGEMVOZ
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SAGDAGENDA
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SAGDEVENTO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SAGDPARAM
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
 # SALUNO
 
 ## CODTIPOALUNO
@@ -691,6 +737,236 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | STIPOALUNO | CODTIPOALUNO | DESCRICAO |
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SAREACONHECIMENTOHIS
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SASSINATURACONTRATO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SATIVIDADEEXTRA
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SAUTORIZACAOFILIAL
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SBANNER
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SBOLSA
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SBOLSAIRMAOS
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SCCOMREGRAFILTROAVANCADO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SCOMPETENCIA
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SCOMPLDISC
+
+## TIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME |
+
+# SCOMPONENTE
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SCONTEXTOSINSTITUICAOMEC
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SCONTRATO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SCURSO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SCURSOHISTORICO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SCURSOPROCSEL
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SDIRECAOFILIAL
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SDISCIPLINA
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SDISCIPLINAHIST
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SEQUIVALENCIA
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SEXTVISITAEVENTO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SFICHAMEDICAMODELO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SFICHAMEDICAPESSOAOBSERVACOES
+
+## CODTIPOCURSOORIGEM
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SFORMULARIO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SGRUPOCONCEITO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SGRUPODISC
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SGRUPOHIST
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SGRUPOSERIE
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
 
 # SHABILITACAOALUNO
 
@@ -700,6 +976,38 @@
 | ------ | ------ | --------- |
 | SSTATUS | CODSTATUS | DESCRICAO |
 
+# SINSTITUICAOMEC
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SITINERARIOFORMATIVOHIST
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SMODELOLAYOUT
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SMOTIVOALTMAT
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
 # SATIVIDADEALUNO
 
 ## CODSTATUS
@@ -707,6 +1015,14 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | SSTATUS | CODSTATUS | DESCRICAO |
+
+# SDISCGRADECOMPLDISC
+
+## TIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME |
 
 # SDISCNAOAPROVEITADAS
 
@@ -723,6 +1039,14 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | SCODTIPOAUXILIO | CODCLIENTE | DESCRICAO |
+
+# SGRUPOTIPOCOMPLEMENTODISC
+
+## CODTIPOCOMPLEMENTO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME |
 
 # SHISTALUNOCOL
 
@@ -756,6 +1080,14 @@
 | ------ | ------ | --------- |
 | SSTATUS | CODSTATUS | DESCRICAO |
 
+# SHORARIOTURMA
+
+## CODTIPOSALA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOSALA | CODTIPOSALA | NOME |
+
 # SINOVINVENTO
 
 ## CODCLIENTETIPOTECNOLO
@@ -784,6 +1116,14 @@
 | ------ | ------ | --------- |
 | SCODTIPOVINC | CODCLIENTE | DESCRICAO |
 
+# SLISTAESPERAINSTALACAO
+
+## CODTIPOSALA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOSALA | CODTIPOSALA | NOME |
+
 # SMATRICPL
 
 ## CODSTATUS
@@ -792,6 +1132,12 @@
 | ------ | ------ | --------- |
 | SSTATUS | CODSTATUS | DESCRICAO |
 
+## CODTIPOMAT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOMATRICULA | CODTIPOMAT | DESCRICAO |
+
 # SMATRICULA
 
 ## CODSTATUS
@@ -799,6 +1145,12 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | SSTATUS | CODSTATUS | DESCRICAO |
+
+## TIPOMAT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOMATRICULA | CODTIPOMAT | DESCRICAO |
 
 # SMISICURSO
 
@@ -876,6 +1228,78 @@
 | ------ | ------ | --------- |
 | SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO |
 
+# SOCORRENCIAGRUPO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SPARAM
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SPARAMRELAT
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SPARTEHIST
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SPLANILHA
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SPLANOPGTO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SPLETIVO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SPREPARACENSO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SPROJPROJETO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
 # SPROJEDITAL
 
 ## CODCLIENTETIPOEDITAL
@@ -900,6 +1324,38 @@
 | ------ | ------ | --------- |
 | SPSTIPOLOCAL | IDTIPOLOCAL | NOME |
 
+# SRESERVAINSTALACAO
+
+## CODTIPOSALA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOSALA | CODTIPOSALA | NOME |
+
+# SSALA
+
+## CODTIPOSALA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOSALA | CODTIPOSALA | NOME |
+
+# SSERIEHISTORICO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SSERVICO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
 # SSTATUS
 
 ## PLCODTIPOALUNO
@@ -907,6 +1363,44 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | STIPOALUNO | CODTIPOALUNO | DESCRICAO |
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STCC
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STCCLINHAPESQUISA
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STCCTIPO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STIPOALUNO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
 
 # STIPOALUNOTRANSF
 
@@ -922,6 +1416,86 @@
 | ------ | ------ | --------- |
 | STIPOALUNO | CODTIPOALUNO | DESCRICAO |
 
+# STIPOATENDIMENTO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STIPOCURSOFILIAL
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STIPOCURSOPT
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STIPOCURSOTIPOATEND
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STIPOINGRESSO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STIPOMATRICULA
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STOTVSSIGNDOCUMENTO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STURMA
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STURMADISC
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# STURNO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
 # SWEBMATERIALSEC
 
 ## IDTIPOMATERIAL
@@ -930,6 +1504,52 @@
 | ------ | ------ | --------- |
 | EWEBTIPOMATERIAL | IDTIPOMATERIAL | DESCRICAO |
 
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SWIDGETCONFIGURACAO
+
+## CODTIPOCURSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOCURSO | CODTIPOCURSO | NOME |
+
+# SZARQUIVO
+
+## CODTIPODOC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SZTIPODOC | CODTIPODOC | DESCTIPODOC |
+
+# SZCONTROLEDOC
+
+## CODTIPODOC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SZTIPODOC | CODTIPODOC | DESCTIPODOC |
+
+# TCUSTOTIPOAPL
+
+## CODTIPOAPL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| TTIPOAPL | CODTIPOAPL | DESCTIPOAPL |
+
+# TFAIXAENTREGA
+
+## CODENTREGA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| TTIPOENTREGA | CODENTREGA | DSCENTREGA |
+
 # TLOTEPRD
 
 ## IDSTATUS
@@ -937,6 +1557,14 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | TSTATUSLOTEPRD | IDSTATUS | DESCRICAO |
+
+# TITMTIPOMOV
+
+## CODTIPOMOV
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| TTIPOMOV | CODTIPOMOV | DSCTIPOMOV |
 
 # TITMTMV
 
@@ -961,6 +1589,22 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
+
+# TPAGTO
+
+## TIPOPAGAMENTO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| TTIPOPAGTO | CODIGO | DESCRICAO |
+
+# TPRODUTODEF
+
+## CODTIPOAPL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| TTIPOAPL | CODTIPOAPL | DESCTIPOAPL |
 
 # DCODIFICACAOLOGRADOURO
 
@@ -1001,6 +1645,12 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | ESTATUS | STALU | STDESC |
+
+## TIPOALUNO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| UTABTIPO | CODTIPO | DESCRICAO |
 
 # EALUOCOR
 
@@ -1277,6 +1927,22 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
+
+# SPSPERFILPROFISSIONAL
+
+## IDTIPOPROFISSIONAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SPSTIPOPROFISSIONAL | IDTIPOPROFISSIONAL | NOME |
+
+# SPSTIPOPROFISSIONALLOCAL
+
+## IDTIPOPROFISSIONAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SPSTIPOPROFISSIONAL | IDTIPOPROFISSIONAL | NOME |
 
 # LEXEMPLAR
 
