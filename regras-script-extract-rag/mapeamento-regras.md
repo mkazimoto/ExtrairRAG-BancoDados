@@ -70,10 +70,6 @@
 | ------ | ------ | --------- |
 | XALGSITUACAOCONTLOC | CODSITUACAOCONTLOC | DESCSITUACAOCONTLOC |
 
----
-
-# Módulo P — TOTVS Folha de Pagamento
-
 # PFUNC
 
 ## SITUACAOFGTS
@@ -179,10 +175,6 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PINTCONTSTATUS | CODSTATUS | DESCRICAO |
-
----
-
-# Módulo V — TOTVS Gestão de Pessoas
 
 # VTIPOATESTADO
 
@@ -384,9 +376,13 @@
 | ------ | ------ | --------- |
 | VSTATUSPARECER | IDSTATUSPARECER | NOMSTATUSPARECER |
 
----
+# SALUNO
 
-# Módulo S — TOTVS Educacional
+## CODTIPOALUNO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO |
 
 # SHABILITACAOALUNO
 
@@ -460,9 +456,27 @@
 | ------ | ------ | --------- |
 | SSTATUS | CODSTATUS | DESCRICAO |
 
----
+# SSTATUS
 
-# Módulo T — TOTVS Gestão de Estoque, Compras e Faturamento
+## PLCODTIPOALUNO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO |
+
+# STIPOALUNOTRANSF
+
+## CODTIPOALUNOORIGEM
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO |
+
+## CODTIPOALUNODESTINO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO |
 
 # TLOTEPRD
 
@@ -487,10 +501,6 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | TSTATUSLOTEPRD | IDSTATUS | DESCRICAO |
-
----
-
-# Módulo E — Ensino Básico
 
 # EALUNOS
 
@@ -522,10 +532,6 @@
 | ------ | ------ | --------- |
 | ESITMAT | CODSITMAT | DESCRICAO |
 
----
-
-# Módulo L — Gestão Bibliotecária
-
 # LEXEMPLAR
 
 ## CODSITUACAO
@@ -533,10 +539,6 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | LSITUACAOEXEMPLAR | CODSITUACAO | NOME |
-
----
-
-# Módulo XX — Contratos (extensão do Módulo X)
 
 # XXCONTRATO
 
