@@ -1,3 +1,75 @@
+# LPUBLIC
+
+## CODTIPODESCFIS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| LTIPODESCFISPUB | CODIGO | DESCRICAO |
+
+## CODTIPOMATERIAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| LTIPOMATERIALPUB | CODTIPOMATERIAL | DESCRICAO |
+
+## CODIGOTR
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| LTIPOREF | CODIGOTR | DESCRICAO |
+
+## TIPOPUBLIC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| LTIPOPUBLIC | TIPOPUBLIC | DESCRICAO |
+
+# LPUBLICPARAM
+
+## CODTIPOPUB
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| LTIPOPUBLIC | CODTIPOPUB | DESCRICAO |
+
+# LREGRAEMPRESTIMO
+
+## CODTIPOUSU
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| LTIPOUSUARIO | CODTIPOUSU | DESCRICAO |
+
+# LSUGESTAO
+
+## TIPOPUBLIC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| LTIPOPUBLIC | TIPOPUBLIC | DESCRICAO |
+
+# LUSUARIO
+
+## TIPOUSUARIO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| LTIPOUSUARIO | TIPOUSUARIO | DESCRICAO |
+
+# LUSUMAXEMP
+
+## CODIGOTPPUBLIC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| LTIPOPUBLIC | CODIGOTPPUBLIC | DESCRICAO |
+
+## CODIGOTPUSUARIO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| LTIPOUSUARIO | CODIGOTPUSUARIO | DESCRICAO |
+
 # PFUNC
 
 ## CODSITUACAO
@@ -518,6 +590,14 @@
 | ------ | ------ | --------- |
 | STIPOALUNO | CODTIPOALUNO | DESCRICAO |
 
+# SWEBMATERIALSEC
+
+## IDTIPOMATERIAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| EWEBTIPOMATERIAL | IDTIPOMATERIAL | DESCRICAO |
+
 # TLOTEPRD
 
 ## IDSTATUS
@@ -558,6 +638,30 @@
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
 
+# DFILTROOPERACAO
+
+## IDTIPOAPLFIN
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+
+# DFILTROTRIBUTO
+
+## IDTIPOAPLFIN
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+
+# EALUBOLSA
+
+## CODBOL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ETIPOBOLS | CODBOLSA | DESCRICAO |
+
 # EALUNOS
 
 ## STATUS
@@ -565,6 +669,30 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | ESTATUS | STALU | STDESC |
+
+# EALUOCOR
+
+## CODOCORRENCIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ETIPOOCOR | CODTIPOCOR | DESCRICAO |
+
+# ECFGBOLSAIRMAOS
+
+## CODBOL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ETIPOBOLS | CODBOLSA | DESCRICAO |
+
+# ECONCESSAOBOLSA
+
+## CODBOL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ETIPOBOLS | CODBOLSA | DESCRICAO |
 
 # EMATRICPL
 
@@ -580,6 +708,20 @@
 | ------ | ------ | --------- |
 | ESITMAT | CODSITMAT | DESCRICAO |
 
+## TIPMAT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ETIPOMAT | CODTIPMAT | DESCRICAO |
+
+# EMODCONTR
+
+## CODBOL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ETIPOBOLS | CODBOLSA | DESCRICAO |
+
 # EMOVMATRI
 
 ## STATUS
@@ -587,6 +729,46 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | ESITMAT | CODSITMAT | DESCRICAO |
+
+# EPROFOCOR
+
+## CODOCORRENCIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ETIPOOCOR | CODTIPOCOR | DESCRICAO |
+
+# EPROTOCOLOS
+
+## CODTIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ETIPOPROT | CODTIPO | DESCRICAO |
+
+# EWEBMATERIALSEC
+
+## IDTIPOMATERIAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| EWEBTIPOMATERIAL | IDTIPOMATERIAL | DESCRICAO |
+
+# FAPLFIN
+
+## IDTIPOAPLFIN
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+
+# FAPLFINCONTA
+
+## IDTIPOAPLFIN
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
 
 # FCFO
 
@@ -640,6 +822,30 @@
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
 
+# FTIPOAPLFINCOMPL
+
+## IDTIPOAPLFIN
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+
+# FTIPOAPLFINCONT
+
+## IDAPLFIN
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+
+# FTIPOAPLFINCTB
+
+## IDTIPOAPLFIN
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| FTIPOAPLFIN | IDTIPOAPLFIN | DESCRICAO |
+
 # GFILIAL
 
 ## TIPOBAIRRO
@@ -653,6 +859,78 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
+
+# HACAO
+
+## CODTIPOACAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| HTIPOACAO | CODTIPOACAO | TITULO |
+
+# HACAORESULTADO
+
+## CODTIPOACAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| HTIPOACAO | CODTIPOACAO | TITULO |
+
+# HATENDENTE
+
+## CODTIPOATENDENTE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| HTIPOATENDENTE | CODTIPOATENDENTE | TITULO |
+
+# HCAMPTIPOACAO
+
+## CODTIPOACAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| HTIPOACAO | CODTIPOACAO | TITULO |
+
+# HESQUEMAREPASSETIPOATEND
+
+## CODTIPOATENDENTE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| HTIPOATENDENTE | CODTIPOATENDENTE | TITULO |
+
+# HEVENTOS
+
+## CODTIPOEVENTO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| HTIPOEVENTO | CODTIPOEVENTO | TITULO |
+
+# HPROCESSOS
+
+## CODTIPOPROCESSO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| HTIPOPROCESSOS | CODTIPOPROCESSO | TITULO |
+
+# HRECCATALOGO
+
+## CODTIPOMIDIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| HTIPOMIDIA | CODTIPOMIDIA | TITULO |
+
+# HTIPOATENDIMENTO
+
+## IDDLL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| HSERVICODOTIPOATENDIMENTO | IDDLL | TITULO |
 
 # SPSPARAMETROPS
 
@@ -721,4 +999,20 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | XXSITUACAOPARCELA | CODTIPOSITPARC | DSCSITPARC |
+
+# UPROCEDPROT
+
+## CODTIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ETIPOPROT | CODTIPO | DESCRICAO |
+
+# UPROTOCOLOS
+
+## CODTIPO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ETIPOPROT | CODTIPO | DESCRICAO |
 

@@ -38,7 +38,7 @@ Para cada tabela dependente que ainda não exista no mapeamento, adicione:
 
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
-| <TABELA_ORIGEM> | <COLUNA_ORIGEM> | DESCRICAO |
+| <TABELA_ORIGEM> | <COLUNA_DESTINO> | DESCRICAO |
 ```
 
 ### 5. Finalizar
