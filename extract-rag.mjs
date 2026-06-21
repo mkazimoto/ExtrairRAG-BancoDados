@@ -79,6 +79,8 @@ const CONFIG = {
   semDesativadas: false,      // true com --sem-desativadas
   // ── Colunas desativadas ─────────────────────────────────
   colunasDesativadas: './regras-script-extract-rag/colunas-desativadas.md',
+  // ── Override de descrições ──────────────────────────────
+  tabelasDescricao: './regras-script-extract-rag/tabelas-descricao.md',
 };
 
 // ─── Parse de argumentos CLI ─────────────────────────────────────────────────
@@ -342,6 +344,54 @@ function carregarColunasDesativadas() {
   return resultado;
 }
 
+// ─── Override de Descrições (tabelas-descricao.md) ──────────────────────────
+
+/**
+ * Parseia o arquivo tabelas-descricao.md e retorna um Map
+ * onde a chave é o nome da tabela (upper case) e o valor é a descrição.
+ *
+ * Formato esperado:
+ *   # NOMETABELA
+ *
+ *   Descrição da tabela
+ */
+function carregarDescricoesTabelas() {
+  const filePath = mcpResolve(CONFIG.tabelasDescricao);
+  if (!existsSync(filePath)) {
+    return new Map();
+  }
+
+  const content = readFileSync(filePath, 'utf-8');
+  const lines = content.split(/\r?\n/);
+  const resultado = new Map();
+  let tabelaAtual = null;
+  const descLines = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    const tableMatch = trimmed.match(/^#\s+(\S+)/);
+    if (tableMatch) {
+      // Salva descrição anterior antes de mudar de tabela
+      if (tabelaAtual && descLines.length > 0) {
+        resultado.set(tabelaAtual, descLines.join(' ').trim());
+      }
+      tabelaAtual = tableMatch[1].toUpperCase();
+      descLines.length = 0;
+      continue;
+    }
+    // Coleta linhas de descrição
+    if (tabelaAtual && trimmed) {
+      descLines.push(trimmed);
+    }
+  }
+  // Última tabela do arquivo
+  if (tabelaAtual && descLines.length > 0) {
+    resultado.set(tabelaAtual, descLines.join(' ').trim());
+  }
+
+  return resultado;
+}
+
 // ─── Conexão SQL Server ───────────────────────────────────────────────────────
 
 let pool = null;
@@ -598,6 +648,20 @@ async function batchFetchAndSave(tables) {
       AND  TABELA IN (${inClause})
   `);
   console.log(`${allDescs.length} linhas`);
+
+  // Aplica overrides de descrição do arquivo tabelas-descricao.md
+  const descricoesOverride = carregarDescricoesTabelas();
+  if (descricoesOverride.size > 0) {
+    const descsMap = new Map(allDescs.map(d => [d.TABELA.toUpperCase(), d]));
+    for (const [tabela, descricao] of descricoesOverride) {
+      if (descsMap.has(tabela)) {
+        descsMap.get(tabela).DESCRICAO = descricao;
+      } else {
+        allDescs.push({ TABELA: tabela, DESCRICAO: descricao, APLICACOES: null });
+      }
+    }
+    console.log(`  → ${descricoesOverride.size} descrição(ões) sobrescrita(s) via tabelas-descricao.md`);
+  }
 
   // Query 3 — FKs de saída (estas tabelas → outras)
   process.stdout.write('  [3/4] FKs de saída...       ');
