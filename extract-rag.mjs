@@ -434,6 +434,16 @@ async function main() {
   console.log(`  Cache     : ${mcpResolve(CONFIG.cacheDb)}`);
   console.log('───────────────────────────────────────────────────\n');
 
+  // 0. Apaga o cache SQLite anterior (e arquivos WAL/SHM)
+  const dbPath = mcpResolve(CONFIG.cacheDb);
+  for (const ext of ['', '-wal', '-shm']) {
+    const p = dbPath + ext;
+    if (existsSync(p)) {
+      unlinkSync(p);
+      console.log(`  Cache removido: ${p}`);
+    }
+  }
+
   // 1. Abre o cache SQLite
   initSqlite();
 
