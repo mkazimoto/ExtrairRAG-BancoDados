@@ -2356,12 +2356,6 @@
 
 # EALUNOS
 
-## STATUS
-
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| ESTATUS | STALU | STDESC |
-
 ## TIPOALUNO
 
 | Tabela | Codigo | Descricao |
