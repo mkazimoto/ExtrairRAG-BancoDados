@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 import { MODULES, type ColumnInfo, type ForeignKey, type TableDetail, type TableSummary } from '../types.js';
@@ -10,6 +10,23 @@ const CACHE_FILE = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:
 
 /** Cache em memória dos índices e detalhes de tabelas */
 let tableIndex: TableSummary[] | null = null;
+let indexMtime = 0;
+const INDEX_TTL_MS = 60_000;
+
+/** Cache LRU para detalhes de tabelas (max 200 entradas) */
+const DETAIL_CACHE_MAX = 200;
+const detailCache = new Map<string, { detail: TableDetail; mtime: number }>();
+const rawMarkdownCache = new Map<string, { content: string; mtime: number }>();
+
+/** Cache LRU para conteúdos de arquivos .rules.md */
+const rulesContentCache = new Map<string, { content: string; mtime: number }>();
+const RULES_CONTENT_CACHE_MAX = 100;
+
+/** Set de tabelas que possuem .rules.md (pré-carregado) */
+let rulesTableSet: Set<string> | null = null;
+
+/** Cache para getDbIndexMarkdown */
+let dbIndexCache: { content: string; mtime: number } | null = null;
 
 /** Instância lazy do SQLite de cache (somente leitura) */
 let cacheDb: DatabaseSync | null | undefined;
@@ -36,14 +53,15 @@ export function getModule(tableName: string): string {
 
 /**
  * Carrega o índice de tabelas a partir do db-index.md.
- * O resultado é cacheado em memória.
+ * O resultado é cacheado em memória com verificação de mtime.
  */
 export function loadTableIndex(): TableSummary[] {
-  if (tableIndex) return tableIndex;
-
-  if (!existsSync(INDEX_FILE)) {
+  const stat = statSync(INDEX_FILE, { throwIfNoEntry: false });
+  if (!stat) {
     throw new Error(`Arquivo de índice não encontrado: ${INDEX_FILE}`);
   }
+
+  if (tableIndex && stat.mtimeMs <= indexMtime) return tableIndex;
 
   const content = readFileSync(INDEX_FILE, 'utf-8');
   const rows: TableSummary[] = [];
@@ -62,6 +80,7 @@ export function loadTableIndex(): TableSummary[] {
   }
 
   tableIndex = rows;
+  indexMtime = stat.mtimeMs;
   return rows;
 }
 
@@ -282,6 +301,7 @@ export function listTablesByModule(module: string, limit = 50, offset = 0): { it
 
 /**
  * Carrega os detalhes de uma tabela específica a partir do arquivo .md.
+ * Utiliza cache LRU em memória com verificação de mtime.
  */
 export function getTableDetail(tableName: string): TableDetail {
   const upper = tableName.toUpperCase();
@@ -291,12 +311,30 @@ export function getTableDetail(tableName: string): TableDetail {
     throw new Error(`Documentação não encontrada para a tabela: ${upper}`);
   }
 
+  const fileStat = statSync(filePath);
+  const cached = detailCache.get(upper);
+  if (cached && fileStat.mtimeMs <= cached.mtime) {
+    // Move para o fim (LRU: mais recente)
+    detailCache.delete(upper);
+    detailCache.set(upper, cached);
+    return cached.detail;
+  }
+
   const raw = readFileSync(filePath, 'utf-8');
-  return parseTableMarkdown(upper, raw);
+  const detail = parseTableMarkdown(upper, raw);
+
+  detailCache.set(upper, { detail, mtime: fileStat.mtimeMs });
+  if (detailCache.size > DETAIL_CACHE_MAX) {
+    const oldest = detailCache.keys().next().value!;
+    detailCache.delete(oldest);
+  }
+
+  return detail;
 }
 
 /**
  * Retorna o conteúdo raw (markdown) do arquivo de uma tabela.
+ * Utiliza cache LRU em memória com verificação de mtime.
  */
 export function getTableRawMarkdown(tableName: string): string {
   const upper = tableName.toUpperCase();
@@ -304,35 +342,86 @@ export function getTableRawMarkdown(tableName: string): string {
   if (!existsSync(filePath)) {
     throw new Error(`Documentação não encontrada para a tabela: ${upper}`);
   }
-  return readFileSync(filePath, 'utf-8');
+
+  const fileStat = statSync(filePath);
+  const cached = rawMarkdownCache.get(upper);
+  if (cached && fileStat.mtimeMs <= cached.mtime) {
+    rawMarkdownCache.delete(upper);
+    rawMarkdownCache.set(upper, cached);
+    return cached.content;
+  }
+
+  const content = readFileSync(filePath, 'utf-8');
+  rawMarkdownCache.set(upper, { content, mtime: fileStat.mtimeMs });
+  if (rawMarkdownCache.size > DETAIL_CACHE_MAX) {
+    const oldest = rawMarkdownCache.keys().next().value!;
+    rawMarkdownCache.delete(oldest);
+  }
+
+  return content;
 }
 
 /**
  * Retorna o conteúdo do arquivo de regras de uma tabela (<TABELA>.rules.md), ou null se não existir.
+ * Utiliza cache LRU em memória com verificação de mtime.
  */
 export function getTableRules(tableName: string): string | null {
   const upper = tableName.toUpperCase();
   const filePath = join(DOCS_DIR, `${upper}.rules.md`);
   if (!existsSync(filePath)) return null;
-  return readFileSync(filePath, 'utf-8');
+
+  const fileStat = statSync(filePath);
+  const cached = rulesContentCache.get(upper);
+  if (cached && fileStat.mtimeMs <= cached.mtime) {
+    rulesContentCache.delete(upper);
+    rulesContentCache.set(upper, cached);
+    return cached.content;
+  }
+
+  const content = readFileSync(filePath, 'utf-8');
+  rulesContentCache.set(upper, { content, mtime: fileStat.mtimeMs });
+  if (rulesContentCache.size > RULES_CONTENT_CACHE_MAX) {
+    const oldest = rulesContentCache.keys().next().value!;
+    rulesContentCache.delete(oldest);
+  }
+
+  return content;
 }
 
 /**
  * Verifica se existe arquivo de regras para a tabela sem ler seu conteúdo.
+ * Utiliza Set pré-carregado para evitar existsSync repetido.
  */
 export function hasTableRules(tableName: string): boolean {
-  const upper = tableName.toUpperCase();
-  return existsSync(join(DOCS_DIR, `${upper}.rules.md`));
+  if (!rulesTableSet) {
+    rulesTableSet = new Set(
+      existsSync(DOCS_DIR)
+        ? readdirSync(DOCS_DIR)
+            .filter(f => f.endsWith('.rules.md'))
+            .map(f => f.replace(/\.rules\.md$/, ''))
+        : []
+    );
+  }
+  return rulesTableSet.has(tableName.toUpperCase());
 }
 
 /**
  * Retorna o conteúdo do db-index.md.
+ * Utiliza cache em memória com verificação de mtime.
  */
 export function getDbIndexMarkdown(): string {
-  if (!existsSync(INDEX_FILE)) {
+  const stat = statSync(INDEX_FILE, { throwIfNoEntry: false });
+  if (!stat) {
     throw new Error(`Arquivo de índice não encontrado: ${INDEX_FILE}`);
   }
-  return readFileSync(INDEX_FILE, 'utf-8');
+
+  if (dbIndexCache && stat.mtimeMs <= dbIndexCache.mtime) {
+    return dbIndexCache.content;
+  }
+
+  const content = readFileSync(INDEX_FILE, 'utf-8');
+  dbIndexCache = { content, mtime: stat.mtimeMs };
+  return content;
 }
 
 /**
