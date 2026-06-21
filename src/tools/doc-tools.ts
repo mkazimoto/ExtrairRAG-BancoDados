@@ -113,62 +113,6 @@ Importante:
     },
   );
 
-//   // ── totvs_list_tables_by_module ───────────────────────────────────────────
-//   server.registerTool(
-//     'totvs_list_tables_by_module',
-//     {
-//       title: 'Listar Tabelas por Módulo TOTVS RM',
-//       description: `Lista todas as tabelas de um módulo específico do ERP TOTVS RM.
-
-// Cada módulo é identificado por uma letra prefixo no nome da tabela:
-// - P → TOTVS Folha de Pagamento (ex: PFUNC, PPESSOA, PCONTRATACAO)
-// - F → TOTVS Gestão Financeira (ex: FCFO, FTIT, FLAN)
-// - T → TOTVS Gestão de Estoque, Compras e Faturamento (ex: TITMMOV, TMOV, TPRD)
-// - C → TOTVS Gestão Contábil (ex: CCUSTO, CCONTAB)
-// - V → TOTVS Gestão de Pessoas (ex: VFUNC, VHISTCARGO)
-// - S → TOTVS Educacional
-// - E → Ensino Básico
-// - M → TOTVS Construção e Projetos
-// (e demais módulos)
-
-// Args:
-//   - module_prefix (string): Letra prefixo do módulo (ex: "P", "F", "T")
-//   - limit (number): Máximo de resultados (padrão: 50, máx: 200)
-//   - offset (number): Deslocamento para paginação (padrão: 0)`,
-//       inputSchema: {
-//         module_prefix: z.string().length(1).describe('Letra prefixo do módulo (ex: P, F, T, C, V)'),
-//         limit: z.number().int().min(1).max(200).default(50).describe('Máximo de resultados'),
-//         offset: z.number().int().min(0).default(0).describe('Deslocamento para paginação'),
-//      },
-//       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-//     },
-//     async ({ module_prefix, limit, offset }) => {
-//       const prefix = module_prefix.toUpperCase();
-//       const moduleName = MODULES[prefix] ?? `Módulo '${prefix}' não identificado`;
-//       const result = listTablesByModule(prefix, limit, offset);
-
-//       if (result.items.length === 0) {
-//         return { content: [{ type: 'text', text: `Nenhuma tabela encontrada para o módulo: ${prefix}` }] };
-//       }
-
-//       const lines = [
-//         `# Módulo: ${moduleName} (${prefix})`,
-//         '',
-//         `**Total de tabelas:** ${result.total} (exibindo ${result.items.length})`,
-//         '',
-//         '| Tabela | Descrição |',
-//         '|--------|-----------|',
-//         ...result.items.map((t: TableSummary) => `| \`${t.name}\` | ${t.description} |`),
-//       ];
-
-//       if (result.total > offset + result.items.length) {
-//         lines.push('', `> Use offset=${offset + result.items.length} para ver mais.`);
-//       }
-
-//       return { content: [{ type: 'text', text: lines.join('\n') }] };
-//     },
-//   );
-
   // ── totvs_list_modules ────────────────────────────────────────────────────
   server.registerTool(
     'totvs_list_modules',
@@ -220,26 +164,4 @@ Returns:
       return { content: [{ type: 'text', text: rules }] };
     },
   );
-
-//   // ── totvs_get_db_index ────────────────────────────────────────────────────
-//   server.registerTool(
-//     'totvs_get_db_index',
-//     {
-//       title: 'Obter Índice do Banco de Dados TOTVS RM',
-//       description: `Retorna o índice completo de tabelas do banco de dados ERP TOTVS RM em formato markdown.
-
-// AVISO: Este arquivo é grande (8000+ tabelas). Use apenas quando precisar de uma visão geral completa.
-// Para buscas específicas, prefira totvs_search_tables ou totvs_list_tables_by_module.`,
-//       inputSchema: {},
-//       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-//     },
-//     async () => {
-//       try {
-//         const content = getDbIndexMarkdown();
-//         return { content: [{ type: 'text', text: content }] };
-//       } catch (err) {
-//         return { content: [{ type: 'text', text: (err as Error).message }] };
-//       }
-//     },
-//);
 }

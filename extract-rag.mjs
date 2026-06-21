@@ -192,7 +192,7 @@ function toDb(v) {
   if (v === undefined || v === null) return null;
   if (typeof v === 'boolean')       return v ? 1 : 0;
   if (v instanceof Date)            return v.toISOString();
-  if (typeof v === 'bigint')        return Number(v);
+  // BigInt é suportado nativamente pelo node:sqlite (Node 22.5+)
   if (typeof v === 'object')        return String(v);
   return v;
 }
@@ -1215,7 +1215,7 @@ async function runGenerateIndex() {
           NUMERIC_PRECISION:        c.num_precision,
           NUMERIC_SCALE:            c.num_scale,
         }),
-        isPk:  c.is_pk === 1,
+        isPk:  !!c.is_pk,
         desc:  c.gdic_descricao ?? '',
       })),
     };
