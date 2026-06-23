@@ -238,3 +238,40 @@ describe('docs-reader — searchTables plural tokens', () => {
     expect(flan!.score).toBeGreaterThan(dlanfin!.score);
   });
 });
+
+describe('docs-reader — searchTables locação de imóvel', () => {
+  let docReader: typeof import('../src/services/docs-reader.js');
+
+  const locacaoIndex = [
+    '| `XALGCONTRATOLOC` | Contrato de Locação / Aluguel de Imóvel |',
+    '| `XALGCONTRATOLOCIMOVEL` | Imóvel do contrato de locação |',
+    '| `XALGCONTRATOLOCADIT` | Aditivo do contrato de locação |',
+    '| `XALGCONTRATOLOCLOCATARIO` | Locatário do contrato de locação |',
+    '| `XALGIMOVEL` | Imóvel do Contrato de Locação / Aluguel |',
+    '| `XALGCONTRATOLOCALGDOBRO` | Tabela do Aluguel em Dobro |',
+  ].join('\n');
+
+  beforeEach(async () => {
+    vi.resetModules();
+    vi.clearAllMocks();
+
+    (statSync as ReturnType<typeof vi.fn>).mockReturnValue({
+      mtimeMs: Date.now(),
+      isFile: () => true,
+    });
+    (existsSync as ReturnType<typeof vi.fn>).mockReturnValue(true);
+    (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue(locacaoIndex);
+
+    docReader = await import('../src/services/docs-reader.js');
+  });
+
+  it('deve retornar XALGCONTRATOLOC nos resultados ao buscar "locacao de imovel"', () => {
+    const result = docReader.searchTables('locacao de imovel', 20);
+
+    const contratoLoc = result.items.find(t => t.name === 'XALGCONTRATOLOC');
+    expect(contratoLoc).toBeDefined();
+
+    // XALGCONTRATOLOC deve aparecer na primeira página (top 20)
+    expect(result.items.slice(0, 20).some(t => t.name === 'XALGCONTRATOLOC')).toBe(true);
+  });
+});
