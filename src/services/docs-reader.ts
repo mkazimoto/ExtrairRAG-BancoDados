@@ -270,6 +270,12 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
       const desc = normalizePhonetic(t.description);
       const mod = normalizeModule(t.module);
       let score = 0;
+      // Rastreia palavras que deram match como token na descrição
+      const descTokenMatches = new Set<string>();
+      // Pré-calcula tokens da descrição uma única vez
+      const descTokens = desc.split(/[^a-z0-9]+/).filter(Boolean);
+      const descTokenSet = new Set(descTokens);
+
       for (const word of words) {
         const wordPlain = word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         // Módulo: match exato +10, bigrama proporcional como fallback
@@ -286,7 +292,7 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
           const sim = maxBigramSim(word, name);
           if (sim >= BIGRAM_THRESHOLD) score += Math.round(sim * 3);
         }
-        // Descrição: match exato +3, bigrama proporcional como fallback
+        // Descrição: match exato +3 (+8 se for token isolado), bigrama proporcional como fallback
         if (desc.includes(word)) {
           // Se a descrição normalizada (sem 's' final) é essencialmente a
           // própria palavra consultada, a tabela É sobre esse conceito — +15
@@ -295,14 +301,25 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
             : desc;
           if (descSingular === word) {
             score += 15;
+            descTokenMatches.add(word);
+          } else if (descTokenSet.has(word)) {
+            score += 8; // match como token → pontuação média-alta
+            descTokenMatches.add(word);
           } else {
-            score += 3;
+            score += 3; // match como substring → pontuação baixa
           }
         } else {
           const sim = maxBigramSim(word, desc);
           if (sim >= BIGRAM_THRESHOLD) score += Math.round(sim * 1);
         }
       }
+
+      // Bônus: se TODAS as palavras pesquisadas aparecem como tokens na descrição,
+      // a tabela cobre o conceito completo da consulta
+      if (descTokenMatches.size === words.length && words.length > 1) {
+        score += 5;
+      }
+
       return { ...t, score };
     })
     .filter(t => t.score > 0)
