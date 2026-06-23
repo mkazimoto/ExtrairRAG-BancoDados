@@ -40,7 +40,7 @@ function getParser(): TsqlParser {
  * OPTION (MAXRECURSION N, RECOMPILE, OPTIMIZE FOR UNKNOWN, …)
  * que é específica do T-SQL. Esta função as remove antes da validação.
  */
-function stripOptionClauses(sql: string): string {
+export function stripOptionClauses(sql: string): string {
   let result = sql.trimEnd();
 
   // OPTION (...) seguido opcionalmente de comentário (-- ou /* */) e/ou ;
@@ -64,7 +64,7 @@ function stripOptionClauses(sql: string): string {
  * Antes de validar, remove automaticamente cláusulas OPTION (...)
  * do final da consulta, pois não são suportadas pelo parser PEG.js.
  */
-function validateSqlSyntax(sqlQuery: string): {
+export function validateSqlSyntax(sqlQuery: string): {
   isValid: boolean;
   message: string;
   errorDetails?: string;

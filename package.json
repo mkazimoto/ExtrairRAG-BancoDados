@@ -10,7 +10,9 @@
     "start:stdio": "node --env-file=.env --env-file=dist/.env dist/index.js",
     "start:http": "node --env-file=.env --env-file=dist/.env dist/index.js",
     "dev": "tsc --watch",
-    "extract": "node --no-warnings=ExperimentalWarning --env-file=.env extract-rag.mjs"
+    "extract": "node --no-warnings=ExperimentalWarning --env-file=.env extract-rag.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -26,6 +28,8 @@
     "@types/express": "^5.0.6",
     "@types/mssql": "^9.1.5",
     "@types/node": "^22.0.0",
-    "typescript": "^5.8.0"
+    "@vitest/coverage-v8": "^4.1.9",
+    "typescript": "^5.8.0",
+    "vitest": "^4.1.9"
   }
 }
