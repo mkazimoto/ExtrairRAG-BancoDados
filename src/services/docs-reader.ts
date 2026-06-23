@@ -275,6 +275,14 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
       // Pré-calcula tokens da descrição uma única vez
       const descTokens = desc.split(/[^a-z0-9]+/).filter(Boolean);
       const descTokenSet = new Set(descTokens);
+      // Adiciona forma singular (sem 's' final) para match com palavras
+      // na query que foram singularizadas (ex: "lancamentos"→"lancamento",
+      // "financeiros"→"financeiro")
+      for (const token of descTokens) {
+        if (token.endsWith('s') && token.length > 2) {
+          descTokenSet.add(token.slice(0, -1));
+        }
+      }
 
       for (const word of words) {
         const wordPlain = word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');

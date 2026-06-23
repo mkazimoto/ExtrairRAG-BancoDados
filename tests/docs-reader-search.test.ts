@@ -184,3 +184,57 @@ describe('docs-reader — searchTables com cache SQLite', () => {
     expect(result.items.length).toBeGreaterThan(0);
   });
 });
+
+describe('docs-reader — searchTables plural tokens', () => {
+  let docReader: typeof import('../src/services/docs-reader.js');
+
+  const financeIndex = [
+    '| `FLAN` | Lançamentos / Títulos Financeiros |',
+    '| `DLANFIN` | Dados Fiscais do Lançamento Financeiro |',
+    '| `CLANCAMENTO` | Lançamentos Contábeis |',
+    '| `DLAF` | Lançamentos Fiscais |',
+    '| `FINTEGRACAOBOLETOLAN` | Boleto/Lançamento da transação com cartão |',
+  ].join('\n');
+
+  beforeEach(async () => {
+    vi.resetModules();
+    vi.clearAllMocks();
+
+    (statSync as ReturnType<typeof vi.fn>).mockReturnValue({
+      mtimeMs: Date.now(),
+      isFile: () => true,
+    });
+    (existsSync as ReturnType<typeof vi.fn>).mockReturnValue(true);
+    (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue(financeIndex);
+
+    docReader = await import('../src/services/docs-reader.js');
+  });
+
+  it('deve tratar token plural da descrição como match de token (+8) quando query está no singular', () => {
+    // CLANCAMENTO tem desc "Lançamentos Contábeis" — token "lancamentos" (plural)
+    // A query "lancamento" (singular) deve reconhecer "lancamentos" como token
+    // via singularização, ganhando +8 em vez de apenas +3 por substring
+    const result = docReader.searchTables('lancamento');
+    const clancamento = result.items.find(t => t.name === 'CLANCAMENTO');
+    expect(clancamento).toBeDefined();
+    // CLANCAMENTO não tem match no módulo (C=contábil) nem no nome,
+    // então o score mínimo esperado é 8 (token match na descrição)
+    expect(clancamento!.score).toBeGreaterThanOrEqual(8);
+  });
+
+  it('deve priorizar FLAN sobre DLANFIN ao buscar "lançamento financeiro"', () => {
+    // FLAN (desc "Lançamentos / Títulos Financeiros") é a tabela principal
+    // de lançamentos financeiros e deve ter score maior que DLANFIN
+    // (desc "Dados Fiscais do Lançamento Financeiro")
+    const result = docReader.searchTables('lançamento financeiro', 20);
+
+    const flan = result.items.find(t => t.name === 'FLAN');
+    const dlanfin = result.items.find(t => t.name === 'DLANFIN');
+
+    expect(flan).toBeDefined();
+    expect(dlanfin).toBeDefined();
+
+    // FLAN deve ter score maior que DLANFIN
+    expect(flan!.score).toBeGreaterThan(dlanfin!.score);
+  });
+});
