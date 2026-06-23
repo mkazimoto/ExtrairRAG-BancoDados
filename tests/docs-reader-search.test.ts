@@ -49,6 +49,7 @@ describe('docs-reader — searchTables', () => {
       isFile: () => true,
     });
     (existsSync as ReturnType<typeof vi.fn>).mockReturnValue(true);
+    (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue([]);
     (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue(sampleIndex);
 
     docReader = await import('../src/services/docs-reader.js');
@@ -62,6 +63,12 @@ describe('docs-reader — searchTables', () => {
     const pfunc = result.items.find(t => t.name === 'PFUNC');
     expect(pfunc).toBeDefined();
     expect(pfunc!.score).toBeGreaterThan(0);
+
+    // PFUNC (desc "Funcionários" = conceito exato) deve ter
+    // tanto peso quanto VFUNCIONARIO (nome "VFUNCIONARIO" + desc "Tabela de Funcionários")
+    const vfunc = result.items.find(t => t.name === 'VFUNCIONARIO');
+    expect(vfunc).toBeDefined();
+    expect(pfunc!.score).toBeGreaterThanOrEqual(vfunc!.score);
   });
 
   it('deve priorizar tabela com nome exato sobre descrição', () => {
@@ -173,6 +180,7 @@ describe('docs-reader — searchTables com cache SQLite', () => {
       isFile: () => true,
     });
     (existsSync as ReturnType<typeof vi.fn>).mockReturnValue(true);
+    (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue([]);
     (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue(sampleIndex);
 
     docReader = await import('../src/services/docs-reader.js');
@@ -205,6 +213,7 @@ describe('docs-reader — searchTables plural tokens', () => {
       isFile: () => true,
     });
     (existsSync as ReturnType<typeof vi.fn>).mockReturnValue(true);
+    (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue([]);
     (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue(financeIndex);
 
     docReader = await import('../src/services/docs-reader.js');
@@ -260,6 +269,7 @@ describe('docs-reader — searchTables locação de imóvel', () => {
       isFile: () => true,
     });
     (existsSync as ReturnType<typeof vi.fn>).mockReturnValue(true);
+    (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue([]);
     (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue(locacaoIndex);
 
     docReader = await import('../src/services/docs-reader.js');

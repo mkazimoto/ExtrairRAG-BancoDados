@@ -317,12 +317,13 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
         // Descrição: match exato +3 (+8 se for token isolado), bigrama proporcional como fallback
         if (desc.includes(word)) {
           // Se a descrição normalizada (sem 's' final) é essencialmente a
-          // própria palavra consultada, a tabela É sobre esse conceito — +15
+          // própria palavra consultada, a tabela É sobre esse conceito — +18
+          // (mesmo peso de nome exato +10 + token descrição +8)
           const descSingular = desc.endsWith('s') && desc.length > 2
             ? desc.slice(0, -1)
             : desc;
           if (descSingular === word) {
-            score += 15;
+            score += 18;
             descTokenMatches.add(word);
           } else if (descTokenSet.has(word)) {
             score += 8; // match como token → pontuação média-alta
@@ -339,6 +340,12 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
       // Bônus: se TODAS as palavras pesquisadas aparecem como tokens na descrição,
       // a tabela cobre o conceito completo da consulta
       if (descTokenMatches.size === words.length && words.length > 1) {
+        score += 5;
+      }
+
+      // Bônus: tabelas com regras documentadas (.rules.md) recebem +5
+      // pois tendem a ser tabelas de maior relevância no sistema
+      if (hasTableRules(t.name)) {
         score += 5;
       }
 
