@@ -354,17 +354,52 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
     .filter(t => t.score > 0)
     .sort((a, b) => b.score - a.score);
 
-  const primaryNames = new Set(primaryMatches.map(t => t.name));
-
   // Busca secundária: tabelas com colunas (nome ou descrição GDIC) que contenham a query
-  // Pontua pela quantidade de colunas que corresponderam
-  const columnMatches = searchColumnInCache(rawWords, primaryNames).map(t => ({
-    ...t,
-    score: t.matchedColumns?.length ?? 1,
-  }));
+  // Também inclui tabelas já encontradas no índice primário, pois o score de colunas
+  // pode ser superior (ex: PPESSOA com score 5 no índice mas muitas colunas relevantes).
+  // Pontua pela quantidade de colunas que corresponderam, com bônus quando
+  // alguma coluna cobre TODAS as palavras da consulta (ex: DTNASCIMENTO
+  // com GDIC "Data de Nascimento" para a query "Data de Nascimento").
+  // O bônus é aplicado uma única vez por tabela (não por coluna) para evitar
+  // beneficiar desproporcionalmente tabelas com muitas colunas repetitivas.
+  const columnMatches = searchColumnInCache(rawWords, new Set()).map(t => {
+    let score = t.matchedColumns?.length ?? 1;
+    let hasConceptMatch = false;
+    if (t.matchedColumns) {
+      for (const col of t.matchedColumns) {
+        const colDesc = col.description.toLowerCase();
+        const colName = col.name.toLowerCase();
+        // Verifica se esta coluna, combinando nome + descrição GDIC,
+        // contém TODAS as palavras da consulta (match semântico forte)
+        const combined = `${colName} ${colDesc}`;
+        if (rawWords.every(w => combined.includes(w))) {
+          hasConceptMatch = true;
+          break;
+        }
+      }
+    }
+    // Bônus único quando existe coluna que representa exatamente o conceito
+    // (nome+descrição contém todas as palavras da consulta)
+    if (hasConceptMatch) {
+      score += 20;
+    }
+    return { ...t, score };
+  });
 
-  // Combina e ordena o resultado final por relevância (score desc)
-  const combined = [...columnMatches, ...primaryMatches]
+  // Mescla resultados: para cada tabela, usa o maior score entre primário e colunas
+  const scoreMap = new Map<string, TableSummary>();
+  for (const t of primaryMatches) {
+    scoreMap.set(t.name, t);
+  }
+  for (const t of columnMatches) {
+    const existing = scoreMap.get(t.name);
+    if (!existing || (t.score ?? 0) > (existing.score ?? 0)) {
+      scoreMap.set(t.name, t);
+    }
+  }
+
+  // Ordena o resultado final por relevância (score desc)
+  const combined = [...scoreMap.values()]
     .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
 
   return {
