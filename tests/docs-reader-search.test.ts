@@ -86,6 +86,24 @@ describe('docs-reader — searchTables', () => {
     expect(vfunc!.score).toBeGreaterThanOrEqual(ppessoal!.score);
   });
 
+  it('deve dar +5 para tabelas com regras documentadas (.rules.md)', () => {
+    // Simula que PFUNC possui arquivo de regras
+    (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue(['PFUNC.rules.md']);
+
+    const result = docReader.searchTables('funcionario');
+
+    const pfunc = result.items.find(t => t.name === 'PFUNC');
+    const vfunc = result.items.find(t => t.name === 'VFUNCIONARIO');
+    expect(pfunc).toBeDefined();
+    expect(vfunc).toBeDefined();
+
+    // PFUNC tem regras (+5), VFUNCIONARIO não — PFUNC deve ter score maior
+    expect(pfunc!.score).toBeGreaterThan(vfunc!.score);
+
+    // A diferença deve ser exatamente 5 (mesmo score base = 18, +5 do bônus)
+    expect(pfunc!.score! - vfunc!.score!).toBe(5);
+  });
+
   it('deve retornar vazio para query sem correspondência', () => {
     const result = docReader.searchTables('xyzzy_nao_existe');
     expect(result.total).toBe(0);
