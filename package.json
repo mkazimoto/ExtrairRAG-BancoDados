@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --sourceMap false --declarationMap false",
     "start": "node --env-file=.env --env-file=dist/.env dist/index.js",
     "start:stdio": "node --env-file=.env --env-file=dist/.env dist/index.js",
     "start:http": "node --env-file=.env --env-file=dist/.env dist/index.js",
