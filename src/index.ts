@@ -12,7 +12,7 @@ import { registerSqlValidator } from './tools/sql-validator.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-const API_KEY = process.env.MCP_API_KEY ?? 'ed931c92-33db-4fdb-aa86-c78a236bf40e';
+const API_KEY = process.env.MCP_API_KEY ?? '';
 const TRANSPORT = (process.env.MCP_TRANSPORT ?? 'http').toLowerCase();
 
 /** Cria o servidor MCP com todas as ferramentas e recursos registrados */
@@ -78,7 +78,7 @@ async function startHttp(): Promise<void> {
   const app = express();
   app.use(express.json());
 
-  // Página de teste do MCP (sem autenticação — apenas UI local)
+  // Página de teste do MCP (sem auth — apenas UI local)
   app.get('/', (_req, res) => {
     const html = readFileSync(join(__dirname, '../mcp-test.html'), 'utf-8');
     res.setHeader('Content-Type', 'text/html; charset=utf-8');

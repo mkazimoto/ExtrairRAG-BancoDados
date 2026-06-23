@@ -2,13 +2,13 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import {
   getDbIndexMarkdown,
-  getTableDetail,
+  getTableRawMarkdown,
   getTableRules,
   hasTableRules,
   listTablesByModule,
   searchTables
 } from '../services/docs-reader.js';
-import { MODULES, ResponseFormat, type TableDetail, type TableSummary } from '../types.js';
+import { MODULES, ResponseFormat, type TableSummary } from '../types.js';
 
 /** Registra todas as ferramentas relacionadas à documentação de tabelas */
 export function registerDocTools(server: McpServer): void {
@@ -38,7 +38,7 @@ Exemplos:
         query: z.string().min(1).max(200).describe('Texto para buscar no nome ou descrição da tabela'),
         limit: z.number().int().min(1).max(100).default(20).describe('Máximo de resultados'),
         offset: z.number().int().min(0).default(0).describe('Deslocamento para paginação'),
-        phonetic: z.boolean().default(false).describe('Habilita busca fonética (ignora acentos e aplica equivalências sonoras do português). Padrão: true'),
+        phonetic: z.boolean().default(true).describe('Habilita busca fonética (ignora acentos e aplica equivalências sonoras do português). Padrão: true'),
       },
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     },
@@ -102,14 +102,12 @@ Importante:
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     },
     async ({ table_name }) => {
-      let detail: TableDetail;
       try {
-        detail = getTableDetail(table_name);
+        const raw = getTableRawMarkdown(table_name);
+        return { content: [{ type: 'text', text: raw }] };
       } catch (err) {
         return { content: [{ type: 'text', text: (err as Error).message }] };
       }
-
-      return { content: [{ type: 'text', text: detail.rawMarkdown }] };
     },
   );
 

@@ -1,38 +1,46 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
+import { fileURLToPath } from 'node:url';
 import { MODULES, type ColumnInfo, type ForeignKey, type TableDetail, type TableSummary } from '../types.js';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 /** Caminho base para a documentação de tabelas */
-const DOCS_DIR = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'), '..', '..', '..', 'docs', 'db', 'tables');
-const INDEX_FILE = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'), '..', '..', '..', 'ai', 'db-index.md');
-const CACHE_FILE = resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'), '..', '..', '..', 'docs', 'db', 'cache.sqlite');
+const DOCS_DIR = resolve(__dirname, '..', '..', 'docs', 'db', 'tables');
+const INDEX_FILE = resolve(__dirname, '..', '..', 'ai', 'db-index.md');
+const CACHE_FILE = resolve(__dirname, '..', '..', 'docs', 'db', 'cache.sqlite');
 
 /** Cache em memória dos índices e detalhes de tabelas */
 let tableIndex: TableSummary[] | null = null;
 let indexMtime = 0;
 const INDEX_TTL_MS = 60_000;
 
+/** Interface genérica para entradas de cache com verificação de mtime */
+interface CacheEntry<T> { value: T; mtime: number }
+
 /** Cache LRU para detalhes de tabelas (max 200 entradas) */
 const DETAIL_CACHE_MAX = 200;
-const detailCache = new Map<string, { detail: TableDetail; mtime: number }>();
-const rawMarkdownCache = new Map<string, { content: string; mtime: number }>();
+const detailCache = new Map<string, CacheEntry<TableDetail>>();
+const rawMarkdownCache = new Map<string, CacheEntry<string>>();
 
 /** Cache LRU para conteúdos de arquivos .rules.md */
-const rulesContentCache = new Map<string, { content: string; mtime: number }>();
+const rulesContentCache = new Map<string, CacheEntry<string>>();
 const RULES_CONTENT_CACHE_MAX = 100;
 
 /** Set de tabelas que possuem .rules.md (pré-carregado) */
 let rulesTableSet: Set<string> | null = null;
 
 /** Cache para getDbIndexMarkdown */
-let dbIndexCache: { content: string; mtime: number } | null = null;
+let dbIndexCache: CacheEntry<string> | null = null;
 
 /** Instância lazy do SQLite de cache (somente leitura) */
-let cacheDb: DatabaseSync | null | undefined;
+let cacheDb: DatabaseSync | null = null;
+let cacheDbInitialized = false;
 
 function getCacheDb(): DatabaseSync | null {
-  if (cacheDb !== undefined) return cacheDb;
+  if (cacheDbInitialized) return cacheDb;
+  cacheDbInitialized = true;
   if (!existsSync(CACHE_FILE)) { cacheDb = null; return null; }
   try {
     cacheDb = new DatabaseSync(CACHE_FILE);
@@ -41,6 +49,34 @@ function getCacheDb(): DatabaseSync | null {
     cacheDb = null;
     return null;
   }
+}
+
+/**
+ * Helper genérico para cache LRU com verificação de mtime.
+ * Lê o arquivo via `reader(filePath)` apenas se o cache estiver expirado ou ausente.
+ * Gerencia evicção LRU quando o cache excede `maxSize`.
+ */
+function lruCachedGet<T>(
+  cache: Map<string, CacheEntry<T>>,
+  key: string,
+  filePath: string,
+  reader: (path: string) => T,
+  maxSize: number,
+): T {
+  const stat = statSync(filePath);
+  const cached = cache.get(key);
+  if (cached && stat.mtimeMs <= cached.mtime) {
+    cache.delete(key);
+    cache.set(key, cached);
+    return cached.value;
+  }
+  const value = reader(filePath);
+  cache.set(key, { value, mtime: stat.mtimeMs });
+  if (cache.size > maxSize) {
+    const oldest = cache.keys().next().value!;
+    cache.delete(oldest);
+  }
+  return value;
 }
 
 /**
@@ -189,7 +225,8 @@ function searchColumnInCache(
       module: getModule(tableName),
       matchedColumns: cols,
     }));
-  } catch {
+  } catch (err) {
+    process.stderr.write(`[ERRO] searchColumnInCache: ${err instanceof Error ? err.message : String(err)}\n`);
     return [];
   }
 }
@@ -224,7 +261,7 @@ export function searchTables(query: string, limit = 20, offset = 0, phonetic = t
     return { items: [], total: 0 };
   }
 
-  // Pesos: +10 por palavra no módulo, +3 por palavra no nome, +1 por palavra na descrição
+  // Pesos: +10 exato / sim*10 bigrama (módulo), +10 exato / sim*3 bigrama (nome), +3 exato / sim*1 bigrama (descrição)
   // O nome do módulo sempre usa normalização sem acentos para evitar falhas em queries sem acento
   const normalizeModule = (s: string) =>
     s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
@@ -247,14 +284,14 @@ export function searchTables(query: string, limit = 20, offset = 0, phonetic = t
           const sim = maxBigramSim(wordPlain, mod);
           if (sim >= BIGRAM_THRESHOLD) score += Math.round(sim * 10);
         }
-        // Nome: match exato +3, bigrama proporcional como fallback
+        // Nome: match exato +10, bigrama proporcional como fallback
         if (name.includes(word)) {
           score += 10;
         } else {
           const sim = maxBigramSim(word, name);
           if (sim >= BIGRAM_THRESHOLD) score += Math.round(sim * 3);
         }
-        // Descrição: match exato +1, bigrama proporcional como fallback
+        // Descrição: match exato +3, bigrama proporcional como fallback
         if (desc.includes(word)) {
           score += 3;
         } else {
@@ -311,25 +348,13 @@ export function getTableDetail(tableName: string): TableDetail {
     throw new Error(`Documentação não encontrada para a tabela: ${upper}`);
   }
 
-  const fileStat = statSync(filePath);
-  const cached = detailCache.get(upper);
-  if (cached && fileStat.mtimeMs <= cached.mtime) {
-    // Move para o fim (LRU: mais recente)
-    detailCache.delete(upper);
-    detailCache.set(upper, cached);
-    return cached.detail;
-  }
-
-  const raw = readFileSync(filePath, 'utf-8');
-  const detail = parseTableMarkdown(upper, raw);
-
-  detailCache.set(upper, { detail, mtime: fileStat.mtimeMs });
-  if (detailCache.size > DETAIL_CACHE_MAX) {
-    const oldest = detailCache.keys().next().value!;
-    detailCache.delete(oldest);
-  }
-
-  return detail;
+  return lruCachedGet(
+    detailCache,
+    upper,
+    filePath,
+    (path) => parseTableMarkdown(upper, readFileSync(path, 'utf-8')),
+    DETAIL_CACHE_MAX,
+  );
 }
 
 /**
@@ -339,26 +364,18 @@ export function getTableDetail(tableName: string): TableDetail {
 export function getTableRawMarkdown(tableName: string): string {
   const upper = tableName.toUpperCase();
   const filePath = join(DOCS_DIR, `${upper}.md`);
+
   if (!existsSync(filePath)) {
     throw new Error(`Documentação não encontrada para a tabela: ${upper}`);
   }
 
-  const fileStat = statSync(filePath);
-  const cached = rawMarkdownCache.get(upper);
-  if (cached && fileStat.mtimeMs <= cached.mtime) {
-    rawMarkdownCache.delete(upper);
-    rawMarkdownCache.set(upper, cached);
-    return cached.content;
-  }
-
-  const content = readFileSync(filePath, 'utf-8');
-  rawMarkdownCache.set(upper, { content, mtime: fileStat.mtimeMs });
-  if (rawMarkdownCache.size > DETAIL_CACHE_MAX) {
-    const oldest = rawMarkdownCache.keys().next().value!;
-    rawMarkdownCache.delete(oldest);
-  }
-
-  return content;
+  return lruCachedGet(
+    rawMarkdownCache,
+    upper,
+    filePath,
+    (path) => readFileSync(path, 'utf-8'),
+    DETAIL_CACHE_MAX,
+  );
 }
 
 /**
@@ -370,22 +387,13 @@ export function getTableRules(tableName: string): string | null {
   const filePath = join(DOCS_DIR, `${upper}.rules.md`);
   if (!existsSync(filePath)) return null;
 
-  const fileStat = statSync(filePath);
-  const cached = rulesContentCache.get(upper);
-  if (cached && fileStat.mtimeMs <= cached.mtime) {
-    rulesContentCache.delete(upper);
-    rulesContentCache.set(upper, cached);
-    return cached.content;
-  }
-
-  const content = readFileSync(filePath, 'utf-8');
-  rulesContentCache.set(upper, { content, mtime: fileStat.mtimeMs });
-  if (rulesContentCache.size > RULES_CONTENT_CACHE_MAX) {
-    const oldest = rulesContentCache.keys().next().value!;
-    rulesContentCache.delete(oldest);
-  }
-
-  return content;
+  return lruCachedGet(
+    rulesContentCache,
+    upper,
+    filePath,
+    (path) => readFileSync(path, 'utf-8'),
+    RULES_CONTENT_CACHE_MAX,
+  );
 }
 
 /**
@@ -416,11 +424,11 @@ export function getDbIndexMarkdown(): string {
   }
 
   if (dbIndexCache && stat.mtimeMs <= dbIndexCache.mtime) {
-    return dbIndexCache.content;
+    return dbIndexCache.value;
   }
 
   const content = readFileSync(INDEX_FILE, 'utf-8');
-  dbIndexCache = { content, mtime: stat.mtimeMs };
+  dbIndexCache = { value: content, mtime: stat.mtimeMs };
   return content;
 }
 
