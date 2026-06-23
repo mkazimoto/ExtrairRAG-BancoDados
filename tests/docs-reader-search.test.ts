@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { existsSync, readFileSync, statSync, readdirSync } from 'node:fs';
 
@@ -68,7 +70,7 @@ describe('docs-reader — searchTables', () => {
     // tanto peso quanto VFUNCIONARIO (nome "VFUNCIONARIO" + desc "Tabela de Funcionários")
     const vfunc = result.items.find(t => t.name === 'VFUNCIONARIO');
     expect(vfunc).toBeDefined();
-    expect(pfunc!.score).toBeGreaterThanOrEqual(vfunc!.score);
+    expect(pfunc!.score!).toBeGreaterThanOrEqual(vfunc!.score!);
   });
 
   it('deve priorizar tabela com nome exato sobre descrição', () => {
@@ -83,7 +85,7 @@ describe('docs-reader — searchTables', () => {
     expect(ppessoal).toBeDefined();
 
     // VFUNCIONARIO deve ter score maior que PPESSOAL
-    expect(vfunc!.score).toBeGreaterThanOrEqual(ppessoal!.score);
+    expect(vfunc!.score!).toBeGreaterThanOrEqual(ppessoal!.score!);
   });
 
   it('deve dar +5 para tabelas com regras documentadas (.rules.md)', () => {
@@ -98,7 +100,7 @@ describe('docs-reader — searchTables', () => {
     expect(vfunc).toBeDefined();
 
     // PFUNC tem regras (+5), VFUNCIONARIO não — PFUNC deve ter score maior
-    expect(pfunc!.score).toBeGreaterThan(vfunc!.score);
+    expect(pfunc!.score!).toBeGreaterThan(vfunc!.score!);
 
     // A diferença deve ser exatamente 5 (mesmo score base = 18, +5 do bônus)
     expect(pfunc!.score! - vfunc!.score!).toBe(5);
@@ -262,7 +264,7 @@ describe('docs-reader — searchTables plural tokens', () => {
     expect(dlanfin).toBeDefined();
 
     // FLAN deve ter score maior que DLANFIN
-    expect(flan!.score).toBeGreaterThan(dlanfin!.score);
+    expect(flan!.score!).toBeGreaterThan(dlanfin!.score!);
   });
 });
 

@@ -3,6 +3,8 @@
  * Valida que a busca por colunas (via cache) funciona com dados reais,
  * incluindo o bônus de conceito match (+20).
  */
+/// <reference types="node" />
+
 import { existsSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 
@@ -23,7 +25,7 @@ describe('docs-reader — searchTables Data de Nascimento (integração)', () =>
     // PPESSOA deve estar na primeira página (top 20)
     const ppessoa = result.items.find(t => t.name === 'PPESSOA');
     expect(ppessoa).toBeDefined();
-    expect(result.items.indexOf(ppessoa)).toBeLessThan(20);
+    expect(result.items.indexOf(ppessoa!)).toBeLessThan(20);
 
     // PPESSOA deve ter matchedColumns incluindo DTNASCIMENTO
     expect(ppessoa!.matchedColumns).toBeDefined();
@@ -36,6 +38,6 @@ describe('docs-reader — searchTables Data de Nascimento (integração)', () =>
 
     // PPESSOA deve ter score maior que o número bruto de colunas correspondentes
     // (o bônus +20 por conceito match deve ser aplicado, então score > matchedColumns.length)
-    expect(ppessoa!.score).toBeGreaterThan(ppessoa!.matchedColumns!.length);
+    expect(ppessoa!.score!).toBeGreaterThan(ppessoa!.matchedColumns!.length);
   });
 });
