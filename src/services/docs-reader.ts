@@ -231,13 +231,8 @@ function searchColumnInCache(
   }
 }
 
-export function searchTables(query: string, limit = 20, offset = 0, phonetic = true): { items: TableSummary[]; total: number } {
+export function searchTables(query: string, limit = 20, offset = 0): { items: TableSummary[]; total: number } {
   const index = loadTableIndex();
-
-  // Normalização base (sempre remove acentos). Phonetic adiciona equivalências sonoras.
-  const normalizeBase = (s: string) =>
-    s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  const normalize = phonetic ? normalizePhonetic : normalizeBase;
 
   // Palavras irrelevantes (stopwords) a serem ignoradas na busca
   const STOPWORDS = new Set(['/', '-', 'p/', 'de', 'do', 'da', 'dos', 'das', 'por', 'para', 'pelo', 'pela', 'em', 'no', 'na', 'nos', 'nas', 'a', 'o', 'e', 'ao', 'ou', 'com', 'sem']);
@@ -250,9 +245,9 @@ export function searchTables(query: string, limit = 20, offset = 0, phonetic = t
 
   // words: normalização fonética (para busca no índice em memória)
   const words = rawWords.map(w => {
-    const normalized = normalize(w);
-    // Remove 's' final para lidar com plural (apenas na busca fonética)
-    return phonetic && normalized.endsWith('s') && normalized.length > 2
+    const normalized = normalizePhonetic(w);
+    // Remove 's' final para lidar com plural
+    return normalized.endsWith('s') && normalized.length > 2
       ? normalized.slice(0, -1)
       : normalized;
   });
@@ -271,8 +266,8 @@ export function searchTables(query: string, limit = 20, offset = 0, phonetic = t
 
   const primaryMatches = index
     .map(t => {
-      const name = normalize(t.name);
-      const desc = normalize(t.description);
+      const name = normalizePhonetic(t.name);
+      const desc = normalizePhonetic(t.description);
       const mod = normalizeModule(t.module);
       let score = 0;
       for (const word of words) {
@@ -293,7 +288,16 @@ export function searchTables(query: string, limit = 20, offset = 0, phonetic = t
         }
         // Descrição: match exato +3, bigrama proporcional como fallback
         if (desc.includes(word)) {
-          score += 3;
+          // Se a descrição normalizada (sem 's' final) é essencialmente a
+          // própria palavra consultada, a tabela É sobre esse conceito — +15
+          const descSingular = desc.endsWith('s') && desc.length > 2
+            ? desc.slice(0, -1)
+            : desc;
+          if (descSingular === word) {
+            score += 15;
+          } else {
+            score += 3;
+          }
         } else {
           const sim = maxBigramSim(word, desc);
           if (sim >= BIGRAM_THRESHOLD) score += Math.round(sim * 1);

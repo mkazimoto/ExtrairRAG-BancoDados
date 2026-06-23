@@ -38,12 +38,11 @@ Exemplos:
         query: z.string().min(1).max(200).describe('Texto para buscar no nome ou descrição da tabela'),
         limit: z.number().int().min(1).max(100).default(20).describe('Máximo de resultados'),
         offset: z.number().int().min(0).default(0).describe('Deslocamento para paginação'),
-        phonetic: z.boolean().default(true).describe('Habilita busca fonética (ignora acentos e aplica equivalências sonoras do português). Padrão: true'),
       },
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     },
-    async ({ query, limit, offset, phonetic }) => {
-      const result = searchTables(query, limit, offset, phonetic);
+    async ({ query, limit, offset }) => {
+      const result = searchTables(query, limit, offset);
 
       if (result.items.length === 0) {
         return { content: [{ type: 'text', text: `Nenhuma tabela encontrada para: "${query}"` }] };

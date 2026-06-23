@@ -371,13 +371,11 @@ const TOOLS = [
       { id: 'query',    label: 'Query',    type: 'text',   default: 'funcionario', hint: 'Nome ou descrição (ex: funcionario, folha, PFUNC)' },
       { id: 'limit',    label: 'Limit',    type: 'number', default: '20',          hint: 'Máx. resultados (1-100)' },
       { id: 'offset',   label: 'Offset',   type: 'number', default: '0',           hint: 'Paginação' },
-      { id: 'phonetic', label: 'Fonética', type: 'checkbox', default: false,       hint: 'Habilitar busca fonética' },
     ],
     args: (f) => ({
       query:    f.query,
       limit:    parseInt(f.limit) || 20,
       offset:   parseInt(f.offset) || 0,
-      phonetic: f.phonetic === true || f.phonetic === 'true'
     })
   },
   {
