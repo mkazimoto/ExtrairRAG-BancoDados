@@ -274,4 +274,36 @@ describe('docs-reader — searchTables locação de imóvel', () => {
     // XALGCONTRATOLOC deve aparecer na primeira página (top 20)
     expect(result.items.slice(0, 20).some(t => t.name === 'XALGCONTRATOLOC')).toBe(true);
   });
+
+  it('deve retornar XALGCONTRATOLOC na primeira página ao buscar "alugueis de imóveis"', () => {
+    // A palavra "alugueis" no plural deve ser corretamente singularizada para "aluguel"
+    // (regra portuguesa: aluguel→alugueis, troca 'l' por 'is' no plural)
+    const result = docReader.searchTables('alugueis de imóveis', 20);
+
+    const contratoLoc = result.items.find(t => t.name === 'XALGCONTRATOLOC');
+    expect(contratoLoc).toBeDefined();
+
+    // XALGCONTRATOLOC deve aparecer na primeira página
+    expect(result.items.slice(0, 20).some(t => t.name === 'XALGCONTRATOLOC')).toBe(true);
+
+    // Deve ter score positivo fruto dos matches na descrição
+    expect(contratoLoc!.score).toBeGreaterThan(0);
+  });
+
+  it('deve retornar XALGCONTRATOLOC na primeira página ao buscar "locacoes de imoveis"', () => {
+    // "locacoes" é o plural de "locação" (regra -ção→-ções)
+    // Após normalização fonética: "locações"→"locacoes", deve singularizar para "locacao"
+    // "imoveis" é o plural de "imóvel" (regra -vel→-veis)
+    // Após normalização fonética: "imóveis"→"imoveis", deve singularizar para "imovel"
+    const result = docReader.searchTables('locacoes de imoveis', 20);
+
+    const contratoLoc = result.items.find(t => t.name === 'XALGCONTRATOLOC');
+    expect(contratoLoc).toBeDefined();
+
+    // XALGCONTRATOLOC deve aparecer na primeira página (top 20)
+    expect(result.items.slice(0, 20).some(t => t.name === 'XALGCONTRATOLOC')).toBe(true);
+
+    // Deve ter score positivo — "locacao" como token na descrição (+8) e "imovel" como token (+8)
+    expect(contratoLoc!.score).toBeGreaterThan(0);
+  });
 });

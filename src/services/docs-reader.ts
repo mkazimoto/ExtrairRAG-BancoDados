@@ -244,12 +244,26 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
     .filter(w => w.length > 0 && !STOPWORDS.has(w));
 
   // words: normalização fonética (para busca no índice em memória)
+  // Também trata plurais irregulares do português (ex: aluguel→alugueis, locação→locações)
   const words = rawWords.map(w => {
     const normalized = normalizePhonetic(w);
-    // Remove 's' final para lidar com plural
-    return normalized.endsWith('s') && normalized.length > 2
-      ? normalized.slice(0, -1)
-      : normalized;
+    if (normalized.endsWith('s') && normalized.length > 2) {
+      // Plurais portugueses de palavras terminadas em 'ção' (-ções):
+      // locação→locações, operação→operações, função→funções
+      // Após normalização fonética: 'ções'→'coes', 'ção'→'cao'
+      if (normalized.endsWith('coes') && normalized.length > 4) {
+        return normalized.slice(0, -4) + 'cao';
+      }
+      const withoutS = normalized.slice(0, -1);
+      // Plurais portugueses de palavras terminadas em 'l':
+      // aluguel→alugueis, imóvel→imóveis, animal→animais
+      // A forma singular substitui o 'i' final por 'l'
+      if (withoutS.endsWith('i') && withoutS.length > 2) {
+        return withoutS.slice(0, -1) + 'l';
+      }
+      return withoutS;
+    }
+    return normalized;
   });
 
   if (words.length === 0) {
