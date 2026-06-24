@@ -71,6 +71,43 @@ Tabelas que não se enquadram nos padrões anteriores, mas que foram desativadas
 | Tabela | Descrição | Módulo |
 |--------|-----------|--------|
 | `XVENDAPESSOA` | Cadastro de Pessoas do Contrato de Venda | Incorporação |
+| `FHISTVALORESINTEGRACAO_BKPTIN` | | |   
+| `FLANBAIXAINTEGRACAO_BKPTIN` | | |   
+| `FLANBAIXARATCCU_BKPTIN` | | |   
+| `FLANBAIXARATDEP_BKPTIN` | | |   
+| `FLANBAIXA_BKPTIN` | | |   
+| `FLANBOLETOBAIXA_BKPTIN` | | |   
+| `FLANBOLETO_BKPTIN` | | |   
+| `FLANINTEGRACAO_BKPTIN` | | |   
+| `FLANRATCCU_BKPTIN` | | |   
+| `FLANRATDEP_BKPTIN` | | |   
+| `FLANREMESSA_BKPTIN` | | |   
+| `FLAN_BKPTIN` | | |   
+| `FLOGVALORES_BKPTIN` | | |   
+| `FRELLAN_BKPTIN` | | |   
+| `FRETORNOBANCARIOITEM_BKPTIN` | | |   
+| `SZMOVIESTOQUEPROCBKP` | | |   
+| `GUSRPERFIL_BACKUP` | | |   
+| `TTRBITMAGRUPADO_BACKUP` | | |   
+| `IBEM_OLD` | | |   
+| `IGRPCONT_OLD` | | |   
+| `ILEASING_OLD` | | |   
+| `IMTBX_OLD` | | |   
+| `IOCORHISTCOMP_OLD` | | |   
+| `IOCORHIST_OLD` | | |   
+| `IOCOR_OLD` | | |   
+| `IRATEIODEPREC_OLD` | | |   
+| `IRAZAOFILIAL_OLD` | | |   
+| `IRAZAOGERENCIAL_OLD` | | |   
+| `IRAZAOHIST_OLD` | | |   
+| `IRAZAO_OLD` | | |   
+| `PFFERIAS_OLD` | | |   
+| `PFHSTFER_OLD` | | |   
+| `PFPERFER_OLD` | | |   
+| `SLAN_OLD_CODPARCELALAN` | | |   
+| `XLOGPARCELACOMPONENTE_OLD1217` | | |   
+| `XLOGPARCELAPAGAMENTO_OLD1217` | | |   
+| `ZLOGPROCESSOS_OLD` | | |   
 
 ---
 

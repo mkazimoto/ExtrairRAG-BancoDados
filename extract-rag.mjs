@@ -260,6 +260,17 @@ function loadAllTablesFromCache() {
   return db.prepare('SELECT nome FROM tabelas ORDER BY nome').all().map(r => r.nome);
 }
 
+// ─── Padrões de exclusão (tabelas ignoradas por nome) ──────────────────────────
+
+/** Tabelas cujo nome contenha um destes padrões serão ignoradas. */
+const IGNORE_TABLE_PATTERNS = ['_TEMP', '_OLD', 'BKP'];
+
+/** Filtra tabelas que contenham padrões de exclusão no nome (case-insensitive). */
+function filtrarIgnoradas(tabelas) {
+  const upper = n => n.toUpperCase();
+  return tabelas.filter(t => !IGNORE_TABLE_PATTERNS.some(p => upper(t).includes(upper(p))));
+}
+
 // ─── Tabelas Desativadas ──────────────────────────────────────────────────────
 
 /**
@@ -485,8 +496,13 @@ async function main() {
       process.exit(1);
     }
     const desativadas = carregarTabelasDesativadas();
-    const nomesFiltrados = names.filter(t => !desativadas.has(t));
+    const semIgnoradas = filtrarIgnoradas(names);
+    const nomesFiltrados = semIgnoradas.filter(t => !desativadas.has(t));
     const removidas = names.length - nomesFiltrados.length;
+    const ignoradas = names.length - semIgnoradas.length;
+    if (ignoradas > 0) {
+      console.log(`  → ${ignoradas} tabela(s) ignoradas por padrão de exclusão (_TEMP, _OLD, BKP)`);
+    }
     if (removidas > 0) {
       console.log(`  → ${removidas} tabela(s) desativada(s) removidas (tabelas-desativadas.md)`);
     }
@@ -547,9 +563,16 @@ async function main() {
     return;
   }
 
+  // 4a. Remove tabelas com padrões de exclusão no nome (_TEMP, _OLD, BKP)
+  const allTablesSemIgnoradas = filtrarIgnoradas(allTables);
+  const ignoradas = allTables.length - allTablesSemIgnoradas.length;
+  if (ignoradas > 0) {
+    console.log(`  → ${ignoradas} tabela(s) ignoradas por padrão de exclusão (_TEMP, _OLD, BKP)`);
+  }
+
   // 4b. Remove tabelas desativadas (tabelas-desativadas.md)
   const desativadas = carregarTabelasDesativadas();
-  const allTablesFiltradas = allTables.filter(t => !desativadas.has(t));
+  const allTablesFiltradas = allTablesSemIgnoradas.filter(t => !desativadas.has(t));
   const removidas = allTables.length - allTablesFiltradas.length;
   if (removidas > 0) {
     console.log(`  → ${removidas} tabela(s) desativada(s) removidas (tabelas-desativadas.md)`);
@@ -1179,9 +1202,16 @@ async function runGenerateIndex() {
 
   const tableNames = db.prepare('SELECT nome FROM tabelas ORDER BY nome').all().map(r => r.nome);
 
+  // Remove tabelas com padrões de exclusão no nome (_TEMP, _OLD, BKP)
+  const semIgnoradas = filtrarIgnoradas(tableNames);
+  const ignoradasIndex = tableNames.length - semIgnoradas.length;
+  if (ignoradasIndex > 0) {
+    console.log(`  → ${ignoradasIndex} tabela(s) ignorada(s) por padrão de exclusão (_TEMP, _OLD, BKP)`);
+  }
+
   // Remove tabelas desativadas do índice
   const desativadas = carregarTabelasDesativadas();
-  const nomesFiltrados = tableNames.filter(t => !desativadas.has(t));
+  const nomesFiltrados = semIgnoradas.filter(t => !desativadas.has(t));
   const removidasIndex = tableNames.length - nomesFiltrados.length;
   if (removidasIndex > 0) {
     console.log(`  → ${removidasIndex} tabela(s) desativada(s) removidas do índice`);
