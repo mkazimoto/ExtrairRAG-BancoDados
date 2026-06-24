@@ -124,7 +124,7 @@ export function loadTableIndex(): TableSummary[] {
  * - Converte para minúsculas
  * - Aplica equivalências fonéticas do português
  */
-function normalizePhonetic(text: string): string {
+export function normalizePhonetic(text: string): string {
   return text
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')  // remove diacríticos (ã→a, ç→c, é→e, etc.)
@@ -183,7 +183,59 @@ function maxBigramSim(word: string, text: string): number {
 }
 
 /**
+ * Busca nomes de tabelas candidatas no cache SQLite usando busca fonética.
+ * Retorna um Set com os nomes das tabelas que correspondem à consulta,
+ * ou null se o cache não estiver disponível (quando null, o caller deve
+ * usar o índice em memória como fallback).
+ *
+ * A busca é feita em duas frentes:
+ * 1. Colunas fonéticas (nome_fonetico, desc_fonetica) com termos foneticamente normalizados
+ * 2. Colunas originais (nome, descricao) com termos raw (LIKE)
+ *
+ * Isso reduz drasticamente o número de tabelas a serem processadas pelo scorer
+ * em memória, já que a maioria das tabelas é filtrada diretamente no SQLite.
+ */
+function getCandidateTableNamesFromCache(
+  db: DatabaseSync,
+  words: string[],
+  rawWords: string[],
+): Set<string> | null {
+  try {
+    // Constrói condições combinadas: fonéticas + raw
+    const phoneticConditions = words
+      .map(() => `(t.nome_fonetico LIKE ? OR t.desc_fonetica LIKE ?)`)
+      .join(' OR ');
+    const rawConditions = rawWords
+      .map(() => `(LOWER(t.nome) LIKE ? OR LOWER(t.descricao) LIKE ?)`)
+      .join(' OR ');
+
+    const params: string[] = [];
+    for (const w of words) {
+      params.push(`%${w}%`, `%${w}%`);
+    }
+    for (const w of rawWords) {
+      params.push(`%${w}%`, `%${w}%`);
+    }
+
+    const rows = db.prepare(`
+      SELECT DISTINCT t.nome
+      FROM   tabelas t
+      WHERE  (${phoneticConditions})
+         OR  (${rawConditions})
+    `).all(...params) as Array<{ nome: string }>;
+
+    if (rows.length === 0) return new Set();
+    return new Set(rows.map(r => r.nome));
+  } catch {
+    return null; // fallback para índice em memória
+  }
+}
+
+/**
  * Busca tabelas no cache SQLite pelo nome ou descrição de colunas.
+ * Quando as colunas fonéticas existem no cache, também busca por elas
+ * com os termos normalizados foneticamente, melhorando recall em buscas
+ * com variações ortográficas (ex: "locações" → "locacao").
  * Retorna tabelas que NÃO estejam em `excludeNames` (já encontradas pelo índice).
  */
 function searchColumnInCache(
@@ -195,19 +247,52 @@ function searchColumnInCache(
   if (!db) return [];
 
   try {
-    const conditions = rawWords
-      .map(() => `(LOWER(c.nome) LIKE ? OR (c.gdic_descricao IS NOT NULL AND LOWER(c.gdic_descricao) LIKE ?))`)
-      .join(' OR ');
-    const params = rawWords.flatMap(w => [`%${w}%`, `%${w}%`]);
+    // Para as colunas fonéticas, normalizamos os termos da query
+    const phoneticWords = rawWords.map(w => normalizePhonetic(w));
 
-    const rows = db.prepare(`
-      SELECT c.tabela, COALESCE(t.descricao, '') AS tabela_descricao,
-             c.nome, COALESCE(c.gdic_descricao, '') AS gdic_descricao
-      FROM   colunas c
-      LEFT JOIN tabelas t ON t.nome = c.tabela
-      WHERE  ${conditions}
-      ORDER  BY c.tabela, c.ordinal
-    `).all(...params) as Array<{ tabela: string; tabela_descricao: string; nome: string; gdic_descricao: string }>;
+    // Condições: busca no nome/descrição original (LIKE) E também nas colunas fonéticas
+    const conditions = rawWords
+      .map((_, i) => `(
+        LOWER(c.nome) LIKE ? 
+        OR (c.gdic_descricao IS NOT NULL AND LOWER(c.gdic_descricao) LIKE ?)
+        OR (c.nome_fonetico IS NOT NULL AND c.nome_fonetico LIKE ?)
+        OR (c.gdic_desc_fonetica IS NOT NULL AND c.gdic_desc_fonetica LIKE ?)
+      )`)
+      .join(' OR ');
+    const params = rawWords.flatMap((w, i) => [
+      `%${w}%`,
+      `%${w}%`,
+      `%${phoneticWords[i]}%`,
+      `%${phoneticWords[i]}%`,
+    ]);
+
+    let rows: Array<{ tabela: string; tabela_descricao: string; nome: string; gdic_descricao: string }>;
+
+    try {
+      // Tenta query com colunas fonéticas (cache novo)
+      rows = db.prepare(`
+        SELECT c.tabela, COALESCE(t.descricao, '') AS tabela_descricao,
+               c.nome, COALESCE(c.gdic_descricao, '') AS gdic_descricao
+        FROM   colunas c
+        LEFT JOIN tabelas t ON t.nome = c.tabela
+        WHERE  ${conditions}
+        ORDER  BY c.tabela, c.ordinal
+      `).all(...params) as Array<{ tabela: string; tabela_descricao: string; nome: string; gdic_descricao: string }>;
+    } catch {
+      // Fallback: cache antigo sem colunas fonéticas — query simplificada
+      const fallbackConditions = rawWords
+        .map(() => `(LOWER(c.nome) LIKE ? OR (c.gdic_descricao IS NOT NULL AND LOWER(c.gdic_descricao) LIKE ?))`)
+        .join(' OR ');
+      const fallbackParams = rawWords.flatMap(w => [`%${w}%`, `%${w}%`]);
+      rows = db.prepare(`
+        SELECT c.tabela, COALESCE(t.descricao, '') AS tabela_descricao,
+               c.nome, COALESCE(c.gdic_descricao, '') AS gdic_descricao
+        FROM   colunas c
+        LEFT JOIN tabelas t ON t.nome = c.tabela
+        WHERE  ${fallbackConditions}
+        ORDER  BY c.tabela, c.ordinal
+      `).all(...fallbackParams) as Array<{ tabela: string; tabela_descricao: string; nome: string; gdic_descricao: string }>;
+    }
 
     // Agrupa colunas por tabela, ignorando as já encontradas pelo índice
     const byTable = new Map<string, { desc: string; cols: Array<{ name: string; description: string }> }>();
@@ -276,7 +361,22 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
   // Limiar mínimo de similaridade por bigrama para considerar um match aproximado
   const BIGRAM_THRESHOLD = 0.6;
 
-  const primaryMatches = index
+  // ─── Otimização: pré-filtra tabelas via cache SQLite fonético ──────────
+  // Quando o cache está disponível, consulta as colunas fonéticas
+  // (nome_fonetico, desc_fonetica) com LIKE, reduzindo drasticamente o
+  // número de tabelas a serem processadas pelo scorer em memória.
+  let tablesToScore: TableSummary[] = index;
+  const db = getCacheDb();
+  if (db && words.length > 0) {
+    const candidateNames = getCandidateTableNamesFromCache(db, words, rawWords);
+    if (candidateNames !== null && candidateNames.size < index.length) {
+      tablesToScore = candidateNames.size === 0
+        ? []
+        : index.filter(t => candidateNames.has(t.name));
+    }
+  }
+
+  const primaryMatches = tablesToScore
     .map(t => {
       const name = normalizePhonetic(t.name);
       const desc = normalizePhonetic(t.description);

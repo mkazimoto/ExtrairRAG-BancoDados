@@ -120,27 +120,37 @@ function initSqlite() {
   db.exec("PRAGMA journal_mode = WAL");
   db.exec("PRAGMA synchronous = NORMAL");
 
+  // Migration: adiciona colunas fonéticas em caches existentes
+  try { db.exec(`ALTER TABLE tabelas ADD COLUMN nome_fonetico TEXT`); } catch { /* já existe */ }
+  try { db.exec(`ALTER TABLE tabelas ADD COLUMN desc_fonetica TEXT`); } catch { /* já existe */ }
+  try { db.exec(`ALTER TABLE colunas ADD COLUMN nome_fonetico TEXT`); } catch { /* já existe */ }
+  try { db.exec(`ALTER TABLE colunas ADD COLUMN gdic_desc_fonetica TEXT`); } catch { /* já existe */ }
+
   db.exec(`
     CREATE TABLE IF NOT EXISTS tabelas (
-      nome        TEXT PRIMARY KEY,
-      descricao   TEXT DEFAULT '',
-      extraido_em TEXT NOT NULL
+      nome           TEXT PRIMARY KEY,
+      descricao      TEXT DEFAULT '',
+      extraido_em    TEXT NOT NULL,
+      nome_fonetico  TEXT DEFAULT '',
+      desc_fonetica  TEXT DEFAULT ''
     );
     CREATE TABLE IF NOT EXISTS colunas (
-      tabela        TEXT    NOT NULL,
-      ordinal       INTEGER NOT NULL,
-      nome          TEXT    NOT NULL,
-      data_type     TEXT,
-      char_max_len  INTEGER,
-      num_precision INTEGER,
-      num_scale     INTEGER,
-      is_nullable   TEXT,
-      col_default   TEXT,
-      gdic_descricao  TEXT,
-      gdic_aplicacoes TEXT,
-      gdic_apiname    TEXT,
+      tabela            TEXT    NOT NULL,
+      ordinal           INTEGER NOT NULL,
+      nome              TEXT    NOT NULL,
+      data_type         TEXT,
+      char_max_len      INTEGER,
+      num_precision     INTEGER,
+      num_scale         INTEGER,
+      is_nullable       TEXT,
+      col_default       TEXT,
+      gdic_descricao    TEXT,
+      gdic_aplicacoes   TEXT,
+      gdic_apiname      TEXT,
       gdic_anonimizavel TEXT,
-      is_pk         INTEGER DEFAULT 0,
+      is_pk             INTEGER DEFAULT 0,
+      nome_fonetico     TEXT DEFAULT '',
+      gdic_desc_fonetica TEXT DEFAULT '',
       PRIMARY KEY (tabela, nome)
     );
     CREATE TABLE IF NOT EXISTS fks_saida (
@@ -209,8 +219,8 @@ function saveToCache(tableNames, allColumns, allDescs, allFksOut, allFksIn) {
   const fksInMap   = byTable(allFksIn,   'TABELA');
 
   const stmts = {
-    upsertTabela:  db.prepare(`INSERT OR REPLACE INTO tabelas VALUES (?,?,?)`),
-    upsertColuna:  db.prepare(`INSERT OR REPLACE INTO colunas VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`),
+    upsertTabela:  db.prepare(`INSERT OR REPLACE INTO tabelas (nome, descricao, extraido_em, nome_fonetico, desc_fonetica) VALUES (?,?,?,?,?)`),
+    upsertColuna:  db.prepare(`INSERT OR REPLACE INTO colunas (tabela, ordinal, nome, data_type, char_max_len, num_precision, num_scale, is_nullable, col_default, gdic_descricao, gdic_aplicacoes, gdic_apiname, gdic_anonimizavel, is_pk, nome_fonetico, gdic_desc_fonetica) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`),
     delFksSaida:   db.prepare(`DELETE FROM fks_saida WHERE tabela = ?`),
     insFkSaida:    db.prepare(`INSERT INTO fks_saida VALUES (?,?,?,?,?,?)`),
     delFksEntrada: db.prepare(`DELETE FROM fks_entrada WHERE tabela = ?`),
@@ -221,20 +231,26 @@ function saveToCache(tableNames, allColumns, allDescs, allFksOut, allFksIn) {
   try {
     for (const t of tableNames) {
       const descricao = descsMap[t]?.[0]?.DESCRICAO ?? '';
-      stmts.upsertTabela.run(t, descricao, today);
+      const nomeFonetico = normalizePhonetic(t);
+      const descFonetica = descricao ? normalizePhonetic(descricao) : '';
+      stmts.upsertTabela.run(t, descricao, today, nomeFonetico, descFonetica);
 
       const colsDesativadasTab = colunasDesativadas.get(t);
       for (const c of (colsMap[t] ?? [])) {
         // Pula colunas desativadas
         if (colsDesativadasTab?.has(c.COLUMN_NAME.toUpperCase())) continue;
 
+        const colNome = String(c.COLUMN_NAME ?? '');
+        const colGdicDesc = String(c.GDIC_DESCRICAO ?? '');
         stmts.upsertColuna.run(
           t,
-          toDb(c.ORDINAL_POSITION), toDb(c.COLUMN_NAME), toDb(c.DATA_TYPE),
+          toDb(c.ORDINAL_POSITION), toDb(colNome), toDb(c.DATA_TYPE),
           toDb(c.CHARACTER_MAXIMUM_LENGTH), toDb(c.NUMERIC_PRECISION), toDb(c.NUMERIC_SCALE),
           toDb(c.IS_NULLABLE), toDb(c.COLUMN_DEFAULT),
           toDb(c.GDIC_DESCRICAO), toDb(c.GDIC_APLICACOES), toDb(c.GDIC_APINAME), toDb(c.GDIC_ANONIMIZAVEL),
           toDb(c.IS_PK),
+          normalizePhonetic(colNome),
+          colGdicDesc ? normalizePhonetic(colGdicDesc) : '',
         );
       }
 
@@ -969,6 +985,26 @@ export function escapeIdentifier(name) {
     throw new Error(`Identificador SQL inválido: "${name}"`);
   }
   return `[${name}]`;
+}
+
+/**
+ * Normaliza texto para busca fonética (mesma lógica do docs-reader.ts):
+ * - Remove acentos e diacríticos (NFD)
+ * - Converte para minúsculas
+ * - Aplica equivalências fonéticas do português
+ */
+export function normalizePhonetic(text) {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')  // remove diacríticos (ã→a, ç→c, é→e, etc.)
+    .toLowerCase()
+    .replace(/ph/g, 'f')
+    .replace(/nh/g, 'n')
+    .replace(/lh/g, 'l')
+    .replace(/ch/g, 'x')
+    .replace(/qu/g, 'k')
+    .replace(/[yw]/g, 'i')
+    .replace(/([a-z])\1+/g, '$1');   // reduz letras duplicadas (ss→s, rr→r)
 }
 
 // ─── Mapeamento de Regras (.rules.md) ────────────────────────────────────────
