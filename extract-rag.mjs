@@ -120,9 +120,10 @@ function initSqlite() {
   db.exec("PRAGMA journal_mode = WAL");
   db.exec("PRAGMA synchronous = NORMAL");
 
-  // Migration: adiciona colunas fonéticas em caches existentes
+  // Migration: adiciona colunas fonéticas e tem_regras em caches existentes
   try { db.exec(`ALTER TABLE tabelas ADD COLUMN nome_fonetico TEXT`); } catch { /* já existe */ }
   try { db.exec(`ALTER TABLE tabelas ADD COLUMN desc_fonetica TEXT`); } catch { /* já existe */ }
+  try { db.exec(`ALTER TABLE tabelas ADD COLUMN tem_regras INTEGER DEFAULT 0`); } catch { /* já existe */ }
   try { db.exec(`ALTER TABLE colunas ADD COLUMN nome_fonetico TEXT`); } catch { /* já existe */ }
   try { db.exec(`ALTER TABLE colunas ADD COLUMN gdic_desc_fonetica TEXT`); } catch { /* já existe */ }
 
@@ -132,7 +133,8 @@ function initSqlite() {
       descricao      TEXT DEFAULT '',
       extraido_em    TEXT NOT NULL,
       nome_fonetico  TEXT DEFAULT '',
-      desc_fonetica  TEXT DEFAULT ''
+      desc_fonetica  TEXT DEFAULT '',
+      tem_regras     INTEGER DEFAULT 0
     );
     CREATE TABLE IF NOT EXISTS colunas (
       tabela            TEXT    NOT NULL,
@@ -219,7 +221,7 @@ function saveToCache(tableNames, allColumns, allDescs, allFksOut, allFksIn) {
   const fksInMap   = byTable(allFksIn,   'TABELA');
 
   const stmts = {
-    upsertTabela:  db.prepare(`INSERT OR REPLACE INTO tabelas (nome, descricao, extraido_em, nome_fonetico, desc_fonetica) VALUES (?,?,?,?,?)`),
+    upsertTabela:  db.prepare(`INSERT OR REPLACE INTO tabelas (nome, descricao, extraido_em, nome_fonetico, desc_fonetica, tem_regras) VALUES (?,?,?,?,?,?)`),
     upsertColuna:  db.prepare(`INSERT OR REPLACE INTO colunas (tabela, ordinal, nome, data_type, char_max_len, num_precision, num_scale, is_nullable, col_default, gdic_descricao, gdic_aplicacoes, gdic_apiname, gdic_anonimizavel, is_pk, nome_fonetico, gdic_desc_fonetica) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`),
     delFksSaida:   db.prepare(`DELETE FROM fks_saida WHERE tabela = ?`),
     insFkSaida:    db.prepare(`INSERT INTO fks_saida VALUES (?,?,?,?,?,?)`),
@@ -233,7 +235,7 @@ function saveToCache(tableNames, allColumns, allDescs, allFksOut, allFksIn) {
       const descricao = descsMap[t]?.[0]?.DESCRICAO ?? '';
       const nomeFonetico = normalizePhonetic(t);
       const descFonetica = descricao ? normalizePhonetic(descricao) : '';
-      stmts.upsertTabela.run(t, descricao, today, nomeFonetico, descFonetica);
+      stmts.upsertTabela.run(t, descricao, today, nomeFonetico, descFonetica, 0);
 
       const colsDesativadasTab = colunasDesativadas.get(t);
       for (const c of (colsMap[t] ?? [])) {
@@ -496,6 +498,11 @@ async function main() {
     console.log('OK');
     const mapeamento = parseMapeamentoRegras(mapeamentoPath);
     await gerarRulesMdDoBanco(mapeamento, outputPath);
+    // Atualiza cache indicando que estas tabelas possuem regras
+    const updRulesStmt = db.prepare('UPDATE tabelas SET tem_regras = 1 WHERE nome = ?');
+    for (const tableName of Object.keys(mapeamento)) {
+      updRulesStmt.run(tableName);
+    }
     await sql.close();
     db.close();
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
@@ -619,6 +626,11 @@ async function main() {
       const mapeamento = parseMapeamentoRegras(mapeamentoPath);
       if (Object.keys(mapeamento).length > 0) {
         await gerarRulesMdDoBanco(mapeamento, outputPath);
+        // Atualiza cache indicando que estas tabelas possuem regras
+        const updRulesStmt = db.prepare('UPDATE tabelas SET tem_regras = 1 WHERE nome = ?');
+        for (const tableName of Object.keys(mapeamento)) {
+          updRulesStmt.run(tableName);
+        }
       }
     }
   }
@@ -1146,10 +1158,17 @@ async function gerarRulesMdDoBanco(mapeamento, outputPath) {
 // ─── Gerador de Índice RAG ────────────────────────────────────────────────────
 
 /**
- * Retorna um Set com os nomes das tabelas que possuem arquivo .rules.md
- * no diretório de documentação.
+ * Retorna um Set com os nomes das tabelas que possuem regras (tem_regras = 1).
+ * Consulta o cache SQLite primeiro; se vazio, fallback para varredura do diretório.
  */
 function getTablesWithRules() {
+  if (db) {
+    const rows = db.prepare('SELECT nome FROM tabelas WHERE tem_regras = 1').all();
+    if (rows.length > 0) {
+      return new Set(rows.map(r => r.nome.toUpperCase()));
+    }
+  }
+  // Fallback: varre o diretório de saída
   const tablesDir = mcpResolve(CONFIG.outputDir);
   if (!existsSync(tablesDir)) return new Set();
   return new Set(

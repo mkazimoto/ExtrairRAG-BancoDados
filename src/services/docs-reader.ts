@@ -119,6 +119,36 @@ export function loadTableIndex(): TableSummary[] {
 }
 
 /**
+ * Carrega o índice de tabelas diretamente do cache SQLite.
+ * Consulta as colunas nome, descricao e tem_regras, evitando
+ * a necessidade do db-index.md.
+ * Retorna null se o cache não estiver disponível ou estiver vazio.
+ */
+function loadTableIndexFromCache(): TableSummary[] | null {
+  const db = getCacheDb();
+  if (!db) return null;
+
+  try {
+    const rows = db.prepare(
+      'SELECT nome, descricao, tem_regras, nome_fonetico, desc_fonetica FROM tabelas ORDER BY nome'
+    ).all() as Array<{ nome: string; descricao: string; tem_regras: number; nome_fonetico: string; desc_fonetica: string }>;
+
+    if (rows.length === 0) return null;
+
+    return rows.map(r => ({
+      name: r.nome,
+      description: r.descricao || '',
+      module: getModule(r.nome),
+      hasRules: r.tem_regras === 1,
+      nomeFonetico: r.nome_fonetico || undefined,
+      descFonetica: r.desc_fonetica || undefined,
+    }));
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Normaliza texto para busca fonética:
  * - Remove acentos e diacríticos (NFD)
  * - Converte para minúsculas
@@ -315,7 +345,7 @@ function searchColumnInCache(
 }
 
 export function searchTables(query: string, limit = 20, offset = 0): { items: TableSummary[]; total: number } {
-  const index = loadTableIndex();
+  const index = loadTableIndexFromCache() ?? loadTableIndex();
 
   // Palavras irrelevantes (stopwords) a serem ignoradas na busca
   const STOPWORDS = new Set(['/', '-', 'p/', 'de', 'do', 'da', 'dos', 'das', 'por', 'para', 'pelo', 'pela', 'em', 'no', 'na', 'nos', 'nas', 'a', 'o', 'e', 'ao', 'ou', 'com', 'sem']);
@@ -378,8 +408,8 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
 
   const primaryMatches = tablesToScore
     .map(t => {
-      const name = normalizePhonetic(t.name);
-      const desc = normalizePhonetic(t.description);
+      const name = t.nomeFonetico ?? normalizePhonetic(t.name);
+      const desc = t.descFonetica ?? normalizePhonetic(t.description);
       const mod = normalizeModule(t.module);
       let score = 0;
       // Rastreia palavras que deram match como token na descrição
@@ -511,7 +541,7 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
  * Lista tabelas por módulo (prefixo).
  */
 export function listTablesByModule(module: string, limit = 50, offset = 0): { items: TableSummary[]; total: number } {
-  const index = loadTableIndex();
+  const index = loadTableIndexFromCache() ?? loadTableIndex();
   const prefix = module.toUpperCase();
   const filtered = index.filter(t => t.name.startsWith(prefix));
   return {
@@ -585,7 +615,7 @@ export function getTableRules(tableName: string): string | null {
  * O índice é a fonte única de verdade — gerado pelo extract-rag.mjs.
  */
 export function hasTableRules(tableName: string): boolean {
-  const index = loadTableIndex();
+  const index = loadTableIndexFromCache() ?? loadTableIndex();
   const entry = index.find(t => t.name === tableName.toUpperCase());
   return entry?.hasRules ?? false;
 }

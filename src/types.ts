@@ -9,6 +9,10 @@ export interface TableSummary {
   matchedColumns?: Array<{ name: string; description: string }>;
   /** Pontuação de relevância: quanto maior, mais palavras da query foram satisfeitas */
   score?: number;
+  /** Nome foneticamente normalizado (preenchido quando carregado do cache SQLite) */
+  nomeFonetico?: string;
+  /** Descrição foneticamente normalizada (preenchido quando carregado do cache SQLite) */
+  descFonetica?: string;
 }
 
 /** Detalhes completos de uma tabela — lidos do arquivo .md individual */
