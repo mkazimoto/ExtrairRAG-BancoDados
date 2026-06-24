@@ -2826,3 +2826,10 @@
 | ------ | ------ | --------- |
 | UTABINGRS | CODTIPING | TIPOINGRESSO |
 
+# KORDEM
+
+## STATUS
+
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| KSTATUS | CODSTATUS | DSCSTATUS | CODCOLIGADA | 1 |
