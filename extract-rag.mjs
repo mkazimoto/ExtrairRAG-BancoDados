@@ -786,8 +786,8 @@ function gerarMdDaCache(outputPath, tableNames) {
     try {
       const tbl    = stmtTab.get(tableName);
 
-      // Tabelas sem descrição no dicionário de dados (GDIC) são ignoradas
-      if (!tbl?.descricao) {
+      // Tabelas sem descrição ou com descrição='Sem descrição' no GDIC são ignoradas
+      if (!tbl?.descricao || /^sem descriç[ãa]o$/i.test(tbl.descricao.trim())) {
         console.log(`—  (sem descricao no GDIC, ignorada)`);
         continue;
       }
@@ -1200,7 +1200,8 @@ async function runGenerateIndex() {
   console.log(`  Saída : ${outputFile}`);
   console.log('───────────────────────────────────────────────────\n');
 
-  const tableNames = db.prepare('SELECT nome FROM tabelas ORDER BY nome').all().map(r => r.nome);
+  const tableRows = db.prepare('SELECT nome, descricao FROM tabelas ORDER BY nome').all();
+  const tableNames = tableRows.map(r => r.nome);
 
   // Remove tabelas com padrões de exclusão no nome (_TEMP, _OLD, BKP)
   const semIgnoradas = filtrarIgnoradas(tableNames);
@@ -1211,10 +1212,21 @@ async function runGenerateIndex() {
 
   // Remove tabelas desativadas do índice
   const desativadas = carregarTabelasDesativadas();
-  const nomesFiltrados = semIgnoradas.filter(t => !desativadas.has(t));
-  const removidasIndex = tableNames.length - nomesFiltrados.length;
+  const semDesativadas = semIgnoradas.filter(t => !desativadas.has(t));
+  const removidasIndex = tableNames.length - semDesativadas.length;
   if (removidasIndex > 0) {
     console.log(`  → ${removidasIndex} tabela(s) desativada(s) removidas do índice`);
+  }
+
+  // Remove tabelas sem descrição ou com descrição='Sem descrição' no GDIC
+  const descricoesMap = new Map(tableRows.map(r => [r.nome, r.descricao]));
+  const nomesFiltrados = semDesativadas.filter(t => {
+    const d = descricoesMap.get(t);
+    return d && !/^sem descriç[ãa]o$/i.test(d.trim());
+  });
+  const semDescIndex = semDesativadas.length - nomesFiltrados.length;
+  if (semDescIndex > 0) {
+    console.log(`  → ${semDescIndex} tabela(s) sem descrição no GDIC, ignoradas`);
   }
 
   console.log(`Carregando ${nomesFiltrados.length} tabela(s) do cache...`);
