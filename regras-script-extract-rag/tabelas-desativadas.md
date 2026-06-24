@@ -108,7 +108,8 @@ Tabelas que não se enquadram nos padrões anteriores, mas que foram desativadas
 | `XLOGPARCELACOMPONENTE_OLD1217` | | |   
 | `XLOGPARCELAPAGAMENTO_OLD1217` | | |   
 | `ZLOGPROCESSOS_OLD` | | |   
-
+| `__EFMigrationsHistory` | | |   
+| `sysdiagrams` | | |   
 ---
 
 ## Como usar
