@@ -88,7 +88,7 @@ describe('docs-reader — cache e utilitários', () => {
       // Primeira chamada
       const first = docReader.loadTableIndex();
       // Segunda chamada — readFileSync não deve ser chamado de novo
-      readFileSync.mockClear();
+      (readFileSync as ReturnType<typeof vi.fn>).mockClear();
       const second = docReader.loadTableIndex();
 
       expect(second).toEqual(first);
@@ -175,7 +175,7 @@ describe('docs-reader — cache e utilitários', () => {
       (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue(['PFUNC.rules.md']);
 
       docReader.hasTableRules('PFUNC'); // primeira — popula cache
-      readdirSync.mockClear();
+      (readdirSync as ReturnType<typeof vi.fn>).mockClear();
 
       docReader.hasTableRules('PFUNC'); // segunda — usa cache
       expect(readdirSync).not.toHaveBeenCalled();
@@ -204,7 +204,7 @@ describe('docs-reader — cache e utilitários', () => {
       (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue('# Regras PFUNC');
 
       docReader.getTableRules('PFUNC'); // primeira
-      readFileSync.mockClear();
+      (readFileSync as ReturnType<typeof vi.fn>).mockClear();
 
       docReader.getTableRules('PFUNC'); // segunda — cache
       expect(readFileSync).not.toHaveBeenCalled();
@@ -240,7 +240,7 @@ describe('docs-reader — cache e utilitários', () => {
       (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue('# Índice');
 
       docReader.getDbIndexMarkdown();
-      readFileSync.mockClear();
+      (readFileSync as ReturnType<typeof vi.fn>).mockClear();
 
       docReader.getDbIndexMarkdown();
       expect(readFileSync).not.toHaveBeenCalled();

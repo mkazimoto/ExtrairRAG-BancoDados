@@ -40,7 +40,7 @@ import { fileURLToPath } from 'node:url';
 const __scriptDir = dirname(fileURLToPath(import.meta.url));
 
 /** Resolve um caminho relativo à pasta do MCP, não ao cwd do projeto chamador. */
-function mcpResolve(...parts) {
+export function mcpResolve(...parts) {
   return resolve(__scriptDir, ...parts);
 }
 
@@ -188,7 +188,7 @@ function getCachedTableNames() {
 }
 
 /** Converte valores de linhas do SQL Server para tipos compatíveis com node:sqlite. */
-function toDb(v) {
+export function toDb(v) {
   if (v === undefined || v === null) return null;
   if (typeof v === 'boolean')       return v ? 1 : 0;
   if (v instanceof Date)            return v.toISOString();
@@ -266,7 +266,7 @@ function loadAllTablesFromCache() {
 const IGNORE_TABLE_PATTERNS = ['_TEMP', '_OLD', 'BKP'];
 
 /** Filtra tabelas que contenham padrões de exclusão no nome (case-insensitive). */
-function filtrarIgnoradas(tabelas) {
+export function filtrarIgnoradas(tabelas) {
   const upper = n => n.toUpperCase();
   return tabelas.filter(t => !IGNORE_TABLE_PATTERNS.some(p => upper(t).includes(upper(p))));
 }
@@ -279,7 +279,7 @@ function filtrarIgnoradas(tabelas) {
  *
  * Formato esperado: linhas de tabela markdown com `NOMETABELA` na primeira coluna.
  */
-function carregarTabelasDesativadas() {
+export function carregarTabelasDesativadas() {
   if (CONFIG.semDesativadas) {
     return new Set();
   }
@@ -321,7 +321,7 @@ function carregarTabelasDesativadas() {
  *   # NOMETABELA
  *   ## NOMECOLUNA
  */
-function carregarColunasDesativadas() {
+export function carregarColunasDesativadas() {
   const filePath = mcpResolve(CONFIG.colunasDesativadas);
   if (!existsSync(filePath)) {
     return new Map();
@@ -366,7 +366,7 @@ function carregarColunasDesativadas() {
  *
  *   Descrição da tabela
  */
-function carregarDescricoesTabelas() {
+export function carregarDescricoesTabelas() {
   const filePath = mcpResolve(CONFIG.tabelasDescricao);
   if (!existsSync(filePath)) {
     return new Map();
@@ -835,7 +835,7 @@ function gerarMdDaCache(outputPath, tableNames) {
 
 // ─── Geração de Markdown ─────────────────────────────────────────────────────
 
-function generateMarkdown(tableName, tableDesc, columns, fksOut = [], fksIn = []) {
+export function generateMarkdown(tableName, tableDesc, columns, fksOut = [], fksIn = []) {
   const pkCols    = columns.filter(c => c.IS_PK    ).map(c => c.COLUMN_NAME);
   const withDesc  = columns.filter(c => c.GDIC_DESCRICAO);
   const semDesc   = columns.filter(c => !c.GDIC_DESCRICAO).length;
@@ -933,7 +933,7 @@ function generateMarkdown(tableName, tableDesc, columns, fksOut = [], fksIn = []
 
 // ─── Utilitários ─────────────────────────────────────────────────────────────
 
-function groupByConstraint(rows, refTableKey = 'REF_TABLE', refColKey = 'REF_COLUMN', thisColKey = 'COLUMN_NAME') {
+export function groupByConstraint(rows, refTableKey = 'REF_TABLE', refColKey = 'REF_COLUMN', thisColKey = 'COLUMN_NAME') {
   const map = new Map();
   for (const row of rows) {
     const key = row.CONSTRAINT_NAME;
@@ -945,7 +945,7 @@ function groupByConstraint(rows, refTableKey = 'REF_TABLE', refColKey = 'REF_COL
   return [...map.values()];
 }
 
-function formatType(col) {
+export function formatType(col) {
   const type = (col.DATA_TYPE ?? 'UNKNOWN').toUpperCase();
   if (col.CHARACTER_MAXIMUM_LENGTH != null) {
     const len = col.CHARACTER_MAXIMUM_LENGTH === -1 ? 'MAX' : col.CHARACTER_MAXIMUM_LENGTH;
@@ -960,11 +960,11 @@ function formatType(col) {
   return type;
 }
 
-function escapeSql(value) {
+export function escapeSql(value) {
   return String(value).replace(/'/g, "''");
 }
 
-function escapeIdentifier(name) {
+export function escapeIdentifier(name) {
   if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name)) {
     throw new Error(`Identificador SQL inválido: "${name}"`);
   }
@@ -977,7 +977,7 @@ function escapeIdentifier(name) {
  * Parseia o mapeamento-regras.md.
  * Retorna: { [tabela]: { [coluna]: { tabela, codigo, descricao } } }
  */
-function parseMapeamentoRegras(filePath) {
+export function parseMapeamentoRegras(filePath) {
   const lines = readFileSync(filePath, 'utf-8').split(/\r?\n/);
   const result = {};
   let tabelaAtual = null;
@@ -1012,7 +1012,7 @@ function parseMapeamentoRegras(filePath) {
  * Lê as seções de um .rules.md existente (por cabeçalho ## COLUNA).
  * Retorna { secoes: { [coluna]: string[] }, ordem: string[] }
  */
-function lerSecoesRulesMd(filePath) {
+export function lerSecoesRulesMd(filePath) {
   if (!existsSync(filePath)) return { secoes: {}, ordem: [] };
 
   const lines   = readFileSync(filePath, 'utf-8').split(/\r?\n/);
@@ -1115,7 +1115,7 @@ async function gerarRulesMdDoBanco(mapeamento, outputPath) {
  *                         columns: [{name, type, isPk, desc}] }
  * `modulos` = array de { codsistema, descricao } — conteúdo da tabela GSISTEMA
  */
-function generateIndex(tables, modulos, outputFile) {
+export function generateIndex(tables, modulos, outputFile) {
   const today  = new Date().toISOString().slice(0, 10);
   const lines  = [];
 
@@ -1174,7 +1174,7 @@ function generateIndex(tables, modulos, outputFile) {
 /**
  * Extrai a descrição de um arquivo .md de tabela lendo a seção "## Descrição".
  */
-function extrairDescricaoMd(filePath) {
+export function extrairDescricaoMd(filePath) {
   try {
     const resolvedPath = filePath.endsWith('.rules.md')
       ? filePath.slice(0, -9) + '.md'
@@ -1307,7 +1307,7 @@ async function runGenerateIndex() {
 
 // ─── Utilitários de encerramento ────────────────────────────────────────────
 
-function limparCache() {
+export function limparCache() {
   const dbPath = mcpResolve(CONFIG.cacheDb);
   if (existsSync(dbPath)) {
     unlinkSync(dbPath);
@@ -1315,9 +1315,12 @@ function limparCache() {
   }
 }
 
-// ─── Executa ─────────────────────────────────────────────────────────────────
+// ─── Executa (apenas quando chamado diretamente) ───────────────────────────
 
-main().catch(err => {
-  console.error('\n[ERRO FATAL]', err.message);
-  process.exit(1);
-});
+const isMainModule = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isMainModule) {
+  main().catch(err => {
+    console.error('\n[ERRO FATAL]', err.message);
+    process.exit(1);
+  });
+}

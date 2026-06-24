@@ -10,7 +10,7 @@ import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
  */
 
 vi.mock('@modelcontextprotocol/sdk/server/mcp.js', () => {
-  function MockMcpServer() {
+  function MockMcpServer(this: Record<string, ReturnType<typeof vi.fn>>) {
     this.registerResource = vi.fn();
     this.connect = vi.fn().mockResolvedValue(undefined);
   }
@@ -56,7 +56,7 @@ vi.mock('express', async () => {
       return { close: vi.fn() };
     }),
   };
-  const expressFn = vi.fn(() => mockApp);
+  const expressFn = vi.fn(() => mockApp) as ReturnType<typeof vi.fn> & { json: ReturnType<typeof vi.fn>; static: ReturnType<typeof vi.fn> };
   expressFn.json = vi.fn(() => vi.fn());
   expressFn.static = vi.fn(() => vi.fn());
   const actual = await vi.importActual('express');

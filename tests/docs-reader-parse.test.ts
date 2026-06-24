@@ -54,7 +54,7 @@ ${overrides.outboundFks ?? `## Relacionamentos
 |------------|---------|---------------------|----------------------|
 | \`FK_PFUNC_FCFO\` | \`CODFUNC\` | \`FCFO\` | \`CODFUNC\` |`}
 
-${overrides.inboundFfs ?? `### Chaves Estrangeiras de Entrada
+${overrides.inboundFks ?? `### Chaves Estrangeiras de Entrada
 
 | Constraint | Colunas | Tabela Referenciada | Colunas Referenciadas |
 |------------|---------|---------------------|----------------------|
@@ -164,7 +164,7 @@ describe('docs-reader — parse de markdown', () => {
       (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue(createSampleMarkdown());
 
       docReader.getTableDetail('PFUNC'); // primeira
-      readFileSync.mockClear();
+      (readFileSync as ReturnType<typeof vi.fn>).mockClear();
 
       docReader.getTableDetail('PFUNC'); // segunda — cache
       expect(readFileSync).not.toHaveBeenCalled();

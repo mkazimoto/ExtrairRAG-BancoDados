@@ -1,4 +1,4 @@
-import { validateSqlSyntax } from './src/tools/sql-validator.js';
+import { validateSqlSyntax } from '../src/tools/sql-validator.js';
 
 const sql = `
 MERGE INTO PFUNC AS TARGET
