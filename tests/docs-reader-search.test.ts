@@ -30,16 +30,16 @@ describe('docs-reader — searchTables', () => {
 
   /** Índice de tabelas usado nos testes */
   const sampleIndex = [
-    '| `PFUNC` | Funcionários |',
-    '| `VFUNCIONARIO` | Tabela de Funcionários |',
-    '| `FCFO` | Fornecedores |',
-    '| `TITMMOV` | Movimentos de Títulos |',
-    '| `PCPAL` | Cargos e Salários |',
-    '| `PPESSOAL` | Dados Pessoais dos Funcionários |',
-    '| `SALARIO` | Salários e Remunerações |',
-    '| `CCUSTO` | Centro de Custo |',
-    '| `AHORARIO` | Horários de Trabalho |',
-    '| `ABANCOHORFUN` | Banco de Horas do Funcionário |',
+    '| `PFUNC` | Funcionários | ✓ |',
+    '| `VFUNCIONARIO` | Tabela de Funcionários | — |',
+    '| `FCFO` | Fornecedores | — |',
+    '| `TITMMOV` | Movimentos de Títulos | — |',
+    '| `PCPAL` | Cargos e Salários | — |',
+    '| `PPESSOAL` | Dados Pessoais dos Funcionários | — |',
+    '| `SALARIO` | Salários e Remunerações | — |',
+    '| `CCUSTO` | Centro de Custo | — |',
+    '| `AHORARIO` | Horários de Trabalho | — |',
+    '| `ABANCOHORFUN` | Banco de Horas do Funcionário | — |',
   ].join('\n');
 
   beforeEach(async () => {
@@ -89,9 +89,6 @@ describe('docs-reader — searchTables', () => {
   });
 
   it('deve dar +5 para tabelas com regras documentadas (.rules.md)', () => {
-    // Simula que PFUNC possui arquivo de regras
-    (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue(['PFUNC.rules.md']);
-
     const result = docReader.searchTables('funcionario');
 
     const pfunc = result.items.find(t => t.name === 'PFUNC');

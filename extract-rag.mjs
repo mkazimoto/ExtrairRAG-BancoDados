@@ -1110,12 +1110,27 @@ async function gerarRulesMdDoBanco(mapeamento, outputPath) {
 // ─── Gerador de Índice RAG ────────────────────────────────────────────────────
 
 /**
+ * Retorna um Set com os nomes das tabelas que possuem arquivo .rules.md
+ * no diretório de documentação.
+ */
+function getTablesWithRules() {
+  const tablesDir = mcpResolve(CONFIG.outputDir);
+  if (!existsSync(tablesDir)) return new Set();
+  return new Set(
+    readdirSync(tablesDir)
+      .filter(f => f.endsWith('.rules.md'))
+      .map(f => f.replace(/\.rules\.md$/, '').toUpperCase())
+  );
+}
+
+/**
  * Gera o conteúdo do db-index.md e salva no arquivo de saída.
  * `tables`  = array de { name, descricao, totalColunas, colsComDesc, pkCols,
  *                         columns: [{name, type, isPk, desc}] }
  * `modulos` = array de { codsistema, descricao } — conteúdo da tabela GSISTEMA
+ * `tablesWithRules` = Set de nomes de tabelas que possuem arquivo .rules.md
  */
-export function generateIndex(tables, modulos, outputFile) {
+export function generateIndex(tables, modulos, outputFile, tablesWithRules = new Set()) {
   const today  = new Date().toISOString().slice(0, 10);
   const lines  = [];
 
@@ -1136,6 +1151,7 @@ export function generateIndex(tables, modulos, outputFile) {
   lines.push('3. Consulte a seção **Módulos do Sistema** para entender o prefixo de cada tabela.');
   lines.push('4. Acesse o arquivo `docs/db/tables/<NOME_TABELA>.md` para o dicionário detalhado.');
   lines.push('5. Colunas com `(GDIC)` possuem descrição semântica do dicionário de dados.');
+  lines.push('6. A coluna **Regras** indica se a tabela possui documentação de valores válidos em `docs/db/tables/<NOME>.rules.md` (✓ = possui, — = não possui).');
   lines.push('');
 
   if (modulos.length > 0) {
@@ -1155,11 +1171,12 @@ export function generateIndex(tables, modulos, outputFile) {
   lines.push('');
   lines.push('> Tabela rápida para identificação. Para detalhes, acesse o arquivo `.md` da tabela.');
   lines.push('');
-  lines.push('| Tabela | Descrição Resumida |');
-  lines.push('|--------|-------------------|');
+  lines.push('| Tabela | Descrição Resumida | Regras |');
+  lines.push('|--------|-------------------|:------:|');
   for (const t of tables) {
-    const desc = t.descricao || '*(sem descrição no GDIC)*';
-    lines.push(`| \`${t.name}\` | ${desc} |`);
+    const desc  = t.descricao || '*(sem descrição no GDIC)*';
+    const rules = tablesWithRules.has(t.name.toUpperCase()) ? '✓' : '—';
+    lines.push(`| \`${t.name}\` | ${desc} | ${rules} |`);
   }
   lines.push('');
 
@@ -1292,8 +1309,10 @@ async function runGenerateIndex() {
 
   const modulos = db.prepare('SELECT codsistema, descricao FROM modulos ORDER BY codsistema').all();
 
+  const tablesWithRules = getTablesWithRules();
+
   console.log('Gravando db-index.md...');
-  const lineCount = generateIndex(tables, modulos, outputFile);
+  const lineCount = generateIndex(tables, modulos, outputFile, tablesWithRules);
   const sizeKB    = Math.round(statSync(outputFile).size / 1024);
 
   console.log('\n───────────────────────────────────────────────────');

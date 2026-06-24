@@ -28,9 +28,6 @@ const rawMarkdownCache = new Map<string, CacheEntry<string>>();
 const rulesContentCache = new Map<string, CacheEntry<string>>();
 const RULES_CONTENT_CACHE_MAX = 100;
 
-/** Set de tabelas que possuem .rules.md (pré-carregado) */
-let rulesTableSet: Set<string> | null = null;
-
 /** Cache para getDbIndexMarkdown */
 let dbIndexCache: CacheEntry<string> | null = null;
 
@@ -102,8 +99,8 @@ export function loadTableIndex(): TableSummary[] {
   const content = readFileSync(INDEX_FILE, 'utf-8');
   const rows: TableSummary[] = [];
 
-  // Parseia as linhas da tabela markdown: | `TABELA` | Descrição |
-  const lineRe = /^\|\s*`([A-Z0-9_]+)`\s*\|\s*(.*?)\s*\|/;
+  // Parseia as linhas da tabela markdown: | `TABELA` | Descrição | Regras |
+  const lineRe = /^\|\s*`([A-Z0-9_]+)`\s*\|\s*(.*?)\s*(?:\|\s*([✓—])\s*)?\|/;
   for (const line of content.split('\n')) {
     const m = lineRe.exec(line);
     if (!m) continue;
@@ -112,6 +109,7 @@ export function loadTableIndex(): TableSummary[] {
       name,
       description: m[2].trim(),
       module: getModule(name),
+      hasRules: m[3]?.trim() === '✓',
     });
   }
 
@@ -345,7 +343,8 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
 
       // Bônus: tabelas com regras documentadas (.rules.md) recebem +5
       // pois tendem a ser tabelas de maior relevância no sistema
-      if (hasTableRules(t.name)) {
+      // Só aplica se já houver score > 0 (evita falsos positivos)
+      if (score > 0 && t.hasRules) {
         score += 5;
       }
 
@@ -482,20 +481,13 @@ export function getTableRules(tableName: string): string | null {
 }
 
 /**
- * Verifica se existe arquivo de regras para a tabela sem ler seu conteúdo.
- * Utiliza Set pré-carregado para evitar existsSync repetido.
+ * Verifica se existe arquivo de regras para a tabela consultando o db-index.md.
+ * O índice é a fonte única de verdade — gerado pelo extract-rag.mjs.
  */
 export function hasTableRules(tableName: string): boolean {
-  if (!rulesTableSet) {
-    rulesTableSet = new Set(
-      existsSync(DOCS_DIR)
-        ? readdirSync(DOCS_DIR)
-            .filter(f => f.endsWith('.rules.md'))
-            .map(f => f.replace(/\.rules\.md$/, ''))
-        : []
-    );
-  }
-  return rulesTableSet.has(tableName.toUpperCase());
+  const index = loadTableIndex();
+  const entry = index.find(t => t.name === tableName.toUpperCase());
+  return entry?.hasRules ?? false;
 }
 
 /**

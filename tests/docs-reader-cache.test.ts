@@ -143,42 +143,42 @@ describe('docs-reader — cache e utilitários', () => {
   });
 
   describe('hasTableRules', () => {
-    it('deve retornar true quando arquivo .rules.md existe', () => {
-      (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue([
-        'PFUNC.md',
-        'PFUNC.rules.md',
-        'FCFO.md',
-      ]);
+    it('deve retornar true quando db-index.md marca ✓ na coluna Regras', () => {
+      (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue([
+        '| `PFUNC` | Funcionários | ✓ |',
+        '| `FCFO`  | Fornecedores | — |',
+      ].join('\n'));
 
       expect(docReader.hasTableRules('PFUNC')).toBe(true);
     });
 
-    it('deve retornar false quando arquivo .rules.md não existe', () => {
-      (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue([
-        'PFUNC.md',
-        'FCFO.md',
-      ]);
+    it('deve retornar false quando db-index.md marca — na coluna Regras', () => {
+      (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue([
+        '| `PFUNC` | Funcionários | — |',
+        '| `FCFO`  | Fornecedores | ✓ |',
+      ].join('\n'));
 
       expect(docReader.hasTableRules('PFUNC')).toBe(false);
     });
 
     it('deve ser case-insensitive', () => {
-      (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue([
-        'PFUNC.md',
-        'PFUNC.rules.md',
-      ]);
+      (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue([
+        '| `PFUNC` | Funcionários | ✓ |',
+      ].join('\n'));
 
       expect(docReader.hasTableRules('pfunc')).toBe(true);
     });
 
-    it('deve usar cache do Set após primeira chamada', () => {
-      (readdirSync as ReturnType<typeof vi.fn>).mockReturnValue(['PFUNC.rules.md']);
+    it('deve usar cache do loadTableIndex após primeira chamada', () => {
+      (readFileSync as ReturnType<typeof vi.fn>).mockReturnValue([
+        '| `PFUNC` | Funcionários | ✓ |',
+      ].join('\n'));
 
-      docReader.hasTableRules('PFUNC'); // primeira — popula cache
-      (readdirSync as ReturnType<typeof vi.fn>).mockClear();
+      docReader.hasTableRules('PFUNC'); // primeira — carrega índice
+      (readFileSync as ReturnType<typeof vi.fn>).mockClear();
 
       docReader.hasTableRules('PFUNC'); // segunda — usa cache
-      expect(readdirSync).not.toHaveBeenCalled();
+      expect(readFileSync).not.toHaveBeenCalled();
     });
   });
 

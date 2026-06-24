@@ -3,6 +3,8 @@ export interface TableSummary {
   name: string;
   description: string;
   module: string;
+  /** Indica se a tabela possui arquivo .rules.md (lido da coluna Regras do db-index.md) */
+  hasRules?: boolean;
   /** Colunas que corresponderam à busca (preenchido apenas em buscas por coluna via cache) */
   matchedColumns?: Array<{ name: string; description: string }>;
   /** Pontuação de relevância: quanto maior, mais palavras da query foram satisfeitas */
