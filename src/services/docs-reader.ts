@@ -532,7 +532,7 @@ export function searchTables(query: string, limit = 20, offset = 0): { items: Ta
     .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
 
   return {
-    total: combined.length,
+    total: Math.min(combined.length, 100),
     items: combined.slice(offset, offset + limit),
   };
 }
