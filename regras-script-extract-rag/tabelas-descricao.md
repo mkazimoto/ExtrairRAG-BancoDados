@@ -6,6 +6,26 @@ Aluno - Ensino Básico
 
 Aluno - Ensino Superior
 
+# EPROFES
+
+Professor - Ensino Básico
+
+# SPROFESSOR
+
+Professor - Ensino Superior
+
+# SDIRETORESCOLA
+
+Diretor da Escola - Ensino Superior
+
+# SCOORDENADOR
+
+Coordenador da Matriz Aplicada - Ensino Superior
+
+# ECOLEGIOS
+
+Instituições de Ensino - Ensino Básico
+
 # SCONTRATO
 
 Contrato do Aluno - Ensino Superior
@@ -25,6 +45,14 @@ Lançamentos Contábeis
 # TMOV
 
 Movimento - Estoque, Compras e Faturamento
+
+# HATENDENTE
+
+Atendente do CRM
+
+# HCLIENTEATENDIMENTO
+
+Cliente do Atendimento do CRM
 
 # TCNT
 
@@ -54,6 +82,10 @@ Parcela de Venda de Imóvel
 
 Comprador da Venda de Imóvel
 
+# XVENDEDOR
+
+Vendedor da Venda de Imóvel
+
 # XCONTRATO
 
 Contrato de Venda de Imóvel
@@ -72,7 +104,7 @@ Contrato de Locação / Aluguel de Imóvel
 
 # XALGCONTRATOADM
 
-Contrato de Administração de Imóvel
+Contrato de Administração de Imóvel - Locação / Aluguel 
 
 # XALGIMOVEL
 
@@ -80,6 +112,30 @@ Imóvel do Contrato de Locação / Aluguel
 
 # XALGCORRETOR
 
-Corretor do Contrato de Locação / Aluguel
+Corretor - Locação / Aluguel
+
+# XALGLOCATARIO
+
+Locatário - Locação / Aluguel
+
+# XALGPRESTADOR
+
+Prestador - Locação / Aluguel
+
+# XALGPROCURADOR
+
+Procurador - Locação / Aluguel
+
+# XALGPROPRIETARIO
+
+Proprietário - Locação / Aluguel
+
+# XCONDSINDICO
+
+Sindico - Condomínio
+
+# XCONDOCUPANTE
+
+Ocupante - Condomínio
 
 
