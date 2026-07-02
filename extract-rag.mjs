@@ -58,15 +58,15 @@ const CONFIG = {
   // ── Extração ────────────────────────────────────────────────────────────
   schema:       'dbo',
   tablePrefix:  'M',           // tabelas que começam com esta letra
-  outputDir:    './docs/db/tables',
+  outputDir:    process.env.TOTVS_DOCS_DIR  ?? './docs/db/tables',
   maxTables:    9999,          // limite de segurança
   // ── Cache SQLite ─────────────────────────────────────────────────────────
-  cacheDb:      './docs/db/cache.sqlite',
+  cacheDb:      process.env.CACHE_FILE ? join(process.env.CACHE_FILE, 'cache.sqlite') : './docs/db/cache.sqlite',
   usarCache:    true,          // false com --sem-cache
   soMd:         false,         // true com --so-md
   soIndex:      false,         // true com --so-index
   // ── Índice ──────────────────────────────────────────────────────────────
-  indexFile:    './ai/db-index.md',
+  indexFile:    process.env.TOTVS_INDEX_FILE ?? './ai/db-index.md',
   gerarIndex:   true,          // false com --sem-index
   todasTabelas:    true,       // false com --prefixo
   requestTimeout:  300000,     // ms — aumentar se houver muitas tabelas
