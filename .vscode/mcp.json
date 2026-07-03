@@ -2,7 +2,7 @@
   "servers": {
     "totvs-rm-database-mcp-server": {
       "type": "http",
-      "url": "http://bh-eng-auttop01.bh01.local:3000/mcp",
+      "url": "http://localhost:3000/mcp",
       "headers": {
         "Authorization": "Bearer ${input:MCP_TOTVS_RM_DATABASE_TOKEN}"
       }
