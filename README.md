@@ -52,7 +52,7 @@ Você pode usar um arquivo `.env` ou definir diretamente na configuração do cl
 MCP_TRANSPORT = "stdio"
 DB_SERVER = "localhost"
 DB_DATABASE = "EXEMPLO1212606"
-DB_USER = "rm"
+DB_USER = "USUARIO"
 DB_PASSWORD = "SENHA"
 ```
 
