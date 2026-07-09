@@ -9,8 +9,8 @@ Permite que modelos de linguagem consultem o esquema do banco e pesquisem tabela
 |---|---|
 | `totvs_search_tables` | Busca tabelas por nome ou descrição |
 | `totvs_get_table_schema` | Retorna colunas, PKs e FKs de uma tabela |
+| `totvs_get_table_rules` | Retorna os possíveis valores dos campos de uma tabela |
 | `totvs_list_modules` | Lista todos os módulos e prefixos do ERP |
-| `totvs_get_db_index` | Retorna o índice completo de todas as tabelas |
 | `totvs_validate_sql` | Valida a sintaxe T-SQL sem executar a consulta |
 
 ## Transportes suportados
