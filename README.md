@@ -101,7 +101,7 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
         "type": "http",
         "url": "http://localhost:3000/mcp",
         "headers": {
-          "Authorization": "Bearer ed931c92-33db-4fdb-aa86-c78a236bf40e"
+          "Authorization": "Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         }
       }
     }
@@ -121,7 +121,7 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
         "args": ["dist/index.js"],
         "env": {
           "MCP_TRANSPORT": "stdio",
-          "MCP_API_KEY": "ed931c92-33db-4fdb-aa86-c78a236bf40e"
+          "MCP_API_KEY": " xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
         }
       }
     }
