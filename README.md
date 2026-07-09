@@ -121,7 +121,7 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
         "args": ["dist/index.js"],
         "env": {
           "MCP_TRANSPORT": "stdio",
-          "MCP_API_KEY": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          "MCP_API_KEY": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         }
       }
     }
