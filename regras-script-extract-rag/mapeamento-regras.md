@@ -489,6 +489,12 @@
 | ------ | ------ | --------- | -------- | ------ |
 | LTIPOREF | CODIGOTR | DESCRICAO | CODCOLIGADA | 1 |
 
+## CODCATEGORIA
+
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| LCATEGORIA | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
 ## TIPOPUBLIC
 
 | Tabela | Codigo | Descricao |
@@ -603,6 +609,42 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | GETD | CODETD | NOME |
+
+
+# MDASHBOARDINDCONTROLE
+
+## IDCATEGORIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| MDASHBOARDINDCATEGORIA | IDCATEGORIA | NOMECATEGORIA |
+
+
+# MFORM
+
+## IDCATEGORIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| MFORMCATEGORIA | IDCATEGORIA | NOMECATEGORIA |
+
+
+# MWORKFLOWINSPECAOACAO
+
+## IDCATEGORIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| MFORMCATEGORIA | IDCATEGORIA | NOMECATEGORIA |
+
+
+# MWORKFLOWINSPECAOCONDICAO
+
+## IDCATEGORIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| MFORMCATEGORIA | IDCATEGORIA | NOMECATEGORIA |
 
 
 # NMENU
@@ -868,6 +910,24 @@
 | ------ | ------ | --------- |
 | PTPATENDICOPART | CODCLIENTE | DESCRICAO |
 
+# PFHSTCATEGORIAESOCIAL
+
+## CODCATEGORIAESOCIAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PESOCIALCATTRAB | CODCLIENTE | DESCRICAO |
+
+
+# PFHSTESTATUTARIO
+
+## CODCATEGORIAMANDATOELETIVO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PESOCIALCATTRAB | CODCLIENTE | DESCRICAO |
+
+
 # PFINALIDADETAREFAAGRARIA
 
 ## TPFINAGRI
@@ -901,6 +961,36 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PTPDEMISSAO | CODCLIENTE | DESCRICAO |
+
+## CODCATEGORIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODCATTRAB | CODCLIENTE | DESCRICAO |
+
+## CODCATEGORIAESOCIAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PESOCIALCATTRAB | CODCLIENTE | DESCRICAO |
+
+## CODCATEGORIAEMPRESAORIGEM
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PESOCIALCATTRAB | CODCLIENTE | DESCRICAO |
+
+## CODCATEGORIATRABCEDIDO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PESOCIALCATTRAB | CODCLIENTE | DESCRICAO |
+
+## CODCATEGORIAMANDATOELETIVO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PESOCIALCATTRAB | CODCLIENTE | DESCRICAO |
 
 # PLANCFINANC
 
@@ -1177,6 +1267,15 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | SZTIPOPREGLOSA | CODTIPOPREGLOSA | DESCRICAO | CODCOLIGADA | 1 |
+
+# SZCLASSEPRODUTO
+
+## CODCATEGORIAPRD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SZCATEGORIAPRODUTO | CODCATEGORIAPRD | DESCRICAO |
+
 
 # SZDENTICAO
 
@@ -1550,6 +1649,15 @@
 | ------ | ------ | --------- |
 | SZTIPOATENDIMENTO | CODPADRAO | DESCRICAO |
 
+# SZPRD
+
+## CODCATEGORIAPRD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SZCATEGORIAPRODUTO | CODCATEGORIAPRD | DESCRICAO |
+
+
 # SZREGINFCIRURGIA
 
 ## IDTPCIRURG
@@ -1872,6 +1980,15 @@
 | PTIPOFUNCAO | CODCLIENTE | DESCRICAO |
 
 
+# PFUNCPRELIMINAR
+
+## CODCATEGORIAESOCIAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PESOCIALCATTRAB | CODCLIENTE | DESCRICAO |
+
+
 # PFUNCPT
 
 ## SITPROFISSIONAL
@@ -2092,6 +2209,13 @@
 | DTIPORUA | CODIGO | DESCRICAO |
 
 
+## CATEGORIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCATEGEMP | CODCLIENTE | DESCRICAO |
+
+
 ## ESTADO
 
 | Tabela | Codigo | Descricao |
@@ -2214,6 +2338,12 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | VTIPOBENEFICIO | CODTIPOBENEFICIO | NOME | CODCOLIGADA | 1 |
+
+## CODCATEGORIABENEF
+
+| Tabela | Codigo | Descricao | Coligada | Filtro |
+| ------ | ------ | --------- | -------- | ------ |
+| VCATEGORIABENEFICIO | CODCATEGORIABENEF | NOME | CODCOLIGADA | 1 |
 
 
 # VCAMPOSREQGERAL
@@ -3551,6 +3681,13 @@
 | SCODTIPOTECNOLO | CODCLIENTE | DESCRICAO |
 
 
+## CODCLIENTECATEGORIA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SCODCATEGORIA | CODCLIENTE | DESCRICAO |
+
+
 # SINOVINVENTOR
 
 ## CODCLIENTETIPOTRAB
@@ -4884,6 +5021,15 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | HTIPOATENDENTE | CODTIPOATENDENTE | TITULO | CODCOLIGADA | 1 |
+
+
+# HATENDIMENTOBASE
+
+## CODCATEGORIAGERAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| HCATEGORIAGERAL | CODCATEGORIA | DESCRICAO |
 
 
 # HCAMPTIPOACAO
