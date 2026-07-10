@@ -272,14 +272,6 @@
 | ------ | ------ | --------- |
 | XSITUACAOSUBUNIDADE | COD_SIT_SUB_UNID | DSC_SIT_SUB_UNID |
 
-# XCONTRATO
-
-## COD_SIT_CONT
-
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| XSITUACAOCONTRATO | COD_SIT_CONT | DSC_SIT_CONT |
-
 # XDISTRATO
 
 ## COD_SIT_DISTRATO
