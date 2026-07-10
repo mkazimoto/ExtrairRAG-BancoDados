@@ -9,8 +9,8 @@ Permite que modelos de linguagem consultem o esquema do banco e pesquisem tabela
 |---|---|
 | `totvs_search_tables` | Busca tabelas por nome ou descrição |
 | `totvs_get_table_schema` | Retorna colunas, PKs e FKs de uma tabela |
+| `totvs_get_table_rules` | Retorna os possíveis valores dos campos de uma tabela |
 | `totvs_list_modules` | Lista todos os módulos e prefixos do ERP |
-| `totvs_get_db_index` | Retorna o índice completo de todas as tabelas |
 | `totvs_validate_sql` | Valida a sintaxe T-SQL sem executar a consulta |
 
 ## Transportes suportados
@@ -52,7 +52,7 @@ Você pode usar um arquivo `.env` ou definir diretamente na configuração do cl
 MCP_TRANSPORT = "stdio"
 DB_SERVER = "localhost"
 DB_DATABASE = "EXEMPLO1212606"
-DB_USER = "rm"
+DB_USER = "USUARIO"
 DB_PASSWORD = "SENHA"
 ```
 
@@ -101,7 +101,7 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
         "type": "http",
         "url": "http://localhost:3000/mcp",
         "headers": {
-          "Authorization": "Bearer ed931c92-33db-4fdb-aa86-c78a236bf40e"
+          "Authorization": "Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         }
       }
     }
@@ -121,7 +121,7 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
         "args": ["dist/index.js"],
         "env": {
           "MCP_TRANSPORT": "stdio",
-          "MCP_API_KEY": "ed931c92-33db-4fdb-aa86-c78a236bf40e"
+          "MCP_API_KEY": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         }
       }
     }
