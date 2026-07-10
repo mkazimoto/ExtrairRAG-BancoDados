@@ -146,6 +146,240 @@
 | ------ | ------ | --------- | -------- | ------ |
 | FTCF | CODTCF | DESCRICAO | CODCOLIGADA | 1 |
 
+
+# DALIQINTERESTADUAL
+
+## CODETDDESTINO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## CODETDORIGEM
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DCODIGOAJUSTE
+
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DCTEEMISSOR
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DCTEEMISSORHISTORICO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DETDREGIAO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DFILIAL
+
+## UFCONTADOR
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DFISCALESTADO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DGUIAPERIODO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DINSCEST
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DITEM
+
+## CODETDHABILITACAOTEL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## CODETDPLACA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DITEMHISTORICO
+
+## CODETDPLACA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## CODETDHABILITACAOTEL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DLAF
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## CODETDPLACA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DLAFHISTORICO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## CODETDPLACA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DLDC
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DLDCNF
+
+## UF
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DMUNICIPIO
+
+## CODETDMUNICIPIO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DPERIODODIFAL
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DPERIODOST
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DPRDPAUTA
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DREGRATRIBUTARIAESTADO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DUNDNEGOCIO
+
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# DVIGENCIAALIQUOTAESTADO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
 # EPONTOPRF
 
 ## CODOCOR
@@ -201,6 +435,23 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | FTCF | CODTCF | DESCRICAO | CODCOLIGADA | 1 |
+
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# HPROSPECTCONTATO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
 
 # KMOVITEMRESERVAOP
 
@@ -343,6 +594,16 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | MBIMTIPOOBJETO | IDTIPOOBJETO | DESCRICAO |
+
+
+# MCNTITEMLIBERACAO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
 
 # NMENU
 
@@ -591,6 +852,14 @@
 | ------ | ------ | --------- |
 | PTPPENSAO | CODCLIENTE | DESCRICAO |
 
+
+## ESTADOCIVIL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODESTCIVIL | CODCLIENTE | DESCRICAO |
+
+
 # PFHSTASSMEDCOPART
 
 ## CODTPATENDIMENTO
@@ -700,6 +969,16 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PTPDEMISSAO | CODCLIENTE | DESCRICAO |
+
+
+# PCCUSTO
+
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
 
 # RRELAT
 
@@ -845,6 +1124,14 @@
 | ------ | ------ | --------- |
 | PTPCODFIXO | CODCLIENTE | DESCRICAO |
 
+# STABOCUPPT
+
+## CODRAIDES
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SRAIDESSTPROFPT | CODCLIENTE | DESCRICAO |
+
 # STIPOINGRESSOPT
 
 ## CODTIPOINGRESSO
@@ -898,6 +1185,16 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | SZDENTICAOTIPO | ID | DESCRICAO |
+
+
+# SZDENTICAOMARCACAO
+
+## CODDENTICAOESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SZDENTICAOESTADO | ID | DESCRICAO |
+
 
 # SZEXCECAO
 
@@ -1261,6 +1558,23 @@
 | ------ | ------ | --------- | -------- | ------ |
 | SZTPCIRURGIA | IDTPCIRURG | DESCRICAO | CODCOLIGADA | 1 |
 
+
+# SZREGRACBO
+
+## CODPADRAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SZFUNCPRESTADOR | CODPADRAO | DESCFUNCAOMEDICO |
+
+
+## CODFUNCAOMEDICO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SZFUNCPRESTADOR | CODFUNCAOMEDICO | DESCFUNCAOMEDICO |
+
+
 # SZRELVASEXA
 
 ## CODVASILHAME
@@ -1306,6 +1620,31 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | TTIPOENTREGA | CODENTREGA | DSCENTREGA | CODCOLIGADA | 1 |
+
+
+## CODETDPLACA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TMOVFISCAL
+
+## UFDESEMBARACO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TMOVFISCALSERV
+
+## ENDIMOVELCODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
 
 
 # VREQUISICAOMOVPESSOAL
@@ -1381,6 +1720,15 @@
 | XSITUACAOMINUTA | COD_SIT_MINUTA | DSC_SIT_MINUTA |
 
 
+# XALGCONTRATOADM
+
+## SITUACAOCONTADM
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XALGSITUACAOCONTADM | CODSITUACAOCONTADM | DESCSITUACAOCONTADM |
+
+
 # XALGCONTRATOLOC
 
 ## SITUACAOCONTLOC
@@ -1399,6 +1747,13 @@
 | DTIPORUA | CODIGO | DESCRICAO |
 
 
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
 # XALGIMOVEL
 
 ## TIPOLOGRADOURO
@@ -1406,6 +1761,19 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
+
+## SITUACAOIMOVEL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XALGSITUACAOIMOVEL | CODSITUACAOIMOVEL | DESCSITUACAOIMOVEL |
+
+
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
 
 
 # XALGIMOVELCARACTERISTICA
@@ -1426,6 +1794,24 @@
 | XINDICECARACTERISTICALOTE | COD_INDI_CARAC | DSC_INDI_CARAC |
 
 
+# XCLIENTEPESSOAFISICA
+
+## COD_EST_CIV
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XESTADOCIVIL | COD_EST_CIV | DSC_EST_CIV |
+
+
+# XPESSOAFISICA
+
+## COD_EST_CIV
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| XESTADOCIVIL | COD_EST_CIV | DSC_EST_CIV |
+
+
 # XCONDMEDIDOR
 
 ## CODTIPOCONSUMOMED
@@ -1442,6 +1828,15 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | XINDICECARACTERISTICALOTE | COD_INDI_CARAC | DSC_INDI_CARAC |
+
+
+# XEMPREENDIMENTO
+
+## UF
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
 
 
 # XPDCAPPCUSTOMURLCOLIGADAS
@@ -1477,6 +1872,15 @@
 | PTIPOFUNCAO | CODCLIENTE | DESCRICAO |
 
 
+# PFUNCPT
+
+## SITPROFISSIONAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PSITPROFISSPT | CODCLIENTE | DESCRICAO |
+
+
 # PEXTERNO
 
 ## CODSITUACAO
@@ -1484,6 +1888,43 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PCODSITUACAO | CODCLIENTE | DESCRICAO |
+
+
+# PPESSOA
+
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## UFCARTTRAB
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## ESTADONATAL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## UFCARTIDENT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## ESTADOCIVIL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODESTCIVIL | CODCLIENTE | DESCRICAO |
 
 
 # PFHSTSIT
@@ -1541,6 +1982,15 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# PESOCIALPARAMESTADOCIVIL
+
+## TIPOLABORE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODESTCIVIL | CODCLIENTE | DESCRICAO |
 
 
 # PEVENTO
@@ -1626,6 +2076,13 @@
 | DTIPORUA | CODIGO | DESCRICAO |
 
 
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
 # PSECAO
 
 ## CODTIPORUA
@@ -1633,6 +2090,31 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
+
+
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# PSINDIC
+
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# PSINDICATOPT
+
+## DISTRITO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
 
 
 # PTIPOTAREFAAGRARIA
@@ -2257,6 +2739,24 @@
 | VPVVTIPO | CODTPPVV | NOME | CODCOLIGADA | 1 |
 
 
+# VESTADOPERFC
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# VESTADOCIVILPERFC
+
+## CODCLIENTE
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODESTCIVIL | CODCLIENTE | DESCRICAO |
+
+
 # VPREATESTADO
 
 ## CODTPATESTADO
@@ -2288,6 +2788,24 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | VSTATUSPARECER | IDSTATUSPARECER | NOMSTATUSPARECER |
+
+
+# VREQUISICAOADMISSAODEPEND
+
+## ESTADOCIVIL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODESTCIVIL | CODCLIENTE | DESCRICAO |
+
+
+# VRSESTADOCIVILTRIAGEM
+
+## CODESTADOCIVIL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODESTCIVIL | CODCLIENTE | DESCRICAO |
 
 
 # VOCORRENCIA
@@ -2471,6 +2989,42 @@
 | Tabela | Codigo | Descricao | CodColigada | Filtro |
 | ------ | ------ | --------- | ----------- | ------ |
 | VPVVTPEVENTO | CODVPPTPEVENTO | NOME | CODCOLIGADA | 1 |
+
+
+# VPROFISSIONALSAUDE
+
+## CODUFREGISTRO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# VREGISTROPROFISSIONAL
+
+## CODUFREGISTRO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# VRESPMONBIOLOGICA
+
+## UFREGCONSELHO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# VRESPREGAMBIENTAL
+
+## CODUFREGISTRO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
 
 
 # VREPAROSMANUT
@@ -2657,6 +3211,15 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+
+
+# SCODESTCIVILPT
+
+## CODRAIDES
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| SRAIDESESTCIVPT | CODCLIENTE | DESCRICAO |
 
 
 # SCOMPETENCIA
@@ -3261,6 +3824,15 @@
 | SPSTIPOLOCAL | IDTIPOLOCAL | NOME |
 
 
+# SPSPREDIO
+
+## CODETDMUNICIPIO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
 # SRESERVAINSTALACAO
 
 ## CODTIPOSALA
@@ -3521,6 +4093,76 @@
 | TTCN | CODTCN | DESCRICAO | CODCOLIGADA | 1 |
 
 
+# TCTEEMISSOR
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TETDCOL
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TFAB
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TFMOV
+
+## CODETDPLACA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TFORMAPAGTOREGFIN
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TINFPERCURSO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TITMMOVFISCAL
+
+## CODETDHABILITACAOTEL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## CODETDPLACA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
 # TCUSTOTIPOAPL
 
 ## CODTIPOAPL
@@ -3626,6 +4268,13 @@
 | DTIPORUA | CODIGO | DESCRICAO |
 
 
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
 # TPAGTO
 
 ## TIPOPAGAMENTO
@@ -3648,6 +4297,24 @@
 | Tabela | Codigo | Descricao | CodColigada | Filtro |
 | ------ | ------ | --------- | ----------- | ------ |
 | TTIP | CODTIP | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# TPRDCODFISCAL
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TPRDCODFISCALLOG
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
 
 
 # TLOT
@@ -3674,6 +4341,40 @@
 | TTCN | CODTCN | DESCRICAO | CODCOLIGADA | 1 |
 
 
+# TRPR
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## CODETDPGTO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TTABPRECOETD
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# TTRA
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
 # TTIPFIL
 
 ## CODTIP
@@ -3690,6 +4391,15 @@
 | Tabela | Codigo | Descricao | CodColigada | Filtro |
 | ------ | ------ | --------- | ----------- | ------ |
 | TTMVEXT | CODTMV | CODTMV | CODCOLIGADA | 1 |
+
+
+# TVEICULOS
+
+## UF
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
 
 
 # DCODIFICACAOLOGRADOURO
@@ -3735,6 +4445,62 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | UTABTIPO | CODTIPO | DESCRICAO |
+
+
+## CNUF
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+## EMPUF
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+## ESTELEIT
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+## NATES
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+## UFALUNO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+## UFCARTRAB
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+## UFEMISCI
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+## UFRACAD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+## ESTCIVIL
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODESTCIVIL | CODCLIENTE | DESCRICAO |
 
 
 # EALUOCOR
@@ -3821,6 +4587,15 @@
 | ETIPOPROT | CODTIPO | DESCRICAO |
 
 
+# ESITMAT
+
+## NOVOSTATUSATIVEXTRA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| ESITMAT | CODSITMAT | DESCRICAO |
+
+
 # EWEBMATERIALSEC
 
 ## IDTIPOMATERIAL
@@ -3901,6 +4676,53 @@
 | ------ | ------ | --------- | -------- | ------ |
 | FTCF | CODTCF | DESCRICAO | CODCOLIGADA | 1 |
 
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+## CODETDENTREGA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+## CODETDPGTO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# FCFOCEI
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# FCFOCONTATO
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# FCFOINSCST
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
 # FCFOHISTORICO
 
 ## TIPOBAIRRO
@@ -3956,6 +4778,85 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | DTIPORUA | CODIGO | DESCRICAO |
+
+
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# GAGENCIA
+
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# GBAIRRO
+
+## UF
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# GCEPESPECIAL
+
+## UF
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# GENDERECO
+
+## ESTADO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# GETDMX
+
+## CODETD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# GLOCALIDADE
+
+## UF
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# GLOGRADOURO
+
+## UF
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
+
+
+# GMUNICIPIO
+
+## CODETDMUNICIPIO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| GETD | CODETD | NOME |
 
 
 # HACAO
