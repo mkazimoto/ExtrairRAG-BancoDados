@@ -1098,622 +1098,622 @@
 
 ## CODTIPOINGRESSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOINGRESSO | CODTIPOINGRESSO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOINGRESSO | CODTIPOINGRESSO | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 # SPESACOMPALMOXARIFADO
 
 ## CODCLIENTESOLICITACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODSOLICITACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODSOLICITACAO | CODCLIENTE | DESCRICAO | - |
 
 # SPESACOMPPATRIMONIO
 
 ## CODCLIENTESOLICITACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODSOLICITACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODSOLICITACAO | CODCLIENTE | DESCRICAO | - |
 
 # SPESALMOXARIFADO
 
 ## CODCLIENTESOLICITACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODSOLICITACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODSOLICITACAO | CODCLIENTE | DESCRICAO | - |
 
 # SPESPATRIMONIO
 
 ## CODCLIENTESOLICITACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODSOLICITACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODSOLICITACAO | CODCLIENTE | DESCRICAO | - |
 
 # SPROJACOMPARRECADACAO
 
 ## CODCLIENTETIPOARRECADACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODARRECADACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODARRECADACAO | CODCLIENTE | DESCRICAO | - |
 
 # SPROJACOMPDESPESA
 
 ## CODCLIENTERUBRICA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODRUBRICA | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODRUBRICA | CODCLIENTE | DESCRICAO | - |
 
 # SPROJACOMPRECEITA
 
 ## CODCLIENTERUBRICA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODRUBRICA | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODRUBRICA | CODCLIENTE | DESCRICAO | - |
 
 # SPROJARRECADACAO
 
 ## CODCLIENTETIPOARRECADACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODARRECADACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODARRECADACAO | CODCLIENTE | DESCRICAO | - |
 
 # SPROJDESPESA
 
 ## CODCLIENTERUBRICA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODRUBRICA | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODRUBRICA | CODCLIENTE | DESCRICAO | - |
 
 # SPROJITEMAVALIACAO
 
 ## CODCLIENTEAVALIACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODAVALIACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODAVALIACAO | CODCLIENTE | DESCRICAO | - |
 
 # SPROJRECEITA
 
 ## CODCLIENTERUBRICA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODRUBRICA | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODRUBRICA | CODCLIENTE | DESCRICAO | - |
 
 # SPROJSOLPARRECEITA
 
 ## CODCLIENTERUBRICA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODRUBRICA | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODRUBRICA | CODCLIENTE | DESCRICAO | - |
 
 # SPROJTIPOAVALIACAOEDITAL
 
 ## CODCLIENTEAVALIACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODAVALIACAO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODAVALIACAO | CODCLIENTE | DESCRICAO | - |
 
 # SPSCONFIGURACAOPAGAMENTOPROF
 
 ## CODTIPOFIXO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| PTPCODFIXO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| PTPCODFIXO | CODCLIENTE | DESCRICAO | - |
 
 # STABOCUPPT
 
 ## CODRAIDES
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SRAIDESSTPROFPT | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SRAIDESSTPROFPT | CODCLIENTE | DESCRICAO | - |
 
 # STIPOINGRESSOPT
 
 ## CODTIPOINGRESSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOINGRESSO | CODTIPOINGRESSO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOINGRESSO | CODTIPOINGRESSO | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 # STIPOINGRESSOTRANSF
 
 ## CODTIPOINGRESSODESTINO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOINGRESSO | CODTIPOINGRESSO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOINGRESSO | CODTIPOINGRESSO | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 ## CODTIPOINGRESSOORIGEM
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOINGRESSO | CODTIPOINGRESSO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOINGRESSO | CODTIPOINGRESSO | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 # SWIDGETFUNCIONALIDADEDISP
 
 ## IDWIDGET
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SWIDGET | IDWIDGET | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SWIDGET | IDWIDGET | DESCRICAO | - |
 
 # SZAGENDACIRURGICA
 
 ## IDTPCIRURG
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZTPCIRURGIA | IDTPCIRURG | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZTPCIRURGIA | IDTPCIRURG | DESCRICAO | CODCOLIGADA | 1 | - |
 
 # SZAUDITPREGLOSAITEM
 
 ## CODTIPOPREGLOSA
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZTIPOPREGLOSA | CODTIPOPREGLOSA | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZTIPOPREGLOSA | CODTIPOPREGLOSA | DESCRICAO | CODCOLIGADA | 1 | - |
 
 # SZCLASSEPRODUTO
 
 ## CODCATEGORIAPRD
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZCATEGORIAPRODUTO | CODCATEGORIAPRD | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZCATEGORIAPRODUTO | CODCATEGORIAPRD | DESCRICAO | - |
 
 
 # SZDENTICAO
 
 ## TIPODENTICAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZDENTICAOTIPO | ID | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZDENTICAOTIPO | ID | DESCRICAO | - |
 
 
 # SZDENTICAOMARCACAO
 
 ## CODDENTICAOESTADO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZDENTICAOESTADO | ID | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZDENTICAOESTADO | ID | DESCRICAO | - |
 
 
 # SZEXCECAO
 
 ## IDTIPOEXCECAO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZTIPOEXCECAO | IDTIPOEXCECAO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZTIPOEXCECAO | IDTIPOEXCECAO | DESCRICAO | CODCOLIGADA | 1 | - |
 
 # SZGABARITO
 
 ## CODPADRAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOACOMODACAO | CODPADRAO | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOACOMODACAO | CODPADRAO | DESCRICAO | - |
 
 # SZHISTENFERANTCLIPESSOALITEM
 
 ## CODANTECEDENTECLINICOPESSOAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERANTFAMILIARITEM
 
 ## CODPARENTESCO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERANTFAMILIARITEMPATO
 
 ## CODPATOLOGIA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERAVALIACAOPSICOITEM
 
 ## CODAVALIACAOPSICOSSOCIAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERCOLETADADOS
 
 ## CODFONTEINFORMACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODORIGEMPACIENTE
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERHABPESALIMENTACAO
 
 ## CODPADRAOALIMENTACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODPROBLEMASAUDEALIMENTACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODSUPLEMENTOALIMENTAR
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERHABPESATIVFISICA
 
 ## CODFREQUENCIA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODLESAORELACAOATIVIDADEFISICA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODPADRAOATIVIDADEFISICA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERHABPESSONOREPOUSO
 
 ## CODPADRAOSONO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODQUALIDADESONO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERHABPESSTRESS
 
 ## CODNIVELSTRESS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERHABPESTABALCDROGA
 
 ## CODCONSUMOALCOOL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODDROGAILICITA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERNEONATAPRESENTA
 
 ## CODNEONATOLOGIAAPRESENTACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERNEONATMANOBRAS
 
 ## CODMANOBRAAONASCER
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERNEONATOLOGIA
 
 ## CODINFECAODURANTEGESTAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODLIQUIDOAMNIOTICO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODPROFILAXIA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERNEONATPROFILAXIA
 
 ## CODPROFILAXIA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERNEONATREANIMAC
 
 ## CODREANIMACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERNEONATTIPOPARTO
 
 ## CODTIPOPARTO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFEROBSTETRICIA
 
 ## CODGRUPOSANGUINEO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODINDICATIVOABORTAMENTO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODINDICATIVOAMAMENTACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODINDICATIVOERITROBASTOSE
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODINDICATIVOFATORRH
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODINDICATIVOGESTAOALTORISCO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODINDICATIVOGESTAOANTERIOR
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODINDICATIVOGRAVIDEZ
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODINDICATIVOPRENATAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODMOTIVOGESTRISCO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERPEDIATRIA
 
 ## CODCOMUNICACAOVERBAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODCONHECIMENTOPAISSITUACAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODINTERACAOSOCIAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODSEGUIMENTOTERAPEUTICA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODSEGURANCAEMOCIONAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 ## CODTIPOFAMILIA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTENFERPEDIAVINCULOMAE
 
 ## CODINDICATIVOVINCULOMAE
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZHISTORICOANTCDPESSOAIS
 
 ## CODTIPOAVALIACAOPACIENTE
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOAVALIACAOPACIENTE | CODIGO | NOME | - |
 
 # SZITEMESTQANS
 
 ## CODTISS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZANSTABPROCED | CODIGO | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZANSTABPROCED | CODIGO | DESCRICAO | - |
 
 # SZLOCALFAT
 
 ## CODPADRAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOACOMODACAO | CODPADRAO | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOACOMODACAO | CODPADRAO | DESCRICAO | - |
 
 # SZMOTIVOPREGLOSA
 
 ## CODTIPOPREGLOSA
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZTIPOPREGLOSA | CODTIPOPREGLOSA | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZTIPOPREGLOSA | CODTIPOPREGLOSA | DESCRICAO | CODCOLIGADA | 1 | - |
 
 # SZMOVIESTOQUE
 
 ## CODTIPOMOV
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZTIPOMOV | CODTIPOMOV | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZTIPOMOV | CODTIPOMOV | DESCRICAO | CODCOLIGADA | 1 | - |
 
 # SZOBRIGCLINICATIPOATEND
 
 ## CODPADRAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZTIPOATENDIMENTO | CODPADRAO | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZTIPOATENDIMENTO | CODPADRAO | DESCRICAO | - |
 
 # SZPRD
 
 ## CODCATEGORIAPRD
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZCATEGORIAPRODUTO | CODCATEGORIAPRD | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZCATEGORIAPRODUTO | CODCATEGORIAPRD | DESCRICAO | - |
 
 
 # SZREGINFCIRURGIA
 
 ## IDTPCIRURG
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZTPCIRURGIA | IDTPCIRURG | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZTPCIRURGIA | IDTPCIRURG | DESCRICAO | CODCOLIGADA | 1 | - |
 
 
 # SZREGRACBO
 
 ## CODPADRAO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZFUNCPRESTADOR | CODPADRAO | DESCFUNCAOMEDICO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZFUNCPRESTADOR | CODPADRAO | DESCFUNCAOMEDICO | - |
 
 
 ## CODFUNCAOMEDICO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZFUNCPRESTADOR | CODFUNCAOMEDICO | DESCFUNCAOMEDICO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZFUNCPRESTADOR | CODFUNCAOMEDICO | DESCFUNCAOMEDICO | - |
 
 
 # SZRELVASEXA
 
 ## CODVASILHAME
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZLABTIPOVASILHAME | CODTIPO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZLABTIPOVASILHAME | CODTIPO | DESCRICAO | CODCOLIGADA | 1 | - |
 
 # SZTABPRECOUSADA
 
 ## CODTISS
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SZANSTABPROCED | CODIGO | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SZANSTABPROCED | CODIGO | DESCRICAO | - |
 
 # SZTABPROCSERV
 
 ## IDTIPOPROC
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZTIPOPROCEDIMENTO | IDTIPOPROC | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZTIPOPROCEDIMENTO | IDTIPOPROC | DESCRICAO | CODCOLIGADA | 1 | - |
 
 # SZTEMPLATEVERSAO
 
 ## CODTIPODOC
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZSUSTIPODOC | CODTIPODOC | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZSUSTIPODOC | CODTIPODOC | DESCRICAO | CODCOLIGADA | 1 | - |
 
 # TMOV
 
@@ -3205,998 +3205,998 @@
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SACEITETERMOUSOIMAGEMVOZ
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SAGDAGENDA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SAGDEVENTO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SAGDPARAM
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SALUNO
 
 ## CODTIPOALUNO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SAREACONHECIMENTOHIS
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SASSINATURACONTRATO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SATIVIDADEEXTRA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SAUTORIZACAOFILIAL
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SBANNER
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SBOLSA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SBOLSAIRMAOS
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SCCOMREGRAFILTROAVANCADO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SCODESTCIVILPT
 
 ## CODRAIDES
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SRAIDESESTCIVPT | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SRAIDESESTCIVPT | CODCLIENTE | DESCRICAO | - |
 
 
 # SCOMPETENCIA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SCOMPLDISC
 
 ## TIPO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SCOMPONENTE
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SCONTEXTOSINSTITUICAOMEC
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SCONTRATO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SCURSO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SCURSOHISTORICO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SCURSOPROCSEL
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SDIRECAOFILIAL
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SDISCIPLINA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SDISCIPLINAHIST
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SEQUIVALENCIA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SEXTVISITAEVENTO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SFICHAMEDICAMODELO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SFICHAMEDICAPESSOAOBSERVACOES
 
 ## CODTIPOCURSOORIGEM
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SFORMULARIO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SGRUPOCONCEITO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SGRUPODISC
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SGRUPOHIST
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SGRUPOSERIE
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SHABILITACAOALUNO
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 ## CODTIPOINGRESSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOINGRESSO | CODTIPOINGRESSO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOINGRESSO | CODTIPOINGRESSO | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 # SINSTITUICAOMEC
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SITINERARIOFORMATIVOHIST
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SMODELOLAYOUT
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SMOTIVOALTMAT
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SATIVIDADEALUNO
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 
 # SDISCGRADECOMPLDISC
 
 ## TIPO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SDISCNAOAPROVEITADAS
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 
 # SEXTTIPOAUXILIO
 
 ## CODCLIENTETIPOAUXILIO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODTIPOAUXILIO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODTIPOAUXILIO | CODCLIENTE | DESCRICAO | - |
 
 
 # SGRUPOTIPOCOMPLEMENTODISC
 
 ## CODTIPOCOMPLEMENTO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCOMPLEMENTODISC | CODCOMPLEMENTO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SHISTALUNOCOL
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 
 # SHISTDISCCOL
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 
 # SHISTDISCFAC
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 
 # SHISTDISCFACEXT
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 
 # SHORARIOTURMA
 
 ## CODTIPOSALA
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 | - |
 
 
 # SINOVINVENTO
 
 ## CODCLIENTETIPOTECNOLO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODTIPOTECNOLO | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODTIPOTECNOLO | CODCLIENTE | DESCRICAO | - |
 
 
 ## CODCLIENTECATEGORIA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODCATEGORIA | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODCATEGORIA | CODCLIENTE | DESCRICAO | - |
 
 
 # SINOVINVENTOR
 
 ## CODCLIENTETIPOTRAB
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODTIPOTRAB | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODTIPOTRAB | CODCLIENTE | DESCRICAO | - |
 
 ## CODCLIENTETIPOVINCEXT
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODTIPOVINC | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODTIPOVINC | CODCLIENTE | DESCRICAO | - |
 
 ## CODCLIENTETIPOVINCINT
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODTIPOVINC | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODTIPOVINC | CODCLIENTE | DESCRICAO | - |
 
 
 # SLISTAESPERAINSTALACAO
 
 ## CODTIPOSALA
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 | - |
 
 
 # SMATRICPL
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 ## CODTIPOMAT
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOMATRICULA | CODTIPOMAT | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOMATRICULA | CODTIPOMAT | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 
 # SMATRICULA
 
 ## CODSTATUS
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SSTATUS | CODSTATUS | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 ## TIPOMAT
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOMATRICULA | CODTIPOMAT | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOMATRICULA | CODTIPOMAT | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 
 # SMISICURSO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SMISITIPOCURSO | CODTIPOCURSO | DESTIPOCURSO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SMISITIPOCURSO | CODTIPOCURSO | DESTIPOCURSO | - |
 
 
 # SMISISASEANALISEFINANC
 
 ## CODTIPOANALISE
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SMISISASETIPOANALISE | CODTIPOANALISE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SMISISASETIPOANALISE | CODTIPOANALISE | DESCRICAO | - |
 
 
 # SMISISASEANALISEFINANCAUXILIOS
 
 ## CODTIPO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SMISISASETIPOAUXILIO | CODTIPO | DESTIPO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SMISISASETIPOAUXILIO | CODTIPO | DESTIPO | - |
 
 
 # SMISISASEBALMERCADORIA
 
 ## CODTIPOBALANCO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SMISISASETIPOBALANCO | CODTIPOBALANCO | DESTIPOBALANCO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SMISISASETIPOBALANCO | CODTIPOBALANCO | DESTIPOBALANCO | - |
 
 
 # SMISISASESEGACIDENTE
 
 ## CODTIPOACIDENTE
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SMISITIPOACIDENTE | CODTIPOACIDENTE | DESTIPOACIDENTE |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SMISITIPOACIDENTE | CODTIPOACIDENTE | DESTIPOACIDENTE | - |
 
 ## CODTIPOIDENT
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SMISITIPOIDENTIFICACAO | CODTIPOIDENT | DESTIPOIDENT |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SMISITIPOIDENTIFICACAO | CODTIPOIDENT | DESTIPOIDENT | - |
 
 
 # SOCORRENCIAALUNO
 
 ## CODOCORRENCIATIPO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 | - |
 
 ## CODCOLIGADA
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SOCORRENCIATIPO | CODCOLIGADA | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SOCORRENCIATIPO | CODCOLIGADA | DESCRICAO | CODCOLIGADA | 1 | - |
 
 # SOCORRENCIAPROFESSOR
 
 ## CODOCORRENCIATIPO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 | - |
 
 ## CODCOLIGADA
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SOCORRENCIATIPO | CODCOLIGADA | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SOCORRENCIATIPO | CODCOLIGADA | DESCRICAO | CODCOLIGADA | 1 | - |
 
 # SOCORRENCIATIPOTRANSF
 
 ## CODOCORRENCIATIPOORIGEM
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 | - |
 
 ## CODOCORRENCIATIPODESTINO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SOCORRENCIATIPO | CODOCORRENCIATIPO | DESCRICAO | CODCOLIGADA | 1 | - |
 
 ## CODCOLIGADADESTINO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SOCORRENCIATIPO | CODCOLIGADA | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SOCORRENCIATIPO | CODCOLIGADA | DESCRICAO | - |
 
 ## CODCOLIGADAORIGEM
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SOCORRENCIATIPO | CODCOLIGADA | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SOCORRENCIATIPO | CODCOLIGADA | DESCRICAO | - |
 
 # SOCORRENCIAGRUPO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SPARAM
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SPARAMRELAT
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SPARTEHIST
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SPLANILHA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SPLANOPGTO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SPLETIVO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SPREPARACENSO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SPROJPROJETO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SPROJEDITAL
 
 ## CODCLIENTETIPOEDITAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SCODTIPOEDITAL | CODCLIENTE | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SCODTIPOEDITAL | CODCLIENTE | DESCRICAO | - |
 
 
 # SPSATIVIDADEAGENDADAPS
 
 ## IDTIPOATIVIDADEAGENDADA
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SPSTIPOATIVIDADEAGENDADA | IDTIPOATIVIDADEAGENDADA | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SPSTIPOATIVIDADEAGENDADA | IDTIPOATIVIDADEAGENDADA | NOME | - |
 
 
 # SPSLOCAL
 
 ## IDTIPOLOCAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SPSTIPOLOCAL | IDTIPOLOCAL | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SPSTIPOLOCAL | IDTIPOLOCAL | NOME | - |
 
 
 # SPSPREDIO
 
 ## CODETDMUNICIPIO
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| GETD | CODETD | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| GETD | CODETD | NOME | - |
 
 
 # SRESERVAINSTALACAO
 
 ## CODTIPOSALA
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 | - |
 
 
 # SSALA
 
 ## CODTIPOSALA
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOSALA | CODTIPOSALA | NOME | CODCOLIGADA | 1 | - |
 
 
 # SSERIEHISTORICO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SSERVICO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SSTATUS
 
 ## PLCODTIPOALUNO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STCC
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STCCLINHAPESQUISA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STCCTIPO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STIPOALUNO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STIPOALUNOTRANSF
 
 ## CODTIPOALUNOORIGEM
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 ## CODTIPOALUNODESTINO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOALUNO | CODTIPOALUNO | DESCRICAO | CODCOLIGADA | 1 | Sim |
 
 
 # STIPOATENDIMENTO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STIPOCURSOFILIAL
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STIPOCURSOPT
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STIPOCURSOTIPOATEND
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STIPOINGRESSO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STIPOMATRICULA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STOTVSSIGNDOCUMENTO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STURMA
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STURMADISC
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # STURNO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SWEBMATERIALSEC
 
 ## IDTIPOMATERIAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| EWEBTIPOMATERIAL | IDTIPOMATERIAL | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| EWEBTIPOMATERIAL | IDTIPOMATERIAL | DESCRICAO | - |
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 
 # SWIDGETCONFIGURACAO
 
 ## CODTIPOCURSO
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
 
 ## IDWIDGET
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SWIDGET | IDWIDGET | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SWIDGET | IDWIDGET | DESCRICAO | - |
 
 # SZARQUIVO
 
 ## CODTIPODOC
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZTIPODOC | CODTIPODOC | DESCTIPODOC | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZTIPODOC | CODTIPODOC | DESCTIPODOC | CODCOLIGADA | 1 | - |
 
 
 # SZCONTROLEDOC
 
 ## CODTIPODOC
 
-| Tabela | Codigo | Descricao | Coligada | Filtro |
-| ------ | ------ | --------- | -------- | ------ |
-| SZTIPODOC | CODTIPODOC | DESCTIPODOC | CODCOLIGADA | 1 |
+| Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
+| ------ | ------ | --------- | -------- | ------ | ------ |
+| SZTIPODOC | CODTIPODOC | DESCTIPODOC | CODCOLIGADA | 1 | - |
 
 
 # TCNT
@@ -5080,33 +5080,33 @@
 
 ## CODTIPOBAIRRODEFAULT
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| DTIPOBAIRRO | CODIGO | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| DTIPOBAIRRO | CODIGO | DESCRICAO | - |
 
 ## CODTIPORUADEFAULT
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| DTIPORUA | CODIGO | DESCRICAO |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| DTIPORUA | CODIGO | DESCRICAO | - |
 
 
 # SPSPERFILPROFISSIONAL
 
 ## IDTIPOPROFISSIONAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SPSTIPOPROFISSIONAL | IDTIPOPROFISSIONAL | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SPSTIPOPROFISSIONAL | IDTIPOPROFISSIONAL | NOME | - |
 
 
 # SPSTIPOPROFISSIONALLOCAL
 
 ## IDTIPOPROFISSIONAL
 
-| Tabela | Codigo | Descricao |
-| ------ | ------ | --------- |
-| SPSTIPOPROFISSIONAL | IDTIPOPROFISSIONAL | NOME |
+| Tabela | Codigo | Descricao | CodTipoCurso |
+| ------ | ------ | --------- | ------ |
+| SPSTIPOPROFISSIONAL | IDTIPOPROFISSIONAL | NOME | - |
 
 
 # LEXEMPLAR

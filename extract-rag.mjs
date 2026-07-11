@@ -1044,11 +1044,12 @@ export function parseMapeamentoRegras(filePath) {
       if (cells.length < 3) continue;
       if (cells[0].startsWith('---') || cells[0].toLowerCase() === 'tabela') continue;
       result[tabelaAtual][colunaAtual] = {
-        tabela:    cells[0],
-        codigo:    cells[1],
-        descricao: cells[2],
-        coligada:  cells[3] ?? null,
-        filtro:    cells[4] ?? null,
+        tabela:       cells[0],
+        codigo:       cells[1],
+        descricao:    cells[2],
+        coligada:     cells[3] ?? null,
+        filtro:       cells[4] ?? null,
+        codTipoCurso: cells[5] ?? null,
       };
     }
   }
@@ -1116,20 +1117,36 @@ async function gerarRulesMdDoBanco(mapeamento, outputPath) {
           ? `WHERE ${tId}.${escapeIdentifier(mapping.coligada)} = ${Number.isFinite(Number(mapping.filtro)) ? mapping.filtro : `'${escapeSql(mapping.filtro)}'`}`
           : '';
 
+        const temCodTipoCurso = mapping.codTipoCurso === 'Sim';
+        const selectColumns = temCodTipoCurso
+          ? `${tId}.${cId} AS CODIGO, ${tId}.${dId} AS DESCRICAO, ${tId}.CODTIPOCURSO AS CODTIPOCURSO`
+          : `${tId}.${cId} AS CODIGO, ${tId}.${dId} AS DESCRICAO`;
+
         const { rows } = await executeSQL(`
-          SELECT ${tId}.${cId} AS CODIGO, ${tId}.${dId} AS DESCRICAO
+          SELECT ${selectColumns}
           FROM   ${tId} (NOLOCK)
           ${whereClause}
           ORDER BY ${tId}.${cId}
         `);
 
         const sectionLines = [`## ${coluna}`, ''];
-        sectionLines.push('| Codigo | Descricao |');
-        sectionLines.push('| ------ | --------- |');
-        for (const row of rows) {
-          const cod  = String(row.CODIGO  ?? '').replace(/\|/g, '\\|');
-          const desc = String(row.DESCRICAO ?? '').replace(/\r?\n/g, ' ').replace(/\|/g, '\\|').trim();
-          sectionLines.push(`| ${cod} | ${desc} |`);
+        if (temCodTipoCurso) {
+          sectionLines.push('| Codigo | Descricao | CodTipoCurso |');
+          sectionLines.push('| ------ | --------- | ------ |');
+          for (const row of rows) {
+            const cod  = String(row.CODIGO  ?? '').replace(/\|/g, '\\|');
+            const desc = String(row.DESCRICAO ?? '').replace(/\r?\n/g, ' ').replace(/\|/g, '\\|').trim();
+            const tpc  = row.CODTIPOCURSO !== null && row.CODTIPOCURSO !== undefined ? String(row.CODTIPOCURSO).replace(/\|/g, '\\|') : '';
+            sectionLines.push(`| ${cod} | ${desc} | ${tpc} |`);
+          }
+        } else {
+          sectionLines.push('| Codigo | Descricao |');
+          sectionLines.push('| ------ | --------- |');
+          for (const row of rows) {
+            const cod  = String(row.CODIGO  ?? '').replace(/\|/g, '\\|');
+            const desc = String(row.DESCRICAO ?? '').replace(/\r?\n/g, ' ').replace(/\|/g, '\\|').trim();
+            sectionLines.push(`| ${cod} | ${desc} |`);
+          }
         }
         sectionLines.push('');
 
