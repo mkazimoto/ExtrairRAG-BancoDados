@@ -1,3 +1,57 @@
+# AABONFUN
+
+## CODABONO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AABONO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# AABONFUNAM
+
+## CODABONO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AABONO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# AABONFUTURO
+
+## CODABONO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AABONO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# AABONOFUNCIONARIO
+
+## CODABONO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AABONO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# AAUSENCIAPLANEJADAPORTEMPO
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# ABATHOR
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
 # ACONFIGESPELHOTIPOOCORRENCIA
 
 ## TIPOOCORRENCIA
@@ -5,6 +59,61 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | ATIPOOCORRENCIA | TIPOOCORRENCIA | DESCRICAO |
+
+
+# AEVECALC
+
+## CODCALC
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| AEVENTO | CODCLIENTE | DESCRICAO |
+
+
+# AFUNREL
+
+## CODABONO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AABONO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# AHORARIODATA
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# AHORARIOLIMITETOLERANCIA
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# AHORARIOSFUNC
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# AINDHOR
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
 
 # AINTERVALOJORNADA
 
@@ -55,6 +164,25 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | ATIPOOCORRENCIA | TIPOOCORRENCIA | DESCRICAO |
+
+
+# AJORHOR
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# AMODHORPLANINTERVALO
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
 
 # AMODIFICACAOHORARIOPLANEJADO
 
@@ -129,6 +257,16 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | ATIPOOCORRENCIA | TIPOOCORRENCIA | DESCRICAO |
+
+
+# ATOLHOR
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
 
 # DCFOP
 
@@ -902,6 +1040,13 @@
 | PCODESTCIVIL | CODCLIENTE | DESCRICAO |
 
 
+## GRAUPARENTESCO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODPARENT | CODCLIENTE | DESCRICAO |
+
+
 # PFHSTASSMEDCOPART
 
 ## CODTPATENDIMENTO
@@ -992,6 +1137,20 @@
 | ------ | ------ | --------- |
 | PESOCIALCATTRAB | CODCLIENTE | DESCRICAO |
 
+## MOTIVODEMISSAO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| PMOTDEMISSAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
+
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
 # PLANCFINANC
 
 ## LANFIN
@@ -1008,6 +1167,14 @@
 | ------ | ------ | --------- |
 | PTPFUNC | CODCLIENTE | DESCRICAO |
 
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
 # PORCAMENTODEMISSAO
 
 ## CODTIPO
@@ -1016,6 +1183,13 @@
 | ------ | ------ | --------- |
 | PTPDEMISSAO | CODCLIENTE | DESCRICAO |
 
+## CODMOTIVO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| PMOTDEMISSAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
+
+
 # PORCAMENTOTRANSFERENCIA
 
 ## CODTIPO
@@ -1023,6 +1197,13 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PTPDEMISSAO | CODCLIENTE | DESCRICAO |
+
+## CODMOTIVO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| PMOTDEMISSAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
+
 
 # PPRGAVISO
 
@@ -1769,6 +1950,14 @@
 | ------ | ------ | --------- |
 | PTPADMISSAO | CODCLIENTE | DESCRICAO |
 
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
 # VREQUISICAOPESSOAL
 
 ## CODTIPO
@@ -1782,6 +1971,14 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PTPADMISSAO | CODCLIENTE | DESCRICAO |
+
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
 
 # XPARCELAPAGAMENTO
 
@@ -1961,6 +2158,13 @@
 | PCODSITRAIS | CODCLIENTE | DESCRICAO |
 
 
+## VINCULORAIS
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODVINCULO | CODCLIENTE | DESCRICAO |
+
+
 # PFUNCAO
 
 ## CODTIPOFUNCAO
@@ -2058,6 +2262,15 @@
 | PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
 
 
+# PFHSTHOR
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
 # PFHSTMOTIVOAFAST
 
 ## MOTIVO
@@ -2080,6 +2293,24 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro |
 | ------ | ------ | --------- | -------- | ------ |
 | PMUDSITUACAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# PMOTIVDEMISSAOCLI
+
+## CODTOTVS
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| PMOTDEMISSAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
+
+
+# PESOCIALHORARIOSDESCONSIDERAR
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
 
 
 # PESOCIALPARAMAFAST
@@ -2137,6 +2368,20 @@
 | ------ | ------ | --------- |
 | PTPDEMISSAO | CODCLIENTE | DESCRICAO |
 
+## MOTIVODEMISSAO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| PMOTDEMISSAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
+
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
 # PORCAMENTOLOTACAOCADHST
 
 ## CODSITUACAO
@@ -2165,6 +2410,20 @@
 | ------ | ------ | --------- |
 | PTPDEMISSAO | CODCLIENTE | DESCRICAO |
 
+## MOTIVODEMISSAO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| PMOTDEMISSAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
+
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
 # PINTCONTLOTE
 
 ## CODSTATUS
@@ -2188,6 +2447,13 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | GETD | CODETD | NOME |
+
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
 
 
 # PSECAO
@@ -2274,6 +2540,13 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | VTIPOATESTADO | CODTPATESTADO | NOMETPATESTADO |
+
+
+## CODABONO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AABONO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
 
 
 # VAFASTMOTIVOAPI
@@ -2432,6 +2705,24 @@
 | VTIPOSFASESPROC | CODCLIENTE | DESCRICAO |
 
 
+# VFORMACAOACAD
+
+## CODGRAU
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VGRAUINSTRUCAO | CODGRAU | DESCRICAO |
+
+
+# VFORMACAOACADCOMPL
+
+## CODGRAU
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VGRAUINSTRUCAO | CODGRAU | DESCRICAO |
+
+
 # VGRAFICOS
 
 ## CODTIPOGRAF
@@ -2448,6 +2739,15 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | VTIPOEXPOSICAO | CODTIPOEXPOSICAO | DESCRICAO |
+
+
+# VHISTPOSICAO
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
 
 
 # VITENSRECLAMADOS
@@ -2475,6 +2775,15 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | VTIPOREQUISICAO | IDTIPOREQUISICAO | NOMTIPOREQUISICAO |
+
+
+# VPOSICAO
+
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
 
 
 # VREQABERTTURMA
@@ -2527,6 +2836,13 @@
 | ------ | ------ | --------- |
 | PTPDEMISSAO | CODCLIENTE | DESCRICAO |
 
+## CODMOTRESCISAO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| PMOTDEMISSAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
+
+
 # VREQDESLIGAMENTOPARECER
 
 ## CODSTATUS
@@ -2540,6 +2856,13 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PTPDEMISSAO | CODCLIENTE | DESCRICAO |
+
+## CODMOTRESCISAO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| PMOTDEMISSAO | CODCLIENTE | DESCRICAO | CODCOLIGADA | 1 |
+
 
 # VREQFLUXOREPASSEHIERARQUIA
 
@@ -2742,6 +3065,21 @@
 | VSTATUSPARECER | IDSTATUSPARECER | NOMSTATUSPARECER |
 
 
+# VPERFILCAND
+
+## CODGRAUINSTRMAXFORMACAD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VGRAUINSTRUCAO | CODGRAU | DESCRICAO |
+
+## CODGRAUINSTRMINFORMACAD
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VGRAUINSTRUCAO | CODGRAU | DESCRICAO |
+
+
 # VPERFILPESSOAL
 
 ## CODPERFIL
@@ -2910,6 +3248,13 @@
 | VSTATUSPARECER | IDSTATUSPARECER | NOMSTATUSPARECER |
 
 
+## CODHORARIO
+
+| Tabela | Codigo | Descricao | CodColigada | Filtro |
+| ------ | ------ | --------- | ----------- | ------ |
+| AHORARIO | CODIGO | DESCRICAO | CODCOLIGADA | 1 |
+
+
 # VREQUISICAOADMISSAODEPEND
 
 ## ESTADOCIVIL
@@ -2917,6 +3262,13 @@
 | Tabela | Codigo | Descricao |
 | ------ | ------ | --------- |
 | PCODESTCIVIL | CODCLIENTE | DESCRICAO |
+
+
+## PARENTESCO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODPARENT | CODCLIENTE | DESCRICAO |
 
 
 # VRSESTADOCIVILTRIAGEM
@@ -3075,6 +3427,15 @@
 | VTPCERTIFICACAO | CODCLIENTE | DESCRICAO |
 
 
+# VDEFCOMPLGRAUINSTR
+
+## CODGRAU
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VGRAUINSTRUCAO | CODGRAU | DESCRICAO |
+
+
 # VDEFICIENCIA
 
 ## CODTIPODEFICIENCIA
@@ -3174,6 +3535,15 @@
 | VRNTTPDEMANDAS | CODCLIENTE | DESCRICAO |
 
 
+# VREQUISITOACESSO
+
+## CODGRAUINSTRUCAO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| VGRAUINSTRUCAO | CODGRAU | DESCRICAO |
+
+
 # VRNTREGDEMANDAS
 
 ## CODTPDEMANDAS
@@ -3259,6 +3629,19 @@
 | Tabela | Codigo | Descricao | Coligada | Filtro | CodTipoCurso |
 | ------ | ------ | --------- | -------- | ------ | ------ |
 | STIPOCURSO | CODTIPOCURSO | NOME | CODCOLIGADA | 1 | - |
+
+
+## CODPARENTCFO
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODPARENT | CODCLIENTE | DESCRICAO |
+
+## CODPARENTRACA
+
+| Tabela | Codigo | Descricao |
+| ------ | ------ | --------- |
+| PCODPARENT | CODCLIENTE | DESCRICAO |
 
 
 # SAREACONHECIMENTOHIS
