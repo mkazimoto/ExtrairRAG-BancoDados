@@ -3,8 +3,8 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import express from 'express';
 import { randomUUID } from 'node:crypto';
-import { readFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { registerDocTools } from './tools/doc-tools.js';
 import { registerSqlValidator } from './tools/sql-validator.js';
@@ -24,23 +24,41 @@ function createMcpServer(): McpServer {
   registerDocTools(server);
   registerSqlValidator(server);
 
-  server.registerResource(
-    'totvs-db-index',
-    'totvs://db-index',
-    {
-      title: 'Índice do Banco de Dados TOTVS RM',
-      description: 'Índice completo de todas as tabelas do ERP TOTVS RM com descrição e módulo.',
-      mimeType: 'text/markdown',
-    },
-    async () => {
-      const { getDbIndexMarkdown } = await import('./services/docs-reader.js');
-      try {
-        return { contents: [{ uri: 'totvs://db-index', mimeType: 'text/markdown', text: getDbIndexMarkdown() }] };
-      } catch (err) {
-        return { contents: [{ uri: 'totvs://db-index', mimeType: 'text/plain', text: (err as Error).message }] };
+  // ── Skills (resources/) ───────────────────────────────────────────────────
+  const resourcesDir = join(__dirname, 'resources');
+  if (existsSync(resourcesDir)) {
+    const skillDirs = readdirSync(resourcesDir, { withFileTypes: true })
+      .filter(d => d.isDirectory())
+      .map(d => d.name)
+      .sort();
+
+    for (const skillName of skillDirs) {
+      const skillPath = join(resourcesDir, skillName, 'SKILL.md');
+      if (!existsSync(skillPath)) continue;
+
+      const raw = readFileSync(skillPath, 'utf-8');
+      const fmMatch = raw.match(/^---\n([\s\S]*?)\n---/);
+      let title = skillName;
+      let description = '';
+      if (fmMatch) {
+        const fm = fmMatch[1];
+        const nameMatch = fm.match(/^name:\s*(.+)$/m);
+        const descMatch = fm.match(/^description:\s*['"]?([\s\S]*?)['"]?$/m);
+        if (nameMatch) title = nameMatch[1].trim();
+        if (descMatch) description = descMatch[1].trim().replace(/^['"]|['"]$/g, '');
       }
-    },
-  );
+
+      const uri = `totvs://skills/${skillName}`;
+      server.registerResource(
+        `totvs-skill-${skillName}`,
+        uri,
+        { title, description, mimeType: 'text/markdown' },
+        async () => ({
+          contents: [{ uri, mimeType: 'text/markdown', text: readFileSync(skillPath, 'utf-8') }],
+        }),
+      );
+    }
+  }
 
   return server;
 }
@@ -80,7 +98,7 @@ async function startHttp(): Promise<void> {
 
   // Página de teste do MCP (sem auth — apenas UI local)
   app.get('/', (_req, res) => {
-    const html = readFileSync(join(__dirname, '../mcp-test.html'), 'utf-8');
+    const html = readFileSync(join(__dirname, 'mcp-test.html'), 'utf-8');
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.send(html);
   });
