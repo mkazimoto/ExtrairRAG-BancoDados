@@ -3,92 +3,81 @@ name: cte-recursivo-auto-relacionamento
 description: 'Gera CTE recursiva para consultas de auto-relacionamento em hierarquias de dados. Use quando: explorar hierarquias em árvore de uma tabela consigo mesma, navegar estruturas organizacionais ou departamentais, gerar consultas recursivas para relacionamentos parent-child.'
 ---
 
-# CTE Recursivo - Auto-Relacionamento
+# Skill: Consulta com CTE Recursivo (Auto-Relacionamento)
 
 ## Quando usar
-- Trabalhar com hierarquias de dados em uma única tabela
-- Explorar estruturas organizacionais (departamentos, gerências)
-- Navegar relacionamentos parent-child recursivos
-- Listar todos os níveis de uma hierarquia
 
-## Pré-requisitos
-- Identificar a coluna de chave primária (PK)
-- Identificar a coluna de referência para nível superior (FK de auto-relacionamento)
-- Estrutura de dados hierárquica com relacionamento reflexivo
+Use esta skill quando o usuário precisar de uma consulta SQL com CTE recursivo para tabelas que possuem auto-relacionamento (uma coluna que referencia a própria tabela, como `IDPAI → ID`).
 
-## Padrão de Consulta
+## Exemplo prático (MTAREFA)
 
-### 1. Identificar o Auto-Relacionamento
-```sql
--- Encontre a FK que referencia a mesma tabela
-SELECT COL_PK, COL_FK_SUPERIOR 
-FROM <TABELA>
-WHERE COL_FK_SUPERIOR IS NOT NULL
-```
+Tabela com auto-relacionamento: `IDPAI` → `IDTRF` (ambos na mesma tabela `MTAREFA`).
 
-### 2. Construir a CTE Recursiva
-```sql
-WITH HIERARQUIA AS (
-  -- Âncora: elementos de nível superior (raiz)
-  SELECT 
-    COL_PK,
-    COL_FK_SUPERIOR,
-    COL_DESCRICAO,
-    1 AS NIVEL
-  FROM <TABELA> (NOLOCK)
-  WHERE COL_FK_SUPERIOR IS NULL
-  
-  UNION ALL
-  
-  -- Recursão: todos os filhos
-  SELECT 
-    T.COL_PK,
-    T.COL_FK_SUPERIOR,
-    T.COL_DESCRICAO,
-    H.NIVEL + 1
-  FROM <TABELA> T (NOLOCK)
-  JOIN HIERARQUIA H ON T.COL_FK_SUPERIOR = H.COL_PK
-  WHERE H.NIVEL < 20  -- Limite de profundidade
+Pedido: Listar a hierarquia de todas as tarefas da tarefa 126 do projeto 2 e coligada 1.
+
+```sql server
+WITH CTE_RECURSIVO (CODCOLIGADA, IDPRJ, IDTRF, CODTRF, NOME, IDPAI, NIVEL) AS (
+    /* Âncora: a própria tarefa raiz (opcional, ou pode começar só pelos filhos) */
+    SELECT
+        T.CODCOLIGADA,
+        T.IDPRJ,
+        T.IDTRF,
+        T.CODTRF,
+        T.NOME,
+        T.IDPAI,
+        0 AS NIVEL
+    FROM 
+        MTAREFA T (NOLOCK)
+    WHERE T.CODCOLIGADA = 1
+      AND T.IDPRJ = 2
+      AND T.IDTRF = 126  
+      AND T.TIPOPLANILHA = 0  /* 0 - Planilha de Atividades 
+                                 1 - Planilha de Serviços */
+
+    UNION ALL
+
+    /* Passo recursivo: busca os filhos de cada tarefa encontrada */
+    SELECT
+        T.CODCOLIGADA,
+        T.IDPRJ,
+        T.IDTRF,
+        T.CODTRF,
+        T.NOME,
+        T.IDPAI,
+        C.NIVEL + 1 AS NIVEL
+    FROM
+          MTAREFA T (NOLOCK)
+    INNER JOIN CTE_RECURSIVO C
+        ON T.CODCOLIGADA = C.CODCOLIGADA
+       AND T.IDPRJ = C.IDPRJ
+       AND T.IDPAI = C.IDTRF
+       AND T.IDPAI <> T.IDTRF /* a tarefa raiz tem os 2 campos iguais */
+    WHERE
+        C.NIVEL < 20 /* Evita recursão infinita */
 )
-SELECT * FROM HIERARQUIA
-ORDER BY NIVEL, COL_PK
+SELECT
+    C.CODCOLIGADA,
+    C.IDPRJ,
+    C.IDTRF,
+    C.CODTRF,
+    C.NOME,
+    C.IDPAI,
+    C.NIVEL
+FROM 
+    CTE_RECURSIVO C
+ORDER BY 
+    C.CODTRF
+OPTION (MAXRECURSION 20)
 ```
 
-## Exemplo Prático
+## Regras importantes
 
-Para a tabela de departamentos com auto-relacionamento:
-
-```sql
-WITH HIERARQUIA_DEPTO AS (
-  SELECT 
-    CODDEPTO,
-    CODDEPTO_SUPERIOR,
-    NOMEDEPTO,
-    1 AS NIVEL
-  FROM ADEPTO (NOLOCK)
-  WHERE CODDEPTO_SUPERIOR IS NULL
-  
-  UNION ALL
-  
-  SELECT 
-    D.CODDEPTO,
-    D.CODDEPTO_SUPERIOR,
-    D.NOMEDEPTO,
-    H.NIVEL + 1
-  FROM ADEPTO D (NOLOCK)
-  JOIN HIERARQUIA_DEPTO H ON D.CODDEPTO_SUPERIOR = H.CODDEPTO
-  WHERE H.NIVEL < 20
-)
-SELECT 
-  REPLICATE('  ', NIVEL - 1) + NOMEDEPTO AS HIERARQUIA,
-  CODDEPTO,
-  NIVEL
-FROM HIERARQUIA_DEPTO
-ORDER BY NIVEL, CODDEPTO
-```
-
-## Considerar
-- Definir limite de profundidade para evitar loops infinitos
-- Usar (NOLOCK) em consultas de leitura
-- Sempre incluir filtro CODCOLIGADA se aplicável
-- Testar com pequeno volume antes de executar em produção
+1. **Evitar OUTER JOIN no CTE RECURSIVO** utilize apenas LEFT, RIGHT, FULL OUTER JOIN no SELECT principal
+2. **`t.IDPAI <> t.IDTRF`** é necessário para evitar recursão infinita
+3. **`c.NIVEL < 20`** é necessário para evitar recursão infinita
+4. **`OPTION (MAXRECURSION 20)`** é necessário para evitar recursão infinita
+5. **Sempre use `UNION ALL`** entre âncora e parte recursiva
+6. **Coluna `NIVEL`** obrigatória para rastrear profundidade (incrementar com `+ 1`)
+7. **Chaves compostas**: quando a PK for composta, inclua TODAS as colunas no JOIN recursivo
+8. **`(NOLOCK)`** recomendado para consultas de leitura em produção
+9. **ORDER BY** por código hierárquico para preservar a estrutura de árvore

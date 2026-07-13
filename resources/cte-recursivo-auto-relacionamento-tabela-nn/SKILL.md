@@ -1,112 +1,117 @@
 ---
 name: cte-recursivo-auto-relacionamento-tabela-nn
-description: 'Gera CTE recursiva para relacionamentos N-N com auto-referência via tabela de junção. Use quando: trabalhar com hierarquias muitos-para-muitos, explorar redes com múltiplas conexões, navegar grafos complexos através de tabelas de associação.'
+version: 1.0
+description: "Geração de consultas SQL com CTE recursivo para tabelas N:N com auto-relacionamento (ex: MRECCMP → MCMP)"
 ---
 
-# CTE Recursivo - Auto-Relacionamento Tabela N-N
+# Skill: Consulta com CTE Recursivo (Auto-Relacionamento) com uma tabela estrutura N:N recursiva
 
 ## Quando usar
-- Explorar hierarquias de relacionamentos muitos-para-muitos (M2M)
-- Navegar redes ou grafos complexos
-- Trabalhar com associações transitivas
-- Mapear estruturas onde um elemento pode ter múltiplos pais e múltiplos filhos
 
-## Pré-requisitos
-- Tabela de junção que referencia a mesma tabela (2 FKs para a mesma tabela)
-- Chaves primárias bem definidas
-- Estrutura de dados de grafo/rede
+Use esta skill quando o usuário precisar de uma consulta SQL com CTE recursivo para tabelas n para n que possuem auto-relacionamento para a mesma tabela (as 2 colunas referencia a mesma tabela).
 
-## Padrão de Consulta
+## Exemplo prático (MRECCMP)
 
-### 1. Identificar a Tabela de Junção
-```sql
--- Encontre a tabela que possui duas FKs para a mesma tabela
--- Exemplo: TABELA_ASSOCIACAO com COL_ID_ORIGEM e COL_ID_DESTINO
-```
+`MRECCMP.IDCMP` → `MCMP.IDCMP` e 
+`MRECCMP.IDCMPFILHA` → `MCMP.IDCMP`
 
-### 2. Construir a CTE Recursiva N-N
-```sql
-WITH HIERARQUIA_NN AS (
-  -- Âncora: pontos de entrada (nós iniciais)
-  SELECT 
-    T.COL_PK AS ID_ORIGEM,
-    TJ.COL_ID_DESTINO AS ID_DESTINO,
-    T.COL_DESCRICAO AS DESC_ORIGEM,
-    T2.COL_DESCRICAO AS DESC_DESTINO,
-    1 AS NIVEL,
-    CAST(T.COL_PK AS VARCHAR(MAX)) AS CAMINHO
-  FROM <TABELA> T (NOLOCK)
-  JOIN <TABELA_JUNACAO> TJ (NOLOCK) ON T.COL_PK = TJ.COL_ID_ORIGEM
-  JOIN <TABELA> T2 (NOLOCK) ON TJ.COL_ID_DESTINO = T2.COL_PK
-  WHERE T.COL_PK = <ID_INICIAL>
-  
-  UNION ALL
-  
-  -- Recursão: seguir as conexões
-  SELECT 
-    H.ID_ORIGEM,
-    TJ.COL_ID_DESTINO,
-    H.DESC_ORIGEM,
-    T2.COL_DESCRICAO,
-    H.NIVEL + 1,
-    CAST(H.CAMINHO + ',' + CAST(TJ.COL_ID_DESTINO AS VARCHAR) AS VARCHAR(MAX))
-  FROM HIERARQUIA_NN H
-  JOIN <TABELA_JUNACAO> TJ (NOLOCK) ON H.ID_DESTINO = TJ.COL_ID_ORIGEM
-  JOIN <TABELA> T2 (NOLOCK) ON TJ.COL_ID_DESTINO = T2.COL_PK
-  WHERE H.NIVEL < 20  -- Limite de profundidade
-    AND H.CAMINHO NOT LIKE '%,' + CAST(TJ.COL_ID_DESTINO AS VARCHAR) + ',%'  -- Evitar ciclos
+Pedido: Listar toda a hierarquia de recursos da tarefas da tarefa 122 do projeto 2 e coligada 1.
+
+```sql server
+WITH CTE_RECURSIVO (CODCOLIGADA, IDPRJ, IDREC, IDPRJREC, IDCMP, IDCMPFILHA, IDISM, QUANTIDADE, VALORUNIT, VALORTOTAL, ATIVO, NIVEL) AS (
+    /* ÂNCORA: composição raiz (ponto de partida) */
+    SELECT
+        R.CODCOLIGADA,
+        R.IDPRJ,
+        R.IDREC,
+        R.IDPRJREC,
+        R.IDCMP,       /* Composição pai */
+        R.IDCMPFILHA,  /* Sub-composição filha */
+        R.IDISM,
+        R.QUANTIDADE,
+        R.VALORUNIT,
+        R.VALORTOTAL,
+        R.ATIVO,
+        0 AS NIVEL          
+    FROM 
+         MTAREFA T (NOLOCK)
+         INNER JOIN MRECCMP R (NOLOCK) 
+           ON R.CODCOLIGADA = T.CODCOLIGADA 
+          AND R.IDPRJ = T.IDPRJREC 
+          AND R.IDCMP = T.IDCMP
+         INNER JOIN MCMP C (NOLOCK)
+           ON C.CODCOLIGADA = R.CODCOLIGADA 
+          AND C.IDPRJ = R.IDPRJREC 
+          AND C.IDCMP = R.IDCMP
+    WHERE
+        T.CODCOLIGADA = 1                            
+    AND T.IDPRJ = 2                              
+    AND T.IDTRF = 122 /* Id da tarefa */                    
+
+    UNION ALL
+
+    /* PARTE RECURSIVA: sub-composições */ 
+    SELECT
+        F.CODCOLIGADA,
+        F.IDPRJ,
+        F.IDREC,
+        F.IDPRJREC,
+        F.IDCMP,
+        F.IDCMPFILHA,
+        F.IDISM,
+        F.QUANTIDADE,
+        F.VALORUNIT,
+        F.VALORTOTAL,
+        F.ATIVO,
+        P.NIVEL + 1
+    FROM 
+         MRECCMP F (NOLOCK)       
+         INNER JOIN CTE_RECURSIVO P
+            ON  P.CODCOLIGADA = F.CODCOLIGADA
+            AND P.IDPRJ       = F.IDPRJ
+            AND P.IDCMPFILHA  = F.IDCMP /* A filha vira a composição pai no nível abaixo */
+    WHERE
+        P.NIVEL < 20  /* Proteção contra recursão infinita */
 )
-SELECT * FROM HIERARQUIA_NN
-ORDER BY NIVEL, ID_DESTINO
+SELECT
+    H.CODCOLIGADA,
+    H.IDPRJ,
+    H.IDREC,
+    H.IDPRJREC,
+    H.IDCMP,       
+    H.IDCMPFILHA, 
+    H.IDISM,      
+    COALESCE(H.IDCMPFILHA, H.IDCMP) IDPAI,
+    COALESCE(I.CODISM, C.CODCMP) CODRECURSO,
+    COALESCE(I.DESCISM, C.DESCCMP) DSCRECURSO,
+    H.QUANTIDADE,
+    H.ATIVO,
+    H.VALORUNIT,
+    H.VALORTOTAL,
+    H.NIVEL
+FROM 
+     CTE_RECURSIVO H 
+     LEFT JOIN MCMP C (NOLOCK)
+       ON C.CODCOLIGADA = H.CODCOLIGADA
+      AND C.IDPRJ = H.IDPRJREC
+      AND C.IDCMP = H.IDCMP
+     LEFT JOIN MISM I (NOLOCK)
+       ON I.CODCOLIGADA = H.CODCOLIGADA
+      AND I.IDPRJ = H.IDPRJREC
+      AND I.IDISM = H.IDISM
+ORDER BY
+  H.NIVEL, 
+  H.IDCMPFILHA
+OPTION (MAXRECURSION 20)
 ```
+## Regras importantes
 
-## Exemplo Prático
+1. **Evitar OUTER JOIN no CTE RECURSIVO** utilize apenas LEFT, RIGHT, FULL OUTER JOIN no SELECT principal
+2. **`c.NIVEL < 20`** é necessário para evitar recursão infinita
+3. **`OPTION (MAXRECURSION 20)`** é necessário para evitar recursão infinita
+4. **Sempre use `UNION ALL`** entre âncora e parte recursiva
+5. **Coluna `NIVEL`** obrigatória para rastrear profundidade (incrementar com `+ 1`)
+6. **Chaves compostas**: quando a PK for composta, inclua TODAS as colunas no JOIN recursivo
+7. **`(NOLOCK)`** recomendado para consultas de leitura em produção
+8. **ORDER BY** por código hierárquico para preservar a estrutura de árvore
 
-Para relacionamento de projetos com dependências (projeto A depende de projeto B):
-
-```sql
-WITH DEPENDENCIAS_PROJETO AS (
-  -- Âncora: projeto inicial
-  SELECT 
-    P.CODPROJETO AS PROJETO_ORIGEM,
-    PD.CODPROJETO_DEPENDE AS PROJETO_DESTINO,
-    P.NOMEPROJETO AS DESC_ORIGEM,
-    P2.NOMEPROJETO AS DESC_DESTINO,
-    1 AS NIVEL,
-    CAST(P.CODPROJETO AS VARCHAR(MAX)) AS CAMINHO
-  FROM GPROJETO P (NOLOCK)
-  JOIN GPROJETODEPENDE PD (NOLOCK) ON P.CODPROJETO = PD.CODPROJETO
-  JOIN GPROJETO P2 (NOLOCK) ON PD.CODPROJETO_DEPENDE = P2.CODPROJETO
-  WHERE P.CODPROJETO = 'PROJ001'
-  
-  UNION ALL
-  
-  -- Recursão: explorar dependências transitivas
-  SELECT 
-    D.PROJETO_ORIGEM,
-    PD.CODPROJETO_DEPENDE,
-    D.DESC_ORIGEM,
-    P2.NOMEPROJETO,
-    D.NIVEL + 1,
-    CAST(D.CAMINHO + ',' + CAST(PD.CODPROJETO_DEPENDE AS VARCHAR) AS VARCHAR(MAX))
-  FROM DEPENDENCIAS_PROJETO D
-  JOIN GPROJETODEPENDE PD (NOLOCK) ON D.PROJETO_DESTINO = PD.CODPROJETO
-  JOIN GPROJETO P2 (NOLOCK) ON PD.CODPROJETO_DEPENDE = P2.CODPROJETO
-  WHERE D.NIVEL < 20
-    AND D.CAMINHO NOT LIKE '%,' + CAST(PD.CODPROJETO_DEPENDE AS VARCHAR) + ',%'
-)
-SELECT 
-  REPLICATE('  ', NIVEL - 1) + DESC_DESTINO AS HIERARQUIA,
-  PROJETO_DESTINO,
-  NIVEL,
-  CAMINHO
-FROM DEPENDENCIAS_PROJETO
-ORDER BY NIVEL, PROJETO_DESTINO
-```
-
-## Considerar
-- **Evitar ciclos**: Monitorar CAMINHO para detectar referências circulares
-- **Limite de profundidade**: Definir limite de recursão para proteger performance
-- **Performance**: Índices em FKs são críticos para tabelas grandes
-- **Usar (NOLOCK)**: Em consultas de leitura
-- **CODCOLIGADA**: Incluir filtro se a tabela ou tabela de junção tiver esta coluna

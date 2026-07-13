@@ -1,96 +1,78 @@
 ---
 name: diagrama-relacionamento-tabelas
-description: 'Gera diagramas Mermaid dos relacionamentos entre tabelas do ERP RM. Use quando: visualizar dependências entre tabelas, documentar fluxos de dados, entender estrutura de relacionamentos, mapear impacto de mudanças em FK.'
+version: 1.1
+description: Geração automática de diagramas Mermaid ER Diagram para tabelas SQL, incluindo quando consultas usam JOIN
 ---
 
-# Diagrama de Relacionamento de Tabelas
+# Skill: Diagrama de Relacionamento de Tabelas (Mermaid ER Diagram)
 
 ## Quando usar
-- Visualizar a estrutura de relacionamentos entre tabelas
-- Documentar fluxos de dados para um conjunto de tabelas
-- Entender dependências e impacto de chaves estrangeiras
-- Mapear tabelas relacionadas a um domínio específico
 
-## Pré-requisitos
-- Identificar as tabelas envolvidas
-- Ter acesso à documentação das FK em `docs/db/tables/<TABELA>.md`
-- Conhecer a direção dos relacionamentos
+Use esta skill quando o usuário solicitar um **diagrama**, **esquema**, **relacionamento** ou **estrutura** de tabelas do banco de dados, como por exemplo:
+- "Gere o diagrama de relacionamento das tabelas ..."
+- "Mostre a estrutura das tabelas ..."
+- "Faça um diagrama entidade-relacionamento ..."
+- "Como as tabelas X, Y, Z se relacionam?"
+- **Sempre que você gerar uma consulta SQL que contém JOIN entre tabelas** — você DEVE automaticamente incluir o diagrama ER das tabelas envolvidas, mesmo que o usuário não tenha pedido explicitamente.
 
-## Padrão de Diagrama Mermaid
+## Formato de saída OBRIGATÓRIO
 
-### 1. Estrutura Básica
-```mermaid
-erDiagram
-  TABELA_A ||--o{ TABELA_B : "referencia"
-  TABELA_A ||--|| TABELA_C : "tem"
-  TABELA_B }o--|| TABELA_D : "pertence a"
-```
-
-### 2. Símbolos de Cardinalidade
-| Símbolo | Significado |
-|---------|------------|
-| `\|\|` | Um para Um (1:1) |
-| `o\|` | Zero ou Um (0:1) |
-| `\|\{` | Um para Muitos (1:N) |
-| `o{` | Zero ou Muitos (0:N) |
-
-### 3. Construir Diagrama a partir de Documentação
-1. Ler `docs/db/tables/<TABELA>.md`
-2. Identificar seção "Chaves Estrangeiras"
-3. Mapear relacionamentos de entrada e saída
-4. Desenhar com Mermaid
-
-## Exemplo Prático
-
-Para tabelas de folha de pagamento e recursos humanos:
+Você **DEVE** gerar a resposta usando a sintaxe **Mermaid ER Diagram** dentro de um bloco de código com a linguagem **mermaid**:
 
 ```mermaid
 erDiagram
-  PCOLIGADA ||--o{ PFUNC : "tem"
-  PFUNC ||--o{ AEVENTOCALCULADO : "gera"
-  AEVENTOCALCULADO ||--o{ AEVENTOCALCULADO_DETALHE : "compõe"
-  PFUNC ||--o{ ACOMPFUN : "possui"
-  ACOMPFUN ||--|| ACOMPFORMULA : "referencia"
-  PFUNC ||--o{ AVISOCALCULADO : "gera"
-  PFUNC ||--o{ AAVISOCALCULADO : "gera"
+    TABELA_A {
+        int ID_PK PK
+        string NOME
+        int ID_FK FK
+    }
+    TABELA_B {
+        int ID_PK PK
+        string DESCRICAO
+    }
+    TABELA_A ||--o{ TABELA_B : "possui"
 ```
 
-### Estrutura Detalhada com Atributos
+## Regras importantes
+
+1. **Sempre use `erDiagram`** como primeira linha do diagrama
+2. **Sempre use o bloco ````mermaid`** (nunca um bloco de código genérico)
+3. **Inclua legendas** nos relacionamentos usando aspas duplas: `: "legenda"`
+4. **Cardinalidade**: use a notação Mermaid padrão:
+   - `||--||` : um para um
+   - `||--o{` : um para muitos (opcional)
+   - `||--|{` : um para muitos (obrigatório)
+   - `}o--||` : muitos para um (opcional)
+   - `}o--o{` : muitos para muitos
+5. **Colunas**: inclua tipo e constraint (PK, FK) dentro da definição da tabela
+6. **Use erDiagram** para diagramas entidade-relacionamento de tabelas SQL
+7. **Se houver muitas tabelas**, foque nas principais e nos relacionamentos mais relevantes
+8. **Sempre preceda** o diagrama com uma breve explicação textual do relacionamento entre as tabelas
+
+## Exemplo completo
+
+````
+A tabela `MTAREFA` contém as tarefas dos projetos, enquanto `MISM` armazena as insumos/materiais associados a cada tarefa. O relacionamento é feito através do IDTRF.
 
 ```mermaid
 erDiagram
-  COLIGADA {
-    int CODCOLIGADA PK
-    string NOMECOLIGADA
-  }
-  
-  FUNCIONARIO {
-    int CODCOLIGADA FK
-    int CHAPA PK
-    string NOMEFUNC
-    date DATAMISSAO
-  }
-  
-  EVENTO {
-    int CODCOLIGADA FK
-    int CHAPA FK
-    int IDEVENT PK
-    string DESCRICAO
-  }
-  
-  COLIGADA ||--o{ FUNCIONARIO : "registra"
-  FUNCIONARIO ||--o{ EVENTO : "gera"
+    MTAREFA {
+        int CODCOLIGADA PK
+        int IDPRJ PK
+        int IDTRF PK
+        int IDPAI FK
+        string CODTRF
+        string NOME
+    }
+    MISM {
+        int CODCOLIGADA PK
+        int IDPRJ PK
+        int IDTRF PK, FK
+        int IDITEM PK
+        string CODITEM
+        decimal QTD
+    }
+    MTAREFA ||--o{ MISM : "contém"
 ```
+````
 
-## Dicas de Visualização
-- **Agrupar por módulo**: Tabelas com mesmo prefixo (P, A, G, etc.)
-- **Direcionar fluxo**: Colocar tabelas pai acima, filhas abaixo
-- **Código de cores**: Usar comentários para destacar críticos
-- **Simplificar**: Mostrar apenas relacionamentos principais em primeiro nível
-- **Detalhar progressivamente**: Criar diagramas para cada subdomínio
-
-## Exportar Diagrama
-Mermaid pode ser exportado para:
-- PNG/SVG: Via VS Code preview
-- URL: Usar [Mermaid Live Editor](https://mermaid.live)
-- Markdown: Incluir fenced code block com \`\`\`mermaid
