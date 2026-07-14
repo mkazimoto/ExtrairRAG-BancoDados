@@ -113,6 +113,10 @@
     .tool-item .tool-name { font-size: .82rem; font-weight: 600; color: var(--accent); font-family: var(--mono); }
     .tool-item .tool-desc { font-size: .72rem; color: var(--text-dim); line-height: 1.3; }
 
+    /* resource items — verde para diferenciar */
+    .tool-item.resource .tool-name { color: var(--accent2); }
+    .tool-item.resource.active { border-left-color: var(--accent2); }
+
     /* ── Main Panel ── */
     .main { display: flex; flex-direction: column; overflow: hidden; }
 
@@ -304,6 +308,19 @@
     <nav class="tool-list" id="toolList">
       <!-- populated by JS -->
     </nav>
+
+    <!-- ── Resources ── -->
+    <div class="sidebar-section" style="padding:8px 16px 4px;border-bottom:none;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <label style="font-size:.7rem;">Resources</label>
+      <button class="btn btn-ghost btn-sm" id="btnRefreshResources" style="font-size:.65rem;padding:2px 8px;visibility:hidden" title="Recarregar lista de resources">
+        ↻ Refresh
+      </button>
+    </div>
+    <nav class="tool-list" id="resourceList" style="flex:0 1 auto;max-height:35%;padding:4px 8px;">
+      <div style="color:var(--text-dim);font-size:.72rem;padding:8px;text-align:center" id="resourcePlaceholder">
+        Conecte-se para listar resources.
+      </div>
+    </nav>
   </aside>
 
   <!-- ── Main Panel ── -->
@@ -353,6 +370,10 @@ let sessionId = null;
 let requestId  = 0;
 let activeTab  = 'rendered';
 let lastRawResult = null;
+let resources = [];
+let activeResource = null;
+let lastResourceResult = null;
+let isConnected = false;
 
 /* ─────────────────── Ferramentas ─────────────────── */
 const TOOLS = [
@@ -429,11 +450,13 @@ function log(msg, type = '') {
 }
 
 function setConnected(yes) {
+  isConnected = yes;
   const dot = $('statusDot');
   dot.className = 'status-dot' + (yes ? ' connected' : '');
   dot.title     = yes ? 'Conectado' : 'Desconectado';
   $('btnConnect').disabled    = yes;
   $('btnDisconnect').disabled = !yes;
+  $('btnRefreshResources').style.visibility = yes ? 'visible' : 'hidden';
 }
 
 /* ─────────────────── JSON Syntax Highlight ─────────────────── */
@@ -563,6 +586,9 @@ $('btnConnect').addEventListener('click', async () => {
     if (!init) throw new Error('Sem resposta do servidor. Verifique URL e API Key.');
     log(`✓ initialize OK — serverInfo: ${JSON.stringify(init?.result?.serverInfo ?? {})}`, 'res');
 
+    // Garante que a UI marque como conectado (caso o servidor não use header mcp-session-id)
+    if (!isConnected) setConnected(true);
+
     // Notificação initialized (sem esperar resposta)
     const headers = { 'Content-Type': 'application/json' };
     const apiKey  = $('apiKey').value.trim();
@@ -578,6 +604,9 @@ $('btnConnect').addEventListener('click', async () => {
     localStorage.setItem('mcp_api_key', $('apiKey').value.trim());
     // Persiste URL do servidor
     localStorage.setItem('mcp_server_url', $('serverUrl').value.trim());
+
+    // Carrega resources do servidor
+    fetchResources();
 
     toast('Conectado com sucesso!', 'success');
   } catch (err) {
@@ -599,11 +628,197 @@ $('btnDisconnect').addEventListener('click', async () => {
     } catch (_) {}
   }
   sessionId = null;
+  resources = [];
+  activeResource = null;
+  lastResourceResult = null;
   $('sessionLabel').textContent = '';
   setConnected(false);
   log('Sessão encerrada.', '');
   toast('Sessão encerrada.');
+  // Restaura placeholder dos resources
+  const rl = $('resourceList');
+  rl.innerHTML = '<div style="color:var(--text-dim);font-size:.72rem;padding:8px;text-align:center">Conecte-se para listar resources.</div>';
+  // Limpa form se estava exibindo resource
+  if (activeResource) {
+    $('formPanel').innerHTML = '<div style="color:var(--text-dim);font-size:.85rem;margin-top:40px;text-align:center">Nenhuma ferramenta selecionada.</div>';
+    $('toolHeader').innerHTML = '<div><h2>Selecione uma ferramenta</h2><p>Conecte ao servidor MCP e escolha uma tool na barra lateral para testar.</p></div>';
+    activeResource = null;
+  }
 });
+
+/* ─────────────────── Resources ─────────────────── */
+async function fetchResources() {
+  if (!isConnected) return;
+  try {
+    log('→ resources/list', 'req');
+    const result = await mcpPost({
+      jsonrpc: '2.0', id: ++requestId,
+      method: 'resources/list',
+      params: {}
+    });
+    if (result?.error) throw new Error(result.error.message ?? JSON.stringify(result.error));
+    const list = result?.result?.resources;
+    if (!Array.isArray(list)) {
+      log(`⚠ resources/list: resposta sem array "resources" — result: ${JSON.stringify(result?.result ?? {})}`, 'err');
+      resources = [];
+    } else {
+      resources = list;
+    }
+    log(`✓ resources/list — ${resources.length} resource(s)`, 'res');
+    buildResourcesSidebar();
+  } catch (err) {
+    log(`✗ resources/list: ${err.message}`, 'err');
+    toast(`Falha ao listar resources: ${err.message}`, 'error', 5000);
+  }
+}
+
+/* Refresh button */
+$('btnRefreshResources').addEventListener('click', fetchResources);
+
+function buildResourcesSidebar() {
+  const list = $('resourceList');
+  list.innerHTML = '';
+
+  if (resources.length === 0) {
+    list.innerHTML = '<div style="color:var(--text-dim);font-size:.72rem;padding:8px;text-align:center">Nenhum resource disponível.</div>';
+    return;
+  }
+
+  resources.forEach(r => {
+    const item = document.createElement('div');
+    item.className   = 'tool-item resource';
+    item.dataset.uri = r.uri;
+    const name = r.name || r.uri.split('/').pop() || r.uri;
+    item.innerHTML = `
+      <span class="tool-name" style="font-size:.75rem;color:var(--accent2)">${escHtml(name)}</span>
+      <span class="tool-desc" style="font-size:.68rem">${escHtml(r.uri)}</span>`;
+    item.addEventListener('click', () => selectResource(r));
+    list.appendChild(item);
+  });
+}
+
+function selectResource(resource) {
+  activeResource = resource;
+  document.querySelectorAll('#resourceList .tool-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.uri === resource.uri);
+  });
+  document.querySelectorAll('#toolList .tool-item').forEach(el => el.classList.remove('active'));
+
+  const header = $('toolHeader');
+  header.innerHTML = `
+    <div>
+      <h2><code style="font-family:var(--mono);color:var(--accent2)">${escHtml(resource.uri)}</code></h2>
+      <p>${escHtml(resource.name ?? resource.description ?? 'Resource MCP')}</p>
+    </div>`;
+
+  // Form panel: exibe detalhes do resource + botão de leitura
+  const panel = $('formPanel');
+  panel.innerHTML = '';
+
+  const meta = document.createElement('div');
+  meta.style.cssText = 'font-size:.82rem;line-height:1.6';
+  meta.innerHTML = `
+    <div class="field"><label>URI</label><input type="text" value="${escHtml(resource.uri)}" readonly style="font-size:.78rem" /></div>
+    ${resource.name ? `<div class="field"><label>Nome</label><input type="text" value="${escHtml(resource.name)}" readonly /></div>` : ''}
+    ${resource.description ? `<div class="field"><label>Descrição</label><input type="text" value="${escHtml(resource.description)}" readonly /></div>` : ''}
+    ${resource.mimeType ? `<div class="field"><label>MIME Type</label><input type="text" value="${escHtml(resource.mimeType)}" readonly /></div>` : ''}
+  `;
+  panel.appendChild(meta);
+
+  const actions = document.createElement('div');
+  actions.className = 'form-actions';
+  const btnRead = document.createElement('button');
+  btnRead.className = 'btn btn-success';
+  btnRead.id = 'btnReadResource';
+  btnRead.innerHTML = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2h14v1H1V2zm0 3h14v1H1V5zm0 3h14v1H1V8zm0 3h10v1H1v-1zm13 0h1v4h-1v-4zm-4 1h4v1h-4v-1z"/></svg> Ler Resource`;
+  btnRead.addEventListener('click', () => readResource(resource));
+  actions.appendChild(btnRead);
+  const elapsed = document.createElement('span');
+  elapsed.id = 'elapsedResource';
+  elapsed.className = 'elapsed';
+  actions.appendChild(elapsed);
+  panel.appendChild(actions);
+
+  // Se já tem resultado anterior, mostra
+  if (lastResourceResult) showResourceResult(lastResourceResult);
+}
+
+async function readResource(resource) {
+  if (!sessionId) {
+    toast('Conecte ao servidor primeiro.', 'error');
+    return;
+  }
+  const btnRead = $('btnReadResource');
+  const elapsedEl = $('elapsedResource');
+  btnRead.disabled = true;
+  btnRead.innerHTML = `<div class="spinner"></div> Lendo…`;
+  elapsedEl.textContent = '';
+  $('resultContent').innerHTML = `<div class="result-placeholder"><div class="spinner" style="width:32px;height:32px;border-width:3px"></div><p>Lendo resource…</p></div>`;
+
+  const t0 = performance.now();
+  try {
+    log(`→ resources/read "${resource.uri}"`, 'req');
+    const result = await mcpPost({
+      jsonrpc: '2.0', id: ++requestId,
+      method: 'resources/read',
+      params: { uri: resource.uri }
+    });
+    const ms = (performance.now() - t0).toFixed(0);
+    elapsedEl.textContent = `${ms}ms`;
+    log(`✓ Resposta em ${ms}ms`, 'res');
+    if (result?.error) throw new Error(result.error.message ?? JSON.stringify(result.error));
+    lastResourceResult = result;
+    showResourceResult(result);
+    toast('Resource lido com sucesso!', 'success');
+  } catch (err) {
+    const ms = (performance.now() - t0).toFixed(0);
+    elapsedEl.textContent = `${ms}ms`;
+    log(`✗ ${err.message}`, 'err');
+    $('resultContent').innerHTML = `
+      <div style="color:var(--danger);padding:16px;font-size:.85rem;background:rgba(248,113,113,.06);border-radius:var(--radius);border:1px solid rgba(248,113,113,.2)">
+        <strong>Erro:</strong> ${escHtml(err.message)}
+      </div>`;
+    toast(err.message, 'error', 5000);
+  } finally {
+    btnRead.disabled = false;
+    btnRead.innerHTML = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2h14v1H1V2zm0 3h14v1H1V5zm0 3h14v1H1V8zm0 3h10v1H1v-1zm13 0h1v4h-1v-4zm-4 1h4v1h-4v-1z"/></svg> Ler Resource`;
+  }
+}
+
+function showResourceResult(raw) {
+  lastRawResult = raw;
+  const el = $('resultContent');
+  if (!raw) return;
+
+  // resources/read retorna contents: [{ uri, mimeType, text }]
+  const contents = raw?.result?.contents;
+  if (Array.isArray(contents) && contents.length > 0) {
+    const texts = contents.map(c => c.text || '').join('\n\n');
+    const mime = contents[0]?.mimeType || '';
+
+    if (mime.includes('markdown') || mime.includes('md')) {
+      el.innerHTML = `<div class="md-render">${marked.parse(texts)}</div>`;
+    } else {
+      el.innerHTML = `<pre class="json">${escHtml(texts)}</pre>`;
+    }
+
+    // Botão para ver JSON Raw
+    const footer = document.createElement('div');
+    footer.style.cssText = 'margin-top:12px;border-top:1px solid var(--border);padding-top:12px';
+    const btnRaw = document.createElement('button');
+    btnRaw.className = 'btn btn-ghost btn-sm';
+    btnRaw.textContent = 'Ver JSON Raw';
+    btnRaw.addEventListener('click', () => {
+      el.innerHTML = `<pre class="json">${highlight(raw)}</pre>`;
+      btnRaw.remove();
+    });
+    footer.appendChild(btnRaw);
+    el.appendChild(footer);
+    return;
+  }
+
+  el.innerHTML = `<pre class="json">${highlight(raw)}</pre>`;
+}
 
 /* ─────────────────── Sidebar Tools ─────────────────── */
 let activeTool = null;
