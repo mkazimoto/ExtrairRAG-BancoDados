@@ -4,6 +4,7 @@ import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/
 import express from 'express';
 import { randomUUID } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { createServer as createHttpsServer } from 'node:https';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { registerDocTools } from './tools/doc-tools.js';
@@ -146,9 +147,28 @@ async function startHttp(): Promise<void> {
     await transport.handleRequest(req, res, req.body);
   });
 
-  const httpServer = app.listen(PORT, () => {
-    process.stderr.write(`TOTVS RM MCP Server iniciado (StreamableHTTP) em http://localhost:${PORT}/mcp\n`);
-  });
+  // ── SSL / HTTPS ─────────────────────────────────────────────────────────
+  const sslCertPath = process.env.SSL_CERT_PATH ?? '';
+  const sslKeyPath = process.env.SSL_KEY_PATH ?? '';
+  const useHttps = !!(sslCertPath && sslKeyPath);
+
+  const protocol = useHttps ? 'https' : 'http';
+
+  let httpServer: ReturnType<typeof app.listen>;
+
+  if (useHttps) {
+    const sslOptions = {
+      cert: readFileSync(sslCertPath),
+      key: readFileSync(sslKeyPath),
+    };
+    httpServer = createHttpsServer(sslOptions, app).listen(PORT, () => {
+      process.stderr.write(`TOTVS RM MCP Server iniciado (StreamableHTTP) em https://localhost:${PORT}/mcp\n`);
+    });
+  } else {
+    httpServer = app.listen(PORT, () => {
+      process.stderr.write(`TOTVS RM MCP Server iniciado (StreamableHTTP) em http://localhost:${PORT}/mcp\n`);
+    });
+  }
 
   // Encerramento limpo
   const shutdown = async () => {

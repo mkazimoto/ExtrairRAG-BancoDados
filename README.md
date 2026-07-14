@@ -42,6 +42,8 @@ Você pode usar um arquivo `.env` ou definir diretamente na configuração do cl
 | `DB_PASSWORD` | *(vazio)* | Senha SQL |
 | `DB_TRUST_CERT` | `true` | Confiar no certificado SSL |
 | `DB_REQUEST_TIMEOUT` | `30000` | Timeout de requisição em ms |
+| `SSL_CERT_PATH` | *(vazio = HTTP)* | Caminho absoluto do arquivo de certificado SSL (`.crt`/`.pem`) — se definido junto com `SSL_KEY_PATH`, o servidor sobe em HTTPS |
+| `SSL_KEY_PATH` | *(vazio = HTTP)* | Caminho absoluto do arquivo de chave privada SSL (`.key`) |
 
 ## Extrair Documentação do Banco de Dados
 
@@ -89,7 +91,7 @@ MCP_TRANSPORT=stdio npm run start
 
 ## Configuração no VS Code (GitHub Copilot)
 
-### Via HTTP (StreamableHTTP)
+### Via HTTP / HTTPS (StreamableHTTP)
 
 Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
 
@@ -108,6 +110,8 @@ Adicione ao seu arquivo `.vscode/mcp.json` ou `settings.json`:
   }
 }
 ```
+
+> **HTTPS:** Se as variáveis `SSL_CERT_PATH` e `SSL_KEY_PATH` estiverem configuradas, o servidor sobe em HTTPS. Neste caso, altere a `url` para `https://localhost:3000/mcp`.
 
 ### Via stdio
 
